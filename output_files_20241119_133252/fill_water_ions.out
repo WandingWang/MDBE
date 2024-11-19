@@ -1,0 +1,175 @@
+                     :-) GROMACS - gmx solvate, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_133252
+Command line:
+  gmx solvate -cp system.gro -cs spc216.gro -o system_water.gro -p topol.top
+
+Reading solute configuration
+Reading solvent configuration
+
+Initialising inter-atomic distances...
+
+WARNING: Masses and atomic (Van der Waals) radii will be guessed
+         based on residue and atom names, since they could not be
+         definitively assigned from the information in your input
+         files. These guessed numbers might deviate from the mass
+         and radius of the atom type. Please check the output
+         files if necessary. Note, that this functionality may
+         be removed in a future GROMACS version. Please, consider
+         using another file format for your input.
+
+NOTE: From version 5.0 gmx solvate uses the Van der Waals radii
+from the source below. This means the results may be different
+compared to previous GROMACS versions.
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+A. Bondi
+van der Waals Volumes and Radii
+J. Phys. Chem. 68 (1964) pp. 441-451
+-------- -------- --- Thank You --- -------- --------
+
+Generating solvent configuration
+Will generate new solvent configuration of 6x5x6 boxes
+Solvent box contains 85083 atoms in 28361 residues
+Removed 9288 solvent atoms due to solvent-solvent overlap
+Removed 6189 solvent atoms due to solute-solvent overlap
+Sorting configuration
+Found 1 molecule type:
+    SOL (   3 atoms): 23202 residues
+Generated solvent containing 69606 atoms in 23202 residues
+Writing generated configuration to system_water.gro
+
+Output configuration contains 76004 atoms in 23615 residues
+Volume                 :     773.377 (nm^3)
+Density                :     1004.32 (g/l)
+Number of solvent molecules:  23202   
+
+Processing topology
+
+Back Off! I just backed up topol.top to ./#topol.top.1#
+
+GROMACS reminds you: "All that glitters may not be gold, but at least it contains free electrons." (John Desmond Baernal)
+
+Adding line for 23202 solvent molecules with resname (SOL) to topology file (topol.top)
+                      :-) GROMACS - gmx grompp, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_133252
+Command line:
+  gmx grompp -f /home/bio/Desktop/jupyter_test/jupyter_test/ions.mdp -c system_water.gro -p topol.top -o system_ions.tpr -maxwarn 1
+
+Generating 1-4 interactions: fudge = 0.5
+
+NOTE 1 [file topol.top, line 52]:
+  System has non-zero total charge: -1.000000
+  Total charge should normally be an integer. See
+  https://manual.gromacs.org/current/user-guide/floating-point.html
+  for discussion on how close it should be to an integer.
+
+
+
+
+WARNING 1 [file topol.top, line 52]:
+  You are using Ewald electrostatics in a system with net charge. This can
+  lead to severe artifacts, such as ions moving into regions with low
+  dielectric, due to the uniform background charge. We suggest to
+  neutralize your system with counter ions, possibly in combination with a
+  physiological salt concentration.
+
+Setting the LD random seed to -551034889
+
+Generated 2145 of the 2145 non-bonded parameter combinations
+
+Generated 2145 of the 2145 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_P'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_A'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_H'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_L'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+J. S. Hub, B. L. de Groot, H. Grubmueller, G. Groenhof
+Quantifying Artifacts in Ewald Simulations of Inhomogeneous Systems with a Net
+Charge
+J. Chem. Theory Comput. 10 (2014) pp. 381-393
+-------- -------- --- Thank You --- -------- --------
+
+Number of degrees of freedom in T-Coupling group rest is 155297.00
+The integrator does not provide a ensemble temperature, there is no system ensemble temperature
+
+There was 1 NOTE
+
+There was 1 WARNING
+
+GROMACS reminds you: "I don't fear death because I don't fear anything I don't understand." (Hedy Lamarr)
+
+Analysing residue names:
+There are:   413    Protein residues
+There are: 23202      Water residues
+Analysing Protein...
+
+The largest distance between excluded atoms is 0.460 nm between atom 3219 and 4352
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 80x72x80, spacing 0.117 0.118 0.122
+
+Estimate for the relative computational load of the PME mesh part: 0.24
+
+This run will generate roughly 6 Mb of data
+                      :-) GROMACS - gmx genion, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_133252
+Command line:
+  gmx genion -s system_ions.tpr -o system_ions.gro -p topol.top -pname K -nname CL -neutral
+
+Reading file system_ions.tpr, VERSION 2024.4 (single precision)
+Reading file system_ions.tpr, VERSION 2024.4 (single precision)
+Group     0 (         System) has 76004 elements
+Group     1 (        Protein) has  6398 elements
+Group     2 (      Protein-H) has  3292 elements
+Group     3 (        C-alpha) has   413 elements
+Group     4 (       Backbone) has  1239 elements
+Group     5 (      MainChain) has  1656 elements
+Group     6 (   MainChain+Cb) has  2035 elements
+Group     7 (    MainChain+H) has  2063 elements
+Group     8 (      SideChain) has  4335 elements
+Group     9 (    SideChain-H) has  1636 elements
+Group    10 (    Prot-Masses) has  6398 elements
+Group    11 (    non-Protein) has 69606 elements
+Group    12 (          Water) has 69606 elements
+Group    13 (            SOL) has 69606 elements
+Group    14 (      non-Water) has  6398 elements
+Select a group: Number of (3-atomic) solvent molecules: 23202
+
+Back Off! I just backed up topol.top to ./#topol.top.2#
+Using random seed -1078987141.
+Replacing solvent molecule 13320 (atom 46358) with K
+
+
+GROMACS reminds you: "I don't fear death because I don't fear anything I don't understand." (Hedy Lamarr)
+
+Will try to add 1 K ions and 0 CL ions.
+Select a continuous group of solvent molecules
+Selected 13: 'SOL'
+
+Processing topology
+Replacing 1 solute molecules in topology file (topol.top)  by 1 K and 0 CL ions.

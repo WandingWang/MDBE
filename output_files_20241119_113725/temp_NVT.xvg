@@ -1,0 +1,35 @@
+# This file was created Tue Nov 19 11:38:13 2024
+# Created by:
+#                      :-) GROMACS - gmx energy, 2024.4 (-:
+# 
+# Executable:   /opt/gromacs-2024.4/bin/gmx
+# Data prefix:  /opt/gromacs-2024.4
+# Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_113725
+# Command line:
+#   gmx energy -f NVT.edr -o temp_NVT.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Gnomes, ROck Monsters And Chili Sauce
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000  300.428406
+    5.000000  279.563049
+   10.000000  293.924622
+   15.000000  299.009033
+   20.000000  299.841095
+   25.000000  299.418945
+   30.000000  300.355957
+   35.000000  300.387909
+   40.000000  300.931915
+   45.000000  300.965759
+   50.000000  299.341125

@@ -1,0 +1,1365 @@
+                      :-) GROMACS - gmx mdrun, 2024.4 (-:
+
+Copyright 1991-2024 The GROMACS Authors.
+GROMACS is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation; either version 2.1
+of the License, or (at your option) any later version.
+
+                         Current GROMACS contributors:
+       Mark Abraham           Andrey Alekseenko           Vladimir Basov      
+      Cathrine Bergh            Eliane Briand               Ania Brown        
+      Mahesh Doijade            Giacomo Fiorin          Stefan Fleischmann    
+      Sergey Gorelov         Gilles Gouaillardet            Alan Gray         
+     M. Eric Irrgang         Farzaneh Jalalypour            Joe Jordan        
+     Carsten Kutzner           Justin A. Lemkul          Magnus Lundborg      
+       Pascal Merz              Vedran Miletic            Dmitry Morozov      
+       Julien Nabet              Szilard Pall        Andrea Pasquadibisceglie 
+    Michele Pellegrino          Hubert Santuz             Roland Schulz       
+     Tatiana Shugaeva          Alexey Shvetsov            Philip Turner       
+     Alessandra Villa      Sebastian Wingbermuehle  
+
+                         Previous GROMACS contributors:
+        Emile Apol             Rossen Apostolov           James Barnett       
+        Paul Bauer          Herman J.C. Berendsen          Par Bjelkmar       
+      Christian Blau          Viacheslav Bolnykh            Kevin Boyd        
+    Aldert van Buuren          Carlo Camilloni           Rudi van Drunen      
+      Anton Feenstra           Oliver Fleetwood            Vytas Gapsys       
+       Gaurav Garg             Gerrit Groenhof            Bert de Groot       
+      Anca Hamuraru           Vincent Hindriksen          Victor Holanda      
+     Aleksei Iupinov          Christoph Junghans        Prashanth Kanduri     
+   Dimitrios Karkoulis           Peter Kasson             Sebastian Kehl      
+     Sebastian Keller             Jiri Kraus               Per Larsson        
+      Viveca Lindahl            Erik Marklund           Pieter Meulenhoff     
+      Teemu Murtola              Sander Pronk             Michael Shirts      
+      Alfons Sijbers            Balint Soproni         David van der Spoel    
+      Peter Tieleman            Carsten Uphoff             Jon Vincent        
+     Teemu Virolainen         Christian Wennberg           Maarten Wolf       
+      Artem Zhmurov       
+
+                  Coordinated by the GROMACS project leaders:
+                           Berk Hess and Erik Lindahl
+
+GROMACS:      gmx mdrun, version 2024.4
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_181141
+Process ID:   32323
+Command line:
+  gmx mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu -s system_SAMD.tpr -c system_Compl_MDstart.gro -cpo state_SAMD.cpt -x traj_SAMD.xtc -e SAMD.edr -v
+
+GROMACS version:     2024.4
+Precision:           mixed
+Memory model:        64 bit
+MPI library:         thread_mpi
+OpenMP support:      enabled (GMX_OPENMP_MAX_THREADS = 128)
+GPU support:         CUDA
+NBNxM GPU setup:     super-cluster 2x2x2 / cluster 8
+SIMD instructions:   AVX2_256
+CPU FFT library:     fftw-3.3.8-sse2-avx
+GPU FFT library:     cuFFT
+Multi-GPU FFT:       none
+RDTSCP usage:        enabled
+TNG support:         enabled
+Hwloc support:       hwloc-2.5.0
+Tracing support:     disabled
+C compiler:          /usr/bin/cc GNU 10.5.0
+C compiler flags:    -fexcess-precision=fast -funroll-all-loops -mavx2 -mfma -Wno-missing-field-initializers -O3 -DNDEBUG
+C++ compiler:        /usr/bin/c++ GNU 10.5.0
+C++ compiler flags:  -fexcess-precision=fast -funroll-all-loops -mavx2 -mfma -Wno-missing-field-initializers -Wno-cast-function-type-strict SHELL:-fopenmp -O3 -DNDEBUG
+BLAS library:        External - detected on the system
+LAPACK library:      External - detected on the system
+CUDA compiler:       /usr/local/cuda/bin/nvcc nvcc: NVIDIA (R) Cuda compiler driver;Copyright (c) 2005-2023 NVIDIA Corporation;Built on Tue_Jun_13_19:16:58_PDT_2023;Cuda compilation tools, release 12.2, V12.2.91;Build cuda_12.2.r12.2/compiler.32965470_0
+CUDA compiler flags:-std=c++17;--generate-code=arch=compute_50,code=sm_50;--generate-code=arch=compute_52,code=sm_52;--generate-code=arch=compute_60,code=sm_60;--generate-code=arch=compute_61,code=sm_61;--generate-code=arch=compute_70,code=sm_70;--generate-code=arch=compute_75,code=sm_75;--generate-code=arch=compute_80,code=sm_80;--generate-code=arch=compute_86,code=sm_86;--generate-code=arch=compute_89,code=sm_89;--generate-code=arch=compute_90,code=sm_90;-Wno-deprecated-gpu-targets;--generate-code=arch=compute_53,code=sm_53;--generate-code=arch=compute_80,code=sm_80;-use_fast_math;-Xptxas;-warn-double-usage;-Xptxas;-Werror;-D_FORCE_INLINES;-Xcompiler;-fopenmp;-fexcess-precision=fast -funroll-all-loops -mavx2 -mfma -Wno-missing-field-initializers -Wno-cast-function-type-strict SHELL:-fopenmp -O3 -DNDEBUG
+CUDA driver:         12.20
+CUDA runtime:        12.20
+
+
+Running on 1 node with total 24 cores, 32 processing units, 1 compatible GPU
+Hardware detected on host SA264-04:
+  CPU info:
+    Vendor: Intel
+    Brand:  13th Gen Intel(R) Core(TM) i9-13900K
+    Family: 6   Model: 183   Stepping: 1
+    Features: aes apic avx avx2 clfsh cmov cx8 cx16 f16c fma htt intel lahf mmx msr nonstop_tsc pcid pclmuldq pdcm pdpe1gb popcnt pse rdrnd rdtscp sha sse2 sse3 sse4.1 sse4.2 ssse3 tdt x2apic
+  Hardware topology: Full, with devices
+    Packages, cores, and logical processors:
+    [indices refer to OS logical processors]
+      Package  0: [   0   1] [   2   3] [   4   5] [   6   7] [   8   9] [  10  11] [  12  13] [  14  15] [  16] [  17] [  18] [  19] [  20] [  21] [  22] [  23] [  24] [  25] [  26] [  27] [  28] [  29] [  30] [  31]
+    CPU limit set by OS: -1   Recommended max number of threads: 32
+    Numa nodes:
+      Node  0 (67088379904 bytes mem):   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31
+      Latency:
+               0
+         0  1.00
+    Caches:
+      L1: 49152 bytes, linesize 64 bytes, assoc. 12, shared 2 ways
+      L2: 2097152 bytes, linesize 64 bytes, assoc. 16, shared 2 ways
+      L3: 37748736 bytes, linesize 64 bytes, assoc. 12, shared 32 ways
+    PCI devices:
+      0000:01:00.0  Id: 10de:2685  Class: 0x0300  Numa: 0
+      0000:00:02.0  Id: 8086:a780  Class: 0x0380  Numa: 0
+      0000:00:0e.0  Id: 8086:a77f  Class: 0x0104  Numa: 0
+      0000:00:1f.6  Id: 8086:1a1c  Class: 0x0200  Numa: 0
+  GPU info:
+    Number of GPUs detected: 1
+    #0: NVIDIA NVIDIA GeForce RTX 4090 D, compute cap.: 8.9, ECC:  no, stat: compatible
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+M. J. Abraham, T. Murtola, R. Schulz, S. Páll, J. C. Smith, B. Hess, E.
+Lindahl
+GROMACS: High performance molecular simulations through multi-level
+parallelism from laptops to supercomputers
+SoftwareX 1 (2015) pp. 19-25
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Páll, M. J. Abraham, C. Kutzner, B. Hess, E. Lindahl
+Tackling Exascale Software Challenges in Molecular Dynamics Simulations with
+GROMACS
+In S. Markidis & E. Laure (Eds.), Solving Software Challenges for Exascale 8759 (2015) pp. 3-27
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Pronk, S. Páll, R. Schulz, P. Larsson, P. Bjelkmar, R. Apostolov, M. R.
+Shirts, J. C. Smith, P. M. Kasson, D. van der Spoel, B. Hess, and E. Lindahl
+GROMACS 4.5: a high-throughput and highly parallel open source molecular
+simulation toolkit
+Bioinformatics 29 (2013) pp. 845-54
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+B. Hess and C. Kutzner and D. van der Spoel and E. Lindahl
+GROMACS 4: Algorithms for highly efficient, load-balanced, and scalable
+molecular simulation
+J. Chem. Theory Comput. 4 (2008) pp. 435-447
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+D. van der Spoel, E. Lindahl, B. Hess, G. Groenhof, A. E. Mark and H. J. C.
+Berendsen
+GROMACS: Fast, Flexible and Free
+J. Comp. Chem. 26 (2005) pp. 1701-1719
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+E. Lindahl and B. Hess and D. van der Spoel
+GROMACS 3.0: A package for molecular simulation and trajectory analysis
+J. Mol. Mod. 7 (2001) pp. 306-317
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+H. J. C. Berendsen, D. van der Spoel and R. van Drunen
+GROMACS: A message-passing parallel molecular dynamics implementation
+Comp. Phys. Comm. 91 (1995) pp. 43-56
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE CITE THE DOI FOR THIS VERSION OF GROMACS ++++
+https://doi.org/10.5281/zenodo.14016590
+-------- -------- --- Thank You --- -------- --------
+
+Input Parameters:
+   integrator                     = md
+   tinit                          = 0
+   dt                             = 0.002
+   nsteps                         = 175000
+   init-step                      = 0
+   simulation-part                = 1
+   mts                            = false
+   mass-repartition-factor        = 1
+   comm-mode                      = Linear
+   nstcomm                        = 100
+   bd-fric                        = 0
+   ld-seed                        = 1190125563
+   emtol                          = 10
+   emstep                         = 0.01
+   niter                          = 20
+   fcstep                         = 0
+   nstcgsteep                     = 1000
+   nbfgscorr                      = 10
+   rtpi                           = 0.05
+   nstxout                        = 0
+   nstvout                        = 0
+   nstfout                        = 0
+   nstlog                         = 3500
+   nstcalcenergy                  = 100
+   nstenergy                      = 3500
+   nstxout-compressed             = 3500
+   compressed-x-precision         = 1000
+   cutoff-scheme                  = Verlet
+   nstlist                        = 20
+   pbc                            = xyz
+   periodic-molecules             = false
+   verlet-buffer-tolerance        = 0.005
+   verlet-buffer-pressure-tolerance = 0.5
+   rlist                          = 1.007
+   coulombtype                    = PME
+   coulomb-modifier               = Potential-shift
+   rcoulomb-switch                = 0
+   rcoulomb                       = 1
+   epsilon-r                      = 1
+   epsilon-rf                     = inf
+   vdw-type                       = Cut-off
+   vdw-modifier                   = Potential-shift
+   rvdw-switch                    = 1
+   rvdw                           = 1
+   DispCorr                       = EnerPres
+   table-extension                = 1
+   fourierspacing                 = 0.125
+   fourier-nx                     = 80
+   fourier-ny                     = 72
+   fourier-nz                     = 80
+   pme-order                      = 4
+   ewald-rtol                     = 1e-06
+   ewald-rtol-lj                  = 0.001
+   lj-pme-comb-rule               = Geometric
+   ewald-geometry                 = 3d
+   epsilon-surface                = 0
+   ensemble-temperature-setting   = not available
+   tcoupl                         = V-rescale
+   nsttcouple                     = 10
+   nh-chain-length                = 0
+   print-nose-hoover-chain-variables = false
+   pcoupl                         = Berendsen
+   pcoupltype                     = Isotropic
+   nstpcouple                     = 100
+   tau-p                          = 2
+   compressibility (3x3):
+      compressibility[    0]={ 4.50000e-05,  0.00000e+00,  0.00000e+00}
+      compressibility[    1]={ 0.00000e+00,  4.50000e-05,  0.00000e+00}
+      compressibility[    2]={ 0.00000e+00,  0.00000e+00,  4.50000e-05}
+   ref-p (3x3):
+      ref-p[    0]={ 1.00000e+00,  0.00000e+00,  0.00000e+00}
+      ref-p[    1]={ 0.00000e+00,  1.00000e+00,  0.00000e+00}
+      ref-p[    2]={ 0.00000e+00,  0.00000e+00,  1.00000e+00}
+   refcoord-scaling               = All
+   posres-com (3):
+      posres-com[0]= 0.00000e+00
+      posres-com[1]= 0.00000e+00
+      posres-com[2]= 0.00000e+00
+   posres-comB (3):
+      posres-comB[0]= 0.00000e+00
+      posres-comB[1]= 0.00000e+00
+      posres-comB[2]= 0.00000e+00
+   QMMM                           = false
+qm-opts:
+   ngQM                           = 0
+   constraint-algorithm           = Lincs
+   continuation                   = true
+   Shake-SOR                      = false
+   shake-tol                      = 0.0001
+   lincs-order                    = 4
+   lincs-iter                     = 1
+   lincs-warnangle                = 30
+   nwall                          = 0
+   wall-type                      = 9-3
+   wall-r-linpot                  = -1
+   wall-atomtype[0]               = -1
+   wall-atomtype[1]               = -1
+   wall-density[0]                = 0
+   wall-density[1]                = 0
+   wall-ewald-zfac                = 3
+   pull                           = false
+   awh                            = false
+   rotation                       = false
+   interactiveMD                  = false
+   disre                          = No
+   disre-weighting                = Conservative
+   disre-mixed                    = false
+   dr-fc                          = 1000
+   dr-tau                         = 0
+   nstdisreout                    = 100
+   orire-fc                       = 0
+   orire-tau                      = 0
+   nstorireout                    = 100
+   free-energy                    = no
+   cos-acceleration               = 0
+   deform (3x3):
+      deform[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   simulated-tempering            = false
+   swapcoords                     = no
+   userint1                       = 0
+   userint2                       = 0
+   userint3                       = 0
+   userint4                       = 0
+   userreal1                      = 0
+   userreal2                      = 0
+   userreal3                      = 0
+   userreal4                      = 0
+   applied-forces:
+     electric-field:
+       x:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+       y:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+       z:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+     density-guided-simulation:
+       active                     = false
+       group                      = protein
+       similarity-measure         = inner-product
+       atom-spreading-weight      = unity
+       force-constant             = 1e+09
+       gaussian-transform-spreading-width = 0.2
+       gaussian-transform-spreading-range-in-multiples-of-width = 4
+       reference-density-filename = reference.mrc
+       nst                        = 1
+       normalize-densities        = true
+       adaptive-force-scaling     = false
+       adaptive-force-scaling-time-constant = 4
+       shift-vector               = 
+       transformation-matrix      = 
+     qmmm-cp2k:
+       active                     = false
+       qmgroup                    = System
+       qmmethod                   = PBE
+       qmfilenames                = 
+       qmcharge                   = 0
+       qmmultiplicity             = 1
+     colvars:
+       active                     = false
+       configfile                 = 
+       seed                       = -1
+grpopts:
+   nrdf:     16087.7      139206
+   ref-t:         310         310
+   tau-t:         0.1         0.1
+annealing:      Single      Single
+annealing-npoints:           4           4
+annealing-time [0]:	         0.0       100.0       150.0       250.0
+annealing-temp [0]:	       310.0       380.0       380.0       310.0
+annealing-time [1]:	         0.0       100.0       150.0       250.0
+annealing-temp [1]:	       310.0       380.0       380.0       310.0
+   acc:	           0           0           0
+   nfreeze:           N           N           N
+   energygrp-flags[  0]: 0
+
+Changing nstlist from 20 to 100, rlist from 1.007 to 1.175
+
+When checking whether update groups are usable:
+  Domain decomposition is not active, so there is no need for update groups
+1 GPU selected for this run.
+Mapping of GPU IDs to the 2 GPU tasks in the 1 rank on this node:
+  PP:0,PME:0
+PP tasks will do (non-perturbed) short-ranged and most bonded interactions on the GPU
+PP task will update and constrain coordinates on the GPU
+PME tasks will do all aspects on the GPU
+Using 1 MPI thread
+Using 8 OpenMP threads 
+
+System total charge: -0.000
+Will do PME sum in reciprocal space for electrostatic interactions.
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+U. Essmann, L. Perera, M. L. Berkowitz, T. Darden, H. Lee and L. G. Pedersen 
+A smooth particle mesh Ewald method
+J. Chem. Phys. 103 (1995) pp. 8577-8592
+-------- -------- --- Thank You --- -------- --------
+
+Using a Gaussian width (1/beta) of 0.289108 nm for Ewald
+Potential shift: LJ r^-12: -1.000e+00 r^-6: -1.000e+00, Ewald -1.000e-06
+Initialized non-bonded Coulomb Ewald tables, spacing: 8.87e-04 size: 1129
+
+Generated table with 1087 data points for 1-4 COUL.
+Tabscale = 500 points/nm
+Generated table with 1087 data points for 1-4 LJ6.
+Tabscale = 500 points/nm
+Generated table with 1087 data points for 1-4 LJ12.
+Tabscale = 500 points/nm
+Long Range LJ corr.: <C6> 3.1597e-04
+
+
+Using GPU 8x8 nonbonded short-range kernels
+
+Using a dual 8x8 pair-list setup updated with dynamic, rolling pruning:
+  outer list: updated every 100 steps, buffer 0.175 nm, rlist 1.175 nm
+  inner list: updated every   8 steps, buffer 0.001 nm, rlist 1.001 nm
+At tolerance 0.005 kJ/mol/ps per atom, equivalent classical 1x1 list would be:
+  outer list: updated every 100 steps, buffer 0.248 nm, rlist 1.248 nm
+  inner list: updated every   8 steps, buffer 0.032 nm, rlist 1.032 nm
+
+The average pressure is off by at most 0.56 bar due to missing LJ interactions
+
+Using Lorentz-Berthelot Lennard-Jones combination rule
+
+NOTE: The number of threads is not equal to the number of (logical) cpus
+      and the -pin option is set to auto: will not pin threads to cpus.
+      This can lead to significant performance degradation.
+      Consider using -pin on (and -pinoffset in case you run multiple jobs).
+
+Initializing LINear Constraint Solver
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+B. Hess and H. Bekker and H. J. C. Berendsen and J. G. E. M. Fraaije
+LINCS: A Linear Constraint Solver for molecular simulations
+J. Comp. Chem. 18 (1997) pp. 1463-1472
+-------- -------- --- Thank You --- -------- --------
+
+The number of constraints is 3106
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Miyamoto and P. A. Kollman
+SETTLE: An Analytical Version of the SHAKE and RATTLE Algorithms for Rigid
+Water Models
+J. Comp. Chem. 13 (1992) pp. 952-962
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+G. Bussi, D. Donadio and M. Parrinello
+Canonical sampling through velocity rescaling
+J. Chem. Phys. 126 (2007) pp. 014101
+-------- -------- --- Thank You --- -------- --------
+
+There are: 76002 Atoms
+
+Updating coordinates and applying constraints on the GPU.
+Center of mass motion removal mode is Linear
+We have the following groups for center of mass motion removal:
+  0:  rest
+
+Started mdrun on rank 0 Tue Nov 19 18:13:29 2024
+
+           Step           Time
+              0        0.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.32462e+03    1.33319e+04    1.59272e+04    8.25050e+02    6.05733e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18480e+04    1.27259e+05   -9.94793e+03   -1.20208e+06    1.07043e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.70750e+05    2.01602e+05   -7.69148e+05   -7.69132e+05    3.12275e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15465e+02   -2.41799e+01    0.00000e+00
+
+           Step           Time
+           3500        7.00000
+
+Current ref_t for group Protein:    314.9
+Current ref_t for group non-Protein:    314.9
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.23853e+03    1.34372e+04    1.59169e+04    8.91301e+02    6.23804e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.21342e+04    1.25638e+05   -9.93763e+03   -1.19431e+06    1.08293e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.63921e+05    2.02903e+05   -7.61018e+05   -7.69987e+05    3.14289e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15020e+02    1.14052e+02    0.00000e+00
+
+           Step           Time
+           7000       14.00000
+
+Current ref_t for group Protein:    319.8
+Current ref_t for group non-Protein:    319.8
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.46638e+03    1.32784e+04    1.61359e+04    8.93780e+02    6.17999e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.22667e+04    1.23797e+05   -9.87922e+03   -1.18791e+06    1.10412e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.58726e+05    2.06896e+05   -7.51830e+05   -7.69876e+05    3.20474e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.12503e+02   -9.44334e+01    0.00000e+00
+
+           Step           Time
+          10500       21.00000
+
+Current ref_t for group Protein:    324.7
+Current ref_t for group non-Protein:    324.7
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.42400e+03    1.40470e+04    1.60572e+04    8.12147e+02    6.13526e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18813e+04    1.23491e+05   -9.83879e+03   -1.18249e+06    1.13046e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.53180e+05    2.10879e+05   -7.42301e+05   -7.69977e+05    3.26644e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.10769e+02    5.60658e+01    0.00000e+00
+
+           Step           Time
+          14000       28.00000
+
+Current ref_t for group Protein:    329.6
+Current ref_t for group non-Protein:    329.6
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.48451e+03    1.44141e+04    1.61661e+04    8.91302e+02    6.09221e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.22622e+04    1.22054e+05   -9.79212e+03   -1.17405e+06    1.14441e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.45035e+05    2.14262e+05   -7.30774e+05   -7.69987e+05    3.31884e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.08776e+02    8.05554e+01    0.00000e+00
+
+           Step           Time
+          17500       35.00000
+
+Current ref_t for group Protein:    334.5
+Current ref_t for group non-Protein:    334.5
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.56389e+03    1.44982e+04    1.62020e+04    7.93236e+02    6.14205e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17492e+04    1.21212e+05   -9.72669e+03   -1.16952e+06    1.17610e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.41324e+05    2.15686e+05   -7.25637e+05   -7.70018e+05    3.34090e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.05999e+02    1.32026e+02    0.00000e+00
+
+step 19100: timed with pme grid 80 72 80, coulomb cutoff 1.000: 78.5 M-cycles
+step 19300: timed with pme grid 72 64 72, coulomb cutoff 1.078: 87.5 M-cycles
+step 19500: timed with pme grid 64 56 64, coulomb cutoff 1.214: 100.2 M-cycles
+step 19700: timed with pme grid 64 60 72, coulomb cutoff 1.164: 103.8 M-cycles
+step 19900: timed with pme grid 72 60 72, coulomb cutoff 1.133: 97.6 M-cycles
+step 20100: timed with pme grid 72 64 72, coulomb cutoff 1.078: 92.5 M-cycles
+step 20300: timed with pme grid 72 64 80, coulomb cutoff 1.062: 81.7 M-cycles
+step 20500: timed with pme grid 72 72 80, coulomb cutoff 1.035: 83.7 M-cycles
+step 20700: timed with pme grid 80 72 80, coulomb cutoff 1.000: 80.1 M-cycles
+              optimal pme grid 80 72 80, coulomb cutoff 1.000
+           Step           Time
+          21000       42.00000
+
+Current ref_t for group Protein:    339.4
+Current ref_t for group non-Protein:    339.4
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.43807e+03    1.38426e+04    1.62734e+04    8.27680e+02    6.19344e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19981e+04    1.18805e+05   -9.69041e+03   -1.16240e+06    1.18470e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.36862e+05    2.19137e+05   -7.17725e+05   -7.69966e+05    3.39436e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.04467e+02    4.76405e+01    0.00000e+00
+
+           Step           Time
+          24500       49.00000
+
+Current ref_t for group Protein:    344.3
+Current ref_t for group non-Protein:    344.3
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.62098e+03    1.47715e+04    1.64068e+04    9.97386e+02    6.12187e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18213e+04    1.15326e+05   -9.65342e+03   -1.14945e+06    1.22393e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.25802e+05    2.23896e+05   -7.01906e+05   -7.69962e+05    3.46806e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.02911e+02    2.09528e+01    0.00000e+00
+
+           Step           Time
+          28000       56.00000
+
+Current ref_t for group Protein:    349.2
+Current ref_t for group non-Protein:    349.2
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.90491e+03    1.45110e+04    1.63511e+04    9.06292e+02    6.21574e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19281e+04    1.14537e+05   -9.60185e+03   -1.14236e+06    1.23394e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.19269e+05    2.24710e+05   -6.94560e+05   -7.69988e+05    3.48067e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.00752e+02    1.02397e+02    0.00000e+00
+
+           Step           Time
+          31500       63.00000
+
+Current ref_t for group Protein:    354.1
+Current ref_t for group non-Protein:    354.1
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.17062e+03    1.46684e+04    1.66069e+04    1.01651e+03    6.24569e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.16994e+04    1.11486e+05   -9.52807e+03   -1.13473e+06    1.27710e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.13594e+05    2.29880e+05   -6.83714e+05   -7.69802e+05    3.56075e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.97682e+02   -1.49358e+02    0.00000e+00
+
+           Step           Time
+          35000       70.00000
+
+Current ref_t for group Protein:    359.0
+Current ref_t for group non-Protein:    359.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.97604e+03    1.50812e+04    1.64222e+04    9.56792e+02    6.36612e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18157e+04    1.11064e+05   -9.49846e+03   -1.12875e+06    1.27932e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.07777e+05    2.33451e+05   -6.74326e+05   -7.69927e+05    3.61607e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.96457e+02    3.70504e+01    0.00000e+00
+
+           Step           Time
+          38500       77.00000
+
+Current ref_t for group Protein:    363.9
+Current ref_t for group non-Protein:    363.9
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.87584e+03    1.47727e+04    1.65323e+04    1.03843e+03    6.17334e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.20351e+04    1.08513e+05   -9.43487e+03   -1.12020e+06    1.31400e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.01559e+05    2.35402e+05   -6.66157e+05   -7.69896e+05    3.64629e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.93838e+02   -4.21364e+01    0.00000e+00
+
+           Step           Time
+          42000       84.00000
+
+Current ref_t for group Protein:    368.8
+Current ref_t for group non-Protein:    368.8
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.16900e+03    1.52690e+04    1.65226e+04    1.02164e+03    6.28138e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19709e+04    1.07678e+05   -9.36104e+03   -1.11236e+06    1.33028e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.93504e+05    2.38270e+05   -6.55233e+05   -7.69864e+05    3.69072e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.90820e+02   -5.10947e+01    0.00000e+00
+
+           Step           Time
+          45500       91.00000
+
+Current ref_t for group Protein:    373.7
+Current ref_t for group non-Protein:    373.7
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.21550e+03    1.56007e+04    1.66231e+04    1.02557e+03    6.05032e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.14005e+04    1.06708e+05   -9.32172e+03   -1.10733e+06    1.35821e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.89443e+05    2.40890e+05   -6.48553e+05   -7.69784e+05    3.73130e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.89223e+02   -1.94578e+02    0.00000e+00
+
+           Step           Time
+          49000       98.00000
+
+Current ref_t for group Protein:    378.6
+Current ref_t for group non-Protein:    378.6
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.19267e+03    1.54800e+04    1.67261e+04    1.03249e+03    6.34191e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17674e+04    1.05337e+05   -9.25505e+03   -1.09681e+06    1.38847e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.79302e+05    2.45598e+05   -6.33704e+05   -7.70064e+05    3.80422e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.86529e+02    1.58695e+02    0.00000e+00
+
+           Step           Time
+          52500      105.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.26333e+03    1.53726e+04    1.67438e+04    9.83863e+02    6.15844e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18586e+04    1.06443e+05   -9.20994e+03   -1.09686e+06    1.37666e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.78478e+05    2.45001e+05   -6.33477e+05   -7.69983e+05    3.79498e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.84718e+02    6.55031e+01    0.00000e+00
+
+           Step           Time
+          56000      112.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.21433e+03    1.60976e+04    1.67235e+04    1.03927e+03    6.36854e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18561e+04    1.05028e+05   -9.21749e+03   -1.09494e+06    1.42015e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.76632e+05    2.44791e+05   -6.31841e+05   -7.69967e+05    3.79172e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.85020e+02    1.63166e+02    0.00000e+00
+
+           Step           Time
+          59500      119.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.11849e+03    1.57221e+04    1.64986e+04    9.34562e+02    6.46672e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.20652e+04    1.03965e+05   -9.22142e+03   -1.09481e+06    1.39196e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.78338e+05    2.45236e+05   -6.33102e+05   -7.69889e+05    3.79861e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.85178e+02    2.08622e+01    0.00000e+00
+
+           Step           Time
+          63000      126.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.12929e+03    1.58537e+04    1.67143e+04    1.03542e+03    6.36382e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.15747e+04    1.06280e+05   -9.23376e+03   -1.09684e+06    1.41826e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.77945e+05    2.46330e+05   -6.31615e+05   -7.70039e+05    3.81556e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.85673e+02    2.15513e+02    0.00000e+00
+
+           Step           Time
+          66500      133.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.18779e+03    1.58231e+04    1.64549e+04    9.54690e+02    6.14073e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19146e+04    1.02917e+05   -9.21801e+03   -1.09359e+06    1.39922e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.78423e+05    2.44782e+05   -6.33640e+05   -7.69683e+05    3.79159e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.85041e+02   -2.79174e+02    0.00000e+00
+
+           Step           Time
+          70000      140.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.03969e+03    1.57784e+04    1.66217e+04    9.72889e+02    6.25470e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.20769e+04    1.04086e+05   -9.21594e+03   -1.09569e+06    1.41370e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.78935e+05    2.45479e+05   -6.33456e+05   -7.69913e+05    3.80237e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.84958e+02    7.06379e+00    0.00000e+00
+
+           Step           Time
+          73500      147.00000
+
+Current ref_t for group Protein:    380.0
+Current ref_t for group non-Protein:    380.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.09690e+03    1.57241e+04    1.65014e+04    1.07854e+03    6.25147e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.15711e+04    1.04931e+05   -9.22765e+03   -1.09458e+06    1.39557e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.77696e+05    2.46024e+05   -6.31672e+05   -7.69948e+05    3.81082e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.85428e+02    9.15387e+01    0.00000e+00
+
+           Step           Time
+          77000      154.00000
+
+Current ref_t for group Protein:    377.2
+Current ref_t for group non-Protein:    377.2
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.17147e+03    1.53948e+04    1.66037e+04    9.71883e+02    6.25004e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.23463e+04    1.06685e+05   -9.26099e+03   -1.10171e+06    1.37779e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.82769e+05    2.43144e+05   -6.39626e+05   -7.69929e+05    3.76621e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.86769e+02    9.72149e+01    0.00000e+00
+
+           Step           Time
+          80500      161.00000
+
+Current ref_t for group Protein:    372.3
+Current ref_t for group non-Protein:    372.3
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    6.10407e+03    1.53005e+04    1.67092e+04    1.06016e+03    6.17437e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19155e+04    1.05830e+05   -9.30165e+03   -1.10642e+06    1.34245e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.89203e+05    2.40824e+05   -6.48378e+05   -7.69691e+05    3.73028e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.88410e+02   -1.55595e+02    0.00000e+00
+
+           Step           Time
+          84000      168.00000
+
+Current ref_t for group Protein:    367.4
+Current ref_t for group non-Protein:    367.4
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.92158e+03    1.54259e+04    1.63967e+04    9.23812e+02    6.08264e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.16845e+04    1.06737e+05   -9.33205e+03   -1.11020e+06    1.33706e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -8.92993e+05    2.36600e+05   -6.56393e+05   -7.69724e+05    3.66485e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.89642e+02   -1.10505e+02    0.00000e+00
+
+           Step           Time
+          87500      175.00000
+
+Current ref_t for group Protein:    362.5
+Current ref_t for group non-Protein:    362.5
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.89346e+03    1.50360e+04    1.65023e+04    9.62282e+02    6.25933e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17303e+04    1.09259e+05   -9.40291e+03   -1.12091e+06    1.29481e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.01718e+05    2.34166e+05   -6.67552e+05   -7.69710e+05    3.62714e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.92529e+02   -9.15689e+01    0.00000e+00
+
+           Step           Time
+          91000      182.00000
+
+Current ref_t for group Protein:    357.6
+Current ref_t for group non-Protein:    357.6
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.92193e+03    1.50426e+04    1.63261e+04    8.94866e+02    6.12192e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.13519e+04    1.10587e+05   -9.44966e+03   -1.12689e+06    1.28406e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.07250e+05    2.29311e+05   -6.77939e+05   -7.69659e+05    3.55195e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.94446e+02   -1.51234e+02    0.00000e+00
+
+           Step           Time
+          94500      189.00000
+
+Current ref_t for group Protein:    352.7
+Current ref_t for group non-Protein:    352.7
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.98761e+03    1.50881e+04    1.63191e+04    9.41128e+02    6.13855e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.20103e+04    1.14095e+05   -9.50718e+03   -1.13751e+06    1.25910e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.13845e+05    2.28733e+05   -6.85112e+05   -7.69723e+05    3.54299e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.96817e+02   -9.24825e+00    0.00000e+00
+
+           Step           Time
+          98000      196.00000
+
+Current ref_t for group Protein:    347.8
+Current ref_t for group non-Protein:    347.8
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.83423e+03    1.47167e+04    1.63378e+04    9.07961e+02    6.18184e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.14779e+04    1.15239e+05   -9.57157e+03   -1.14486e+06    1.22512e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.21490e+05    2.24695e+05   -6.96795e+05   -7.69707e+05    3.48044e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -1.99489e+02   -1.27988e+01    0.00000e+00
+
+           Step           Time
+         101500      203.00000
+
+Current ref_t for group Protein:    342.9
+Current ref_t for group non-Protein:    342.9
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.63710e+03    1.46893e+04    1.61412e+04    9.17998e+02    6.26865e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17631e+04    1.14182e+05   -9.60864e+03   -1.14916e+06    1.21919e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.26976e+05    2.21419e+05   -7.05557e+05   -7.69593e+05    3.42969e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.01035e+02   -1.26313e+02    0.00000e+00
+
+           Step           Time
+         105000      210.00000
+
+Current ref_t for group Protein:    338.0
+Current ref_t for group non-Protein:    338.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.58253e+03    1.41555e+04    1.63168e+04    8.56172e+02    6.07148e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17120e+04    1.20042e+05   -9.67048e+03   -1.16113e+06    1.18098e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.34259e+05    2.18816e+05   -7.15443e+05   -7.69726e+05    3.38937e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.03628e+02   -3.69853e+00    0.00000e+00
+
+           Step           Time
+         108500      217.00000
+
+Current ref_t for group Protein:    333.1
+Current ref_t for group non-Protein:    333.1
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.67018e+03    1.40037e+04    1.61602e+04    8.88837e+02    6.15544e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18867e+04    1.18951e+05   -9.71349e+03   -1.16683e+06    1.15830e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.41245e+05    2.15288e+05   -7.25958e+05   -7.69610e+05    3.33473e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.05441e+02   -1.57888e+02    0.00000e+00
+
+           Step           Time
+         112000      224.00000
+
+Current ref_t for group Protein:    328.2
+Current ref_t for group non-Protein:    328.2
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.47823e+03    1.41307e+04    1.61250e+04    9.27734e+02    6.17363e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.22838e+04    1.20513e+05   -9.76826e+03   -1.17426e+06    1.14991e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.46898e+05    2.12758e+05   -7.34140e+05   -7.69624e+05    3.29554e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.07762e+02   -3.86796e+01    0.00000e+00
+
+           Step           Time
+         115500      231.00000
+
+Current ref_t for group Protein:    323.3
+Current ref_t for group non-Protein:    323.3
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.28564e+03    1.39792e+04    1.60218e+04    9.39637e+02    6.06797e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17324e+04    1.22705e+05   -9.80475e+03   -1.18237e+06    1.10985e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.54341e+05    2.07869e+05   -7.46472e+05   -7.69485e+05    3.21981e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.09315e+02   -1.96224e+02    0.00000e+00
+
+           Step           Time
+         119000      238.00000
+
+Current ref_t for group Protein:    318.4
+Current ref_t for group non-Protein:    318.4
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.40515e+03    1.35419e+04    1.58767e+04    8.72389e+02    6.05654e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17773e+04    1.24365e+05   -9.84483e+03   -1.18922e+06    1.10704e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.60104e+05    2.04705e+05   -7.55399e+05   -7.69536e+05    3.17081e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.11027e+02   -7.53932e+01    0.00000e+00
+
+           Step           Time
+         122500      245.00000
+
+Current ref_t for group Protein:    313.5
+Current ref_t for group non-Protein:    313.5
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.05145e+03    1.36479e+04    1.57756e+04    8.09774e+02    6.12540e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.16798e+04    1.28241e+05   -9.90423e+03   -1.20050e+06    1.06420e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.68436e+05    2.03257e+05   -7.65179e+05   -7.69652e+05    3.14837e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.13578e+02    6.60640e+01    0.00000e+00
+
+           Step           Time
+         126000      252.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.36535e+03    1.33296e+04    1.59067e+04    8.63540e+02    6.10433e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.15703e+04    1.28569e+05   -9.92883e+03   -1.20375e+06    1.06075e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.71362e+05    2.00008e+05   -7.71354e+05   -7.69552e+05    3.09805e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.14639e+02   -2.19529e+01    0.00000e+00
+
+           Step           Time
+         129500      259.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.36415e+03    1.35145e+04    1.59407e+04    8.86847e+02    6.10047e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.16967e+04    1.26525e+05   -9.95447e+03   -1.19981e+06    1.05285e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.69212e+05    2.01025e+05   -7.68187e+05   -7.69506e+05    3.11380e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15748e+02   -8.38745e+01    0.00000e+00
+
+           Step           Time
+         133000      266.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.31380e+03    1.33615e+04    1.59131e+04    9.09122e+02    6.06537e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17866e+04    1.29347e+05   -9.95437e+03   -1.20539e+06    1.03766e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.72268e+05    2.00284e+05   -7.71984e+05   -7.69560e+05    3.10233e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15744e+02    5.56360e+01    0.00000e+00
+
+           Step           Time
+         136500      273.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.23763e+03    1.33752e+04    1.60703e+04    9.13724e+02    6.12074e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.20306e+04    1.27946e+05   -9.94184e+03   -1.20372e+06    1.06799e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.71286e+05    1.98654e+05   -7.72632e+05   -7.69461e+05    3.07708e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15202e+02   -1.07120e+02    0.00000e+00
+
+           Step           Time
+         140000      280.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.21440e+03    1.34868e+04    1.59207e+04    8.63819e+02    6.17604e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18248e+04    1.28544e+05   -9.95391e+03   -1.20481e+06    1.06240e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.72110e+05    2.00545e+05   -7.71564e+05   -7.69557e+05    3.10637e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15724e+02   -3.38728e+00    0.00000e+00
+
+           Step           Time
+         143500      287.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.26809e+03    1.30179e+04    1.59782e+04    8.33027e+02    5.98826e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17709e+04    1.28611e+05   -9.96755e+03   -1.20569e+06    1.05862e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.73607e+05    1.99275e+05   -7.74332e+05   -7.69501e+05    3.08669e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.16315e+02   -8.95784e+01    0.00000e+00
+
+           Step           Time
+         147000      294.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.24608e+03    1.34587e+04    1.58461e+04    8.48788e+02    6.21557e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19654e+04    1.28276e+05   -9.93263e+03   -1.20493e+06    1.07481e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.72259e+05    1.99860e+05   -7.72399e+05   -7.69496e+05    3.09576e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.14803e+02    2.36182e+00    0.00000e+00
+
+           Step           Time
+         150500      301.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.05752e+03    1.35645e+04    1.61780e+04    9.37418e+02    6.06176e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18606e+04    1.28366e+05   -9.94530e+03   -1.20485e+06    1.05904e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.72177e+05    1.99728e+05   -7.72449e+05   -7.69467e+05    3.09372e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15351e+02   -7.54415e+01    0.00000e+00
+
+           Step           Time
+         154000      308.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.31420e+03    1.32446e+04    1.57862e+04    8.58357e+02    6.09238e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19154e+04    1.27571e+05   -9.93880e+03   -1.20296e+06    1.07589e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.71358e+05    2.00053e+05   -7.71305e+05   -7.69451e+05    3.09875e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15070e+02   -9.48741e+01    0.00000e+00
+
+           Step           Time
+         157500      315.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.30431e+03    1.32209e+04    1.59418e+04    7.98705e+02    6.07356e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.19534e+04    1.28166e+05   -9.94938e+03   -1.20466e+06    1.07301e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.72424e+05    1.98183e+05   -7.74241e+05   -7.69501e+05    3.06978e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15528e+02   -2.46852e+01    0.00000e+00
+
+           Step           Time
+         161000      322.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    4.98829e+03    1.31405e+04    1.61024e+04    8.26908e+02    6.17597e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.17143e+04    1.28580e+05   -9.97033e+03   -1.20657e+06    1.04404e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.74572e+05    1.99667e+05   -7.74904e+05   -7.69584e+05    3.09277e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.16435e+02    9.10130e+01    0.00000e+00
+
+           Step           Time
+         164500      329.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.39936e+03    1.32228e+04    1.58244e+04    8.36272e+02    6.08952e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18734e+04    1.29396e+05   -9.95736e+03   -1.20630e+06    1.06034e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.73015e+05    1.98946e+05   -7.74068e+05   -7.69510e+05    3.08161e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15873e+02    3.35589e+01    0.00000e+00
+
+           Step           Time
+         168000      336.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.07192e+03    1.29991e+04    1.60680e+04    8.67241e+02    6.14552e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18201e+04    1.28430e+05   -9.94864e+03   -1.20748e+06    1.04919e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.75539e+05    1.98993e+05   -7.76546e+05   -7.69448e+05    3.08233e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15496e+02   -7.67503e+01    0.00000e+00
+
+           Step           Time
+         171500      343.00000
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.29437e+03    1.33133e+04    1.60161e+04    9.17926e+02    6.06664e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.16654e+04    1.28177e+05   -9.93350e+03   -1.20543e+06    1.07391e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.73175e+05    1.99100e+05   -7.74075e+05   -7.69431e+05    3.08398e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.14841e+02   -6.79622e+01    0.00000e+00
+
+           Step           Time
+         175000      350.00000
+
+Writing checkpoint, step 175000 at Tue Nov 19 18:14:19 2024
+
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.23078e+03    1.36419e+04    1.60072e+04    8.68369e+02    6.07012e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.15860e+04    1.27638e+05   -9.94566e+03   -1.20337e+06    1.06004e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.71674e+05    2.00350e+05   -7.71324e+05   -7.69427e+05    3.10335e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.15367e+02   -2.88741e+01    0.00000e+00
+
+
+Energy conservation over simulation part #1 of length 350 ps, time 0 to 350 ps
+  Conserved energy drift: -1.11e-05 kJ/mol/ps per atom
+
+Current ref_t for group Protein:    310.0
+Current ref_t for group non-Protein:    310.0
+
+	<======  ###############  ==>
+	<====  A V E R A G E S  ====>
+	<==  ###############  ======>
+
+	Statistics over 175001 steps using 1751 frames
+
+   Energies (kJ/mol)
+           Bond          Angle    Proper Dih. Per. Imp. Dih.          LJ-14
+    5.66617e+03    1.43568e+04    1.62329e+04    9.16504e+02    6.18469e+03
+     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)   Coul. recip.
+    6.18433e+04    1.18026e+05   -9.64940e+03   -1.15756e+06    1.19852e+04
+      Potential    Kinetic En.   Total Energy  Conserved En.    Temperature
+   -9.31996e+05    2.19524e+05   -7.12473e+05   -7.69739e+05    3.40034e+02
+ Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -2.02912e+02    1.01838e+00    0.00000e+00
+
+          Box-X          Box-Y          Box-Z
+    9.40997e+00    8.58312e+00    9.80294e+00
+
+   Total Virial (kJ/mol)
+    7.31266e+04   -4.78011e+01   -7.10283e+00
+   -4.78050e+01    7.30565e+04   -2.08719e+01
+   -7.09611e+00   -2.08656e+01    7.32691e+04
+
+   Pressure (bar)
+    2.15534e+00    1.55956e+00   -6.86301e-01
+    1.55973e+00    1.95591e+00    2.41501e-01
+   -6.86591e-01    2.41231e-01   -1.05610e+00
+
+      T-Protein  T-non-Protein
+    3.40192e+02    3.40016e+02
+
+
+	M E G A - F L O P S   A C C O U N T I N G
+
+ NB=Group-cutoff nonbonded kernels    NxN=N-by-N cluster Verlet kernels
+ RF=Reaction-Field  VdW=Van der Waals  QSTab=quadratic-spline table
+ W3=SPC/TIP3p  W4=TIP4p (single or pairs)
+ V&F=Potential and force  V=Potential only  F=Force only
+
+ Computing:                               M-Number         M-Flops  % Flops
+-----------------------------------------------------------------------------
+ Pair Search distance check           13010.383952      117093.456     0.0
+ NxN Ewald Elec. + LJ [F]          12691875.354048   837663773.367    98.4
+ NxN Ewald Elec. + LJ [V&F]          128275.836224    13725514.476     1.6
+ Shift-X                                133.079502         798.477     0.0
+ Virial                                 133.158297        2396.849     0.0
+ Stop-CM                                133.079502        1330.795     0.0
+ P-Coupling                             133.079502         798.477     0.0
+ Calc-Ekin                             2660.222004       71825.994     0.0
+-----------------------------------------------------------------------------
+ Total                                               851583531.891   100.0
+-----------------------------------------------------------------------------
+
+
+      R E A L   C Y C L E   A N D   T I M E   A C C O U N T I N G
+
+On 1 MPI rank, each using 8 OpenMP threads
+
+ Activity:              Num   Num      Call    Wall time         Giga-Cycles
+                        Ranks Threads  Count      (s)         total sum    %
+--------------------------------------------------------------------------------
+ Neighbor search           1    8       1751       4.026         96.468   8.1
+ Launch PP GPU ops.        1    8     348251       1.800         43.141   3.6
+ Force                     1    8     175001       0.062          1.478   0.1
+ PME GPU mesh              1    8     175001       1.791         42.917   3.6
+ Wait Bonded GPU           1    8       1751       0.012          0.294   0.0
+ Wait GPU NB local         1    8     175001       0.835         20.011   1.7
+ Wait GPU state copy       1    8      43753      35.784        857.449  71.6
+ NB X/F buffer ops.        1    8       1751       0.049          1.168   0.1
+ Write traj.               1    8         51       0.151          3.610   0.3
+ Rest                                              5.474        131.157  11.0
+--------------------------------------------------------------------------------
+ Total                                            49.983       1197.692 100.0
+--------------------------------------------------------------------------------
+ Breakdown of PME mesh activities
+--------------------------------------------------------------------------------
+ Wait PME GPU gather       1    8     175001       0.134          3.201   0.3
+ Reduce GPU PME F          1    8     175001       0.046          1.102   0.1
+ Launch PME GPU ops.       1    8    1575009       1.538         36.861   3.1
+--------------------------------------------------------------------------------
+
+               Core t (s)   Wall t (s)        (%)
+       Time:      399.850       49.983      800.0
+                 (ns/day)    (hour/ns)
+Performance:      605.008        0.040
+Finished mdrun on rank 0 Tue Nov 19 18:14:19 2024
+

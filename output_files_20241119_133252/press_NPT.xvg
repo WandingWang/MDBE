@@ -1,0 +1,33 @@
+# This file was created Tue Nov 19 13:33:40 2024
+# Created by:
+#                      :-) GROMACS - gmx energy, 2024.4 (-:
+# 
+# Executable:   /opt/gromacs-2024.4/bin/gmx
+# Data prefix:  /opt/gromacs-2024.4
+# Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_133252
+# Command line:
+#   gmx energy -f NPT.edr -o press_NPT.xvg
+# gmx energy is part of G R O M A C S:
+#
+# God Rules Over Mankind, Animals, Cosmos and Such
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(bar), (kg/m^3)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Pressure"
+@ s1 legend "Density"
+    0.000000   93.571167  997.762817
+   15.000000  -97.408043  1003.362305
+   30.000000  -85.716438  1004.796570
+   45.000000  133.796875  1005.186829
+   60.000000  -31.203056  1005.206970
+   75.000000  -12.309794  1003.876526
+   90.000000  266.631836  1004.863586
+  100.000000   10.331691  1006.124695
