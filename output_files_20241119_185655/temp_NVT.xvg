@@ -1,0 +1,35 @@
+# This file was created Tue Nov 19 18:57:47 2024
+# Created by:
+#                      :-) GROMACS - gmx energy, 2024.4 (-:
+# 
+# Executable:   /opt/gromacs-2024.4/bin/gmx
+# Data prefix:  /opt/gromacs-2024.4
+# Working dir:  /home/bio/Desktop/jupyter_test/jupyter_test/output_files_20241119_185655
+# Command line:
+#   gmx energy -f NVT.edr -o temp_NVT.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Great Red Owns Many ACres of Sand 
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000  300.257080
+    5.000000  279.236877
+   10.000000  296.616699
+   15.000000  299.048950
+   20.000000  299.131531
+   25.000000  298.095123
+   30.000000  300.321930
+   35.000000  299.624847
+   40.000000  300.623993
+   45.000000  301.809998
+   50.000000  302.083221
