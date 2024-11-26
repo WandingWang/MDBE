@@ -1,0 +1,35 @@
+# This file was created Tue Nov 26 11:11:58 2024
+# Created by:
+#                      :-) GROMACS - gmx energy, 2024.4 (-:
+# 
+# Executable:   /opt/gromacs-2024.4/bin/gmx
+# Data prefix:  /opt/gromacs-2024.4
+# Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241126_111041/configuration
+# Command line:
+#   gmx energy -f NVT.edr -o temp_NVT.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Green Red Orange Magenta Azure Cyan Skyblue
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000  300.316925
+    5.000000  280.132324
+   10.000000  294.993195
+   15.000000  299.192383
+   20.000000  300.765259
+   25.000000  299.351166
+   30.000000  298.454132
+   35.000000  301.223145
+   40.000000  299.710754
+   45.000000  301.620209
+   50.000000  299.854095

@@ -10,8 +10,8 @@ def check_file(file_path):
         return False
     return True
 
-#GRO_to_PDB(fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
-def GRO_to_PDB(fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder,pathGRO = os.getcwd()):
+#GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
+def GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder):
     """
     Converts a GRO file to a PDB file using VMD.
 
@@ -171,11 +171,17 @@ def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name):
         "-o", f"./{root_name}/{conf_name}_noPBC.xtc", "-s", tpr_file, "-pbc", "mol", "-center"
     ]
     run_command(cmd2, input_data="1\n0\n")
-    
+
     # check
-    cmd_check = ["gmx", "check", "-f", f"./{root_name}/{conf_name}_noPBC.xtc"]
-    run_command(cmd_check,input_data=None)
+    #cmd_check = ["gmx", "check", "-f", f"./{root_name}/{conf_name}_noPBC.xtc"]
+    #run_command(cmd_check,input_data=None)
+    #print("\t\t--TRJCONV completed successfully!")
+    # check
+    output_file = "trj_check.out"
+    cmd_check = ["gmx", "check", "-f", f"./cycle1_BE/cycle1_noPBC.xtc", ">", output_file, "2>&1"]
+    run_command(["bash", "-c", " ".join(cmd_check)],input_data=None)
     print("\t\t--TRJCONV completed successfully!")
+    
 
 def make_index(conf_name, root_name, receptor_frag, ab_chains):
     """make index file"""
@@ -216,14 +222,14 @@ def run_grompp(mdp_name, conf_name, top_file, root_name):
         "gmx", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
         "-p", f"{top_file}_protein.top", "-o", f"{root_name}/{conf_name}.tpr", "-maxwarn", "1"
     ]
-    run_command(cmd1)
+    run_command(cmd1, input_data = None)
     
     # second GROMPP
     cmd2 = [
         "gmx", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
         "-p", f"{top_file}_protein.top", "-o", f"{root_name}/{conf_name}_newGRO.tpr", "-maxwarn", "1"
     ]
-    run_command(cmd2)
+    run_command(cmd2, input_data = None)
     print("\t\t--GROMPP completed successfully!")
 
 def count_his_residues(pdb_file):
@@ -261,6 +267,7 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
         print("Something wrong during running MAKE_NDX!")
 
     # file for GRO_TO_PDB
+    pathGRO = os.getcwd()
     fileNameGRO = starting_gro_file
     pathPDB = os.path.dirname(repository_pdb_file)
     pdb_name_with_extension = os.path.basename(repository_pdb_file) #xxxx.pdb
@@ -268,13 +275,13 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
     fileNamePDB = pdb_name_without_extension
     FileNamePDB_OUT = f"{conf_name}_starting_protein"
     # RUN GRO_TO_PDB
-    GRO_to_PDB(fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
+    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
     
     remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name)
     make_index(conf_name, root_name, receptor_frag, ab_chains)
     create_protein_top(top_file)
     run_grompp(mdp_name, conf_name, top_file, root_name)
-    his_string = count_his_residues(f"{conf_name}_starting_protein".pdb)
+    his_string = count_his_residues(f"{conf_name}_starting_protein.pdb")
 
     print("Files created successfully!")
 
