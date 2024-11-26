@@ -1,0 +1,359 @@
+
+CPPTRAJ: Trajectory Analysis. V6.18.1 (AmberTools)
+    ___  ___  ___  ___
+     | \/ | \/ | \/ | 
+    _|_/\_|_/\_|_/\_|_
+
+| Date/time: 11/26/24 17:59:33
+| Available memory: 55.867 GB
+
+	Reading 'COM.prmtop' as Amber Topology
+	Radius Set: H(N)-modified Bondi radii (mbondi2)
+INPUT: Reading input from 'STDIN'
+  [trajin COM_traj_0.xtc 1 151 1]
+	Reading 'COM_traj_0.xtc' as Gromacs XTC
+Warning: Trajectory box type is 'Orthorhombic' but topology box type is 'None'.
+Warning: Setting topology box information from trajectory.
+  [noprogress]
+	Progress bar will not be used during Run.
+  [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+    RMSD: (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), reference is first frame (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), mass-weighted.
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [outtraj _GMXMMPBSA_complex.pdb pdb onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_complex.pdb' as PDB
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_dummycomplex.inpcrd restart onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_dummycomplex.inpcrd' as Amber Restart
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.0 onlyframes 1-19 nobox]
+Warning: Format not specified and extension '.0' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 1-19
+	Writing '_GMXMMPBSA_complex.mdcrd.0' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.1 onlyframes 20-38 nobox]
+Warning: Format not specified and extension '.1' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 20-38
+	Writing '_GMXMMPBSA_complex.mdcrd.1' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.2 onlyframes 39-57 nobox]
+Warning: Format not specified and extension '.2' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 39-57
+	Writing '_GMXMMPBSA_complex.mdcrd.2' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.3 onlyframes 58-76 nobox]
+Warning: Format not specified and extension '.3' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 58-76
+	Writing '_GMXMMPBSA_complex.mdcrd.3' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.4 onlyframes 77-95 nobox]
+Warning: Format not specified and extension '.4' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 77-95
+	Writing '_GMXMMPBSA_complex.mdcrd.4' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.5 onlyframes 96-114 nobox]
+Warning: Format not specified and extension '.5' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 96-114
+	Writing '_GMXMMPBSA_complex.mdcrd.5' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.6 onlyframes 115-133 nobox]
+Warning: Format not specified and extension '.6' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 115-133
+	Writing '_GMXMMPBSA_complex.mdcrd.6' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_complex.mdcrd.7 onlyframes 134-151 nobox]
+Warning: Format not specified and extension '.7' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 134-151
+	Writing '_GMXMMPBSA_complex.mdcrd.7' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [strip :185-413]
+    STRIP: Stripping atoms in mask [:185-413]
+  [outtraj _GMXMMPBSA_receptor.pdb pdb onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_receptor.pdb' as PDB
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_dummyreceptor.inpcrd restart onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_dummyreceptor.inpcrd' as Amber Restart
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.0 onlyframes 1-19 nobox]
+Warning: Format not specified and extension '.0' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 1-19
+	Writing '_GMXMMPBSA_receptor.mdcrd.0' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.1 onlyframes 20-38 nobox]
+Warning: Format not specified and extension '.1' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 20-38
+	Writing '_GMXMMPBSA_receptor.mdcrd.1' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.2 onlyframes 39-57 nobox]
+Warning: Format not specified and extension '.2' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 39-57
+	Writing '_GMXMMPBSA_receptor.mdcrd.2' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.3 onlyframes 58-76 nobox]
+Warning: Format not specified and extension '.3' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 58-76
+	Writing '_GMXMMPBSA_receptor.mdcrd.3' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.4 onlyframes 77-95 nobox]
+Warning: Format not specified and extension '.4' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 77-95
+	Writing '_GMXMMPBSA_receptor.mdcrd.4' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.5 onlyframes 96-114 nobox]
+Warning: Format not specified and extension '.5' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 96-114
+	Writing '_GMXMMPBSA_receptor.mdcrd.5' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.6 onlyframes 115-133 nobox]
+Warning: Format not specified and extension '.6' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 115-133
+	Writing '_GMXMMPBSA_receptor.mdcrd.6' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_receptor.mdcrd.7 onlyframes 134-151 nobox]
+Warning: Format not specified and extension '.7' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 134-151
+	Writing '_GMXMMPBSA_receptor.mdcrd.7' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [unstrip]
+  [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+    RMSD: (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), reference is first frame (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), mass-weighted.
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [strip :1-184]
+    STRIP: Stripping atoms in mask [:1-184]
+  [outtraj _GMXMMPBSA_ligand.pdb pdb onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_ligand.pdb' as PDB
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_dummyligand.inpcrd restart onlyframes 1 nobox]
+	Saving frames 1
+	Writing '_GMXMMPBSA_dummyligand.inpcrd' as Amber Restart
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.0 onlyframes 1-19 nobox]
+Warning: Format not specified and extension '.0' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 1-19
+	Writing '_GMXMMPBSA_ligand.mdcrd.0' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.1 onlyframes 20-38 nobox]
+Warning: Format not specified and extension '.1' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 20-38
+	Writing '_GMXMMPBSA_ligand.mdcrd.1' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.2 onlyframes 39-57 nobox]
+Warning: Format not specified and extension '.2' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 39-57
+	Writing '_GMXMMPBSA_ligand.mdcrd.2' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.3 onlyframes 58-76 nobox]
+Warning: Format not specified and extension '.3' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 58-76
+	Writing '_GMXMMPBSA_ligand.mdcrd.3' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.4 onlyframes 77-95 nobox]
+Warning: Format not specified and extension '.4' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 77-95
+	Writing '_GMXMMPBSA_ligand.mdcrd.4' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.5 onlyframes 96-114 nobox]
+Warning: Format not specified and extension '.5' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 96-114
+	Writing '_GMXMMPBSA_ligand.mdcrd.5' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.6 onlyframes 115-133 nobox]
+Warning: Format not specified and extension '.6' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 115-133
+	Writing '_GMXMMPBSA_ligand.mdcrd.6' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [outtraj _GMXMMPBSA_ligand.mdcrd.7 onlyframes 134-151 nobox]
+Warning: Format not specified and extension '.7' not recognized. Defaulting to Amber Trajectory.
+	Saving frames 134-151
+	Writing '_GMXMMPBSA_ligand.mdcrd.7' as Amber Trajectory
+    OUTTRAJ: Writing frames associated with topology 'COM.prmtop'
+  [unstrip]
+  [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+    RMSD: (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), reference is first frame (!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)), mass-weighted.
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+---------- RUN BEGIN -------------------------------------------------
+
+PARAMETER FILES (1 total):
+ 0: COM.prmtop, 6398 atoms, 413 res, box: Orthorhombic, 4 mol
+
+INPUT TRAJECTORIES (1 total):
+ 0: 'COM_traj_0.xtc' is a GROMACS XTC file, Parm COM.prmtop (Orthorhombic box) (reading 151 of 151)
+  Coordinate processing will occur on 151 frames.
+
+BEGIN TRAJECTORY PROCESSING:
+.....................................................
+ACTION SETUP FOR PARM 'COM.prmtop' (37 actions):
+  0: [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+	Target mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+	Reference topology: COM.prmtop
+	Reference mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+  1: [outtraj _GMXMMPBSA_complex.pdb pdb onlyframes 1 nobox]
+        '_GMXMMPBSA_complex.pdb' is a PDB file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  2: [outtraj _GMXMMPBSA_dummycomplex.inpcrd restart onlyframes 1 nobox]
+        '_GMXMMPBSA_dummycomplex.inpcrd' is an AMBER restart file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  3: [outtraj _GMXMMPBSA_complex.mdcrd.0 onlyframes 1-19 nobox]
+        '_GMXMMPBSA_complex.mdcrd.0' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 1-19
+	Has coordinates, time
+  4: [outtraj _GMXMMPBSA_complex.mdcrd.1 onlyframes 20-38 nobox]
+        '_GMXMMPBSA_complex.mdcrd.1' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 20-38
+	Has coordinates, time
+  5: [outtraj _GMXMMPBSA_complex.mdcrd.2 onlyframes 39-57 nobox]
+        '_GMXMMPBSA_complex.mdcrd.2' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 39-57
+	Has coordinates, time
+  6: [outtraj _GMXMMPBSA_complex.mdcrd.3 onlyframes 58-76 nobox]
+        '_GMXMMPBSA_complex.mdcrd.3' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 58-76
+	Has coordinates, time
+  7: [outtraj _GMXMMPBSA_complex.mdcrd.4 onlyframes 77-95 nobox]
+        '_GMXMMPBSA_complex.mdcrd.4' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 77-95
+	Has coordinates, time
+  8: [outtraj _GMXMMPBSA_complex.mdcrd.5 onlyframes 96-114 nobox]
+        '_GMXMMPBSA_complex.mdcrd.5' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 96-114
+	Has coordinates, time
+  9: [outtraj _GMXMMPBSA_complex.mdcrd.6 onlyframes 115-133 nobox]
+        '_GMXMMPBSA_complex.mdcrd.6' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 115-133
+	Has coordinates, time
+  10: [outtraj _GMXMMPBSA_complex.mdcrd.7 onlyframes 134-151 nobox]
+        '_GMXMMPBSA_complex.mdcrd.7' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 134-151
+	Has coordinates, time
+  11: [strip :185-413]
+	Stripping 3478 atoms.
+	Stripped topology: 2920 atoms, 184 res, box: Orthorhombic, 2 mol
+  12: [outtraj _GMXMMPBSA_receptor.pdb pdb onlyframes 1 nobox]
+        '_GMXMMPBSA_receptor.pdb' is a PDB file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  13: [outtraj _GMXMMPBSA_dummyreceptor.inpcrd restart onlyframes 1 nobox]
+        '_GMXMMPBSA_dummyreceptor.inpcrd' is an AMBER restart file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  14: [outtraj _GMXMMPBSA_receptor.mdcrd.0 onlyframes 1-19 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.0' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 1-19
+	Has coordinates, time
+  15: [outtraj _GMXMMPBSA_receptor.mdcrd.1 onlyframes 20-38 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.1' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 20-38
+	Has coordinates, time
+  16: [outtraj _GMXMMPBSA_receptor.mdcrd.2 onlyframes 39-57 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.2' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 39-57
+	Has coordinates, time
+  17: [outtraj _GMXMMPBSA_receptor.mdcrd.3 onlyframes 58-76 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.3' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 58-76
+	Has coordinates, time
+  18: [outtraj _GMXMMPBSA_receptor.mdcrd.4 onlyframes 77-95 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.4' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 77-95
+	Has coordinates, time
+  19: [outtraj _GMXMMPBSA_receptor.mdcrd.5 onlyframes 96-114 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.5' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 96-114
+	Has coordinates, time
+  20: [outtraj _GMXMMPBSA_receptor.mdcrd.6 onlyframes 115-133 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.6' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 115-133
+	Has coordinates, time
+  21: [outtraj _GMXMMPBSA_receptor.mdcrd.7 onlyframes 134-151 nobox]
+        '_GMXMMPBSA_receptor.mdcrd.7' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 134-151
+	Has coordinates, time
+  22: [unstrip]
+  23: [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+	Target mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+	Reference topology: COM.prmtop
+	Reference mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+  24: [strip :1-184]
+	Stripping 2920 atoms.
+	Stripped topology: 3478 atoms, 229 res, box: Orthorhombic, 2 mol
+  25: [outtraj _GMXMMPBSA_ligand.pdb pdb onlyframes 1 nobox]
+        '_GMXMMPBSA_ligand.pdb' is a PDB file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  26: [outtraj _GMXMMPBSA_dummyligand.inpcrd restart onlyframes 1 nobox]
+        '_GMXMMPBSA_dummyligand.inpcrd' is an AMBER restart file, Parm COM.prmtop no box info,: Writing frames 1
+	Has coordinates, time
+  27: [outtraj _GMXMMPBSA_ligand.mdcrd.0 onlyframes 1-19 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.0' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 1-19
+	Has coordinates, time
+  28: [outtraj _GMXMMPBSA_ligand.mdcrd.1 onlyframes 20-38 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.1' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 20-38
+	Has coordinates, time
+  29: [outtraj _GMXMMPBSA_ligand.mdcrd.2 onlyframes 39-57 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.2' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 39-57
+	Has coordinates, time
+  30: [outtraj _GMXMMPBSA_ligand.mdcrd.3 onlyframes 58-76 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.3' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 58-76
+	Has coordinates, time
+  31: [outtraj _GMXMMPBSA_ligand.mdcrd.4 onlyframes 77-95 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.4' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 77-95
+	Has coordinates, time
+  32: [outtraj _GMXMMPBSA_ligand.mdcrd.5 onlyframes 96-114 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.5' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 96-114
+	Has coordinates, time
+  33: [outtraj _GMXMMPBSA_ligand.mdcrd.6 onlyframes 115-133 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.6' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 115-133
+	Has coordinates, time
+  34: [outtraj _GMXMMPBSA_ligand.mdcrd.7 onlyframes 134-151 nobox]
+        '_GMXMMPBSA_ligand.mdcrd.7' is an AMBER trajectory, Parm COM.prmtop no box info,: Writing frames 134-151
+	Has coordinates, time
+  35: [unstrip]
+  36: [rmsd !(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL) mass first]
+	Target mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+	Reference topology: COM.prmtop
+	Reference mask: [!(:WAT,Cl*,CIO,Cs+,IB,K*,Li+,MG*,Na+,Rb+,CS,RB,NA,F,CL)](6398)
+----- COM_traj_0.xtc (1-151, 1) -----
+
+Read 151 frames and processed 151 frames.
+TIME: Avg. throughput= 175.7917 frames / second.
+
+ACTION OUTPUT:
+    OUTTRAJ: '_GMXMMPBSA_complex.pdb': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_dummycomplex.inpcrd': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.0': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.1': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.2': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.3': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.4': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.5': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.6': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_complex.mdcrd.7': Wrote 18 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.pdb': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_dummyreceptor.inpcrd': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.0': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.1': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.2': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.3': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.4': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.5': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.6': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_receptor.mdcrd.7': Wrote 18 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.pdb': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_dummyligand.inpcrd': Wrote 1 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.0': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.1': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.2': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.3': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.4': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.5': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.6': Wrote 19 frames.
+    OUTTRAJ: '_GMXMMPBSA_ligand.mdcrd.7': Wrote 18 frames.
+TIME: Analyses took 0.0000 seconds.
+
+DATASETS (3 total):
+	RMSD_00001 "RMSD_00001" (double, rms), size is 151 (1.208 kB)
+	RMSD_00002 "RMSD_00002" (double, rms), size is 151 (1.208 kB)
+	RMSD_00003 "RMSD_00003" (double, rms), size is 151 (1.208 kB)
+    Total data set memory usage is at least 3.624 kB
+
+RUN TIMING:
+TIME:		Init               : 0.0000 s (  0.00%)
+TIME:		Trajectory Process : 0.8590 s ( 99.97%)
+TIME:		Action Post        : 0.0000 s (  0.00%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0000 s (  0.00%)
+TIME:		Other              : 0.0002 s (  0.00%)
+TIME:	Run Total 0.8592 s
+---------- RUN END ---------------------------------------------------
+TIME: Total execution time: 0.8677 seconds.
+--------------------------------------------------------------------------------
+To cite CPPTRAJ use:
+Daniel R. Roe and Thomas E. Cheatham, III, "PTRAJ and CPPTRAJ: Software for
+  Processing and Analysis of Molecular Dynamics Trajectory Data". J. Chem.
+  Theory Comput., 2013, 9 (7), pp 3084-3095.
+

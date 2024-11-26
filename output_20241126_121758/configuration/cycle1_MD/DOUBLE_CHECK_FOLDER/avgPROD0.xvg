@@ -1,0 +1,18 @@
+# This file was created Tue Nov 26 12:34:31 2024
+# Created by:
+#                       :-) GROMACS - gmx rms, 2024.4 (-:
+# 
+# Executable:   /opt/gromacs-2024.4/bin/gmx
+# Data prefix:  /opt/gromacs-2024.4
+# Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241126_121758/configuration/cycle1_MD
+# Command line:
+#   gmx rms -s system_Compl_MD.tpr -f traj_MD.xtc -o rmsd_PROD0.xvg -a avgPROD0.xvg -tu ps
+# gmx rms is part of G R O M A C S:
+#
+# Great Red Oystrich Makes All Chemists Sane
+#
+@    title "Average RMSD"
+@    xaxis  label "Residue"
+@    yaxis  label "Average RMSD (nm)"
+@TYPE xy
+         0    0.162262
