@@ -1,0 +1,26 @@
+                      :-) GROMACS - gmx check, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241127_134853/configuration/cycle1_MD
+Command line:
+  gmx check -f ./cycle1_BE/cycle1_noPBC.xtc
+
+Reading frame       0 time 2000.000   
+# Atoms  6398
+Precision 0.001 (nm)
+Reading frame       1 time 2020.000   Reading frame       2 time 2040.000   Reading frame       3 time 2060.000   Reading frame       4 time 2080.000   Reading frame       5 time 2100.000   Reading frame       6 time 2120.000   Reading frame       7 time 2140.000   Reading frame       8 time 2160.000   Reading frame       9 time 2180.000   Reading frame      10 time 2200.000   Reading frame      11 time 2220.000   Reading frame      12 time 2240.000   Reading frame      13 time 2260.000   Reading frame      14 time 2280.000   Reading frame      15 time 2300.000   Reading frame      16 time 2320.000   Reading frame      17 time 2340.000   Reading frame      18 time 2360.000   Reading frame      19 time 2380.000   Reading frame      20 time 2400.000   Reading frame      30 time 2600.000   Reading frame      40 time 2800.000   Reading frame      50 time 3000.000   Reading frame      60 time 3200.000   Reading frame      70 time 3400.000   Reading frame      80 time 3600.000   Reading frame      90 time 3800.000   Reading frame     100 time 4000.000   Reading frame     110 time 4200.000   Reading frame     120 time 4400.000   Reading frame     130 time 4600.000   Reading frame     140 time 4800.000   Reading frame     150 time 5000.000   Last frame        150 time 5000.000   
+
+
+Item        #frames Timestep (ps)
+Step           151    20
+Time           151    20
+Lambda           0
+Coords         151    20
+Velocities       0
+Forces           0
+Box            151    20
+
+GROMACS reminds you: "If my PhD doesn't allow me to be right on the internet, what is it even good for?" (Martin Vögele)
+
+Checking file ./cycle1_BE/cycle1_noPBC.xtc
