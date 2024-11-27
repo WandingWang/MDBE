@@ -6,5 +6,6 @@ from .Nvt_Npt import make_new_minim_nvt_npt
 from .SAMD import make_new_minim_config_samd
 from .SAMD import run_md
 from .GMXMMPBSA import files_gmxmmpbsa
+from .gmx_MMPBSA import gmx_mmpbsa
 
-__all__ = ["make_top_protein", "fill_water_ions", "energy_min", "make_new_minim_nvt_npt", "make_new_minim_config_samd", "run_md", "files_gmxmmpbsa"]
+__all__ = ["make_top_protein", "fill_water_ions", "energy_min", "make_new_minim_nvt_npt", "make_new_minim_config_samd", "run_md", "files_gmxmmpbsa", "gmx_mmpbsa"]

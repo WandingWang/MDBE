@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 import shutil
+import glob
 
 def check_file(file_path):
     """检查指定的文件是否存在"""
@@ -282,8 +283,34 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
     create_protein_top(top_file)
     run_grompp(mdp_name, conf_name, top_file, root_name)
     his_string = count_his_residues(f"{conf_name}_starting_protein.pdb")
+    
+    #Trajectory (.xtc): Starting from the production-run .xtc, extract only the protein, remove water and ions, and unwrap PBC.(done)
+    #Topology (.top, .itp): Keep only the protein and ensure all dependent files are correctly linked.
+    #TPR file (.tpr): Starting from the production-run .tpr, create a new .tpr file containing only the protein.(done)
+    #GRO file (.gro): Generate a protein-only .gro file from the production .tpr or NPT-equilibrated final frame.(uesed)
+    #PDB file (.pdb): Create a protein-only .pdb file with Chain IDs reset.
+    #Index file (.ndx): Generate an index file starting from the gro or pdb you just built. Define two groups for the ligand and receptor. The group IDs must match the input for gmx_MMPBSA. (done)
+   
+    # files for gmx_MMPBSA:
+    # 1.pdb file : f"{conf_name}_starting_protein.pdb"
+    # 2. .tpr .xtc
+    # 3. .ndx
+    # top file: topol_protein.top
+    # topol_protein_chain_*.itp
 
+    file_pattern = ["topol_Protein_chain_*.itp",
+                   "topol_protein.top",
+                   "*_starting_protein.pdb"]
+    destination_folder = f"./{root_name}"
+    for pattern in file_pattern:
+        files = glob.glob(pattern)
+        if files:
+            for file_name in files:
+                shutil.copy(file_name,destination_folder)
+        else:
+            print(f"No found {pattern}")
+    
     print("Files created successfully!")
 
-# 示例运行
+# example
 # make_files_gmxt_pbsa("system_Compl_MD", "traj", "input.tpr", "topology.top", "energy_comp.mdp")
