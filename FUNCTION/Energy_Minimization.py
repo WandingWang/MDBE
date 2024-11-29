@@ -1,5 +1,6 @@
 import subprocess
 import os
+import logging
 
 def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1, max_warn=0):
     """
@@ -69,5 +70,4 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1,
         if minim_test == "inf":
             print("\tSomething went wrong with the energy minimization.")
             return
-
-    print("Energy minimization completed successfully!")
+    logging.info("Energy minimization completed successfully.")

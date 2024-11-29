@@ -1,0 +1,11 @@
+2024-11-29 10:11:59,041 - INFO -PATH: /home/bio/Desktop/jupyter_test/antibody_test/output_20241129_101159
+2024-11-29 10:11:59,180 - INFO -Topology generation completed successfully.
+2024-11-29 10:11:59,205 - INFO -Simulation box definition completed successfully.
+2024-11-29 10:11:59,768 - INFO -Water and ions successfully added to the system.
+2024-11-29 10:12:03,909 - INFO -Energy minimization completed successfully.
+2024-11-29 10:12:03,915 - INFO -Running NVT MD for temperature equilibration.
+2024-11-29 10:12:20,608 - INFO -Running NPT MD for pressure equilibration
+2024-11-29 10:12:38,057 - INFO -Equilibration completed successfully.
+2024-11-29 10:12:38,083 - INFO -Running Simulated Annealing MD.
+2024-11-29 10:23:07,555 - INFO -Building input files for gmx MMPBSA.
+2024-11-29 10:23:09,076 - INFO -Running gmxMMPBSA_cycle1

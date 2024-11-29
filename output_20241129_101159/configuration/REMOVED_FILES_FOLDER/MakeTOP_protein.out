@@ -1,0 +1,235 @@
+                     :-) GROMACS - gmx pdb2gmx, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241129_101159/configuration
+Command line:
+  gmx pdb2gmx -f /home/bio/Desktop/jupyter_test/antibody_test/DATA/mtbind.pdb -o system.pdb -p topol.top -ignh -ff amber99sb-ildn -water tip3p
+
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.r2b
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.r2b
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.r2b
+All occupancies are one
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/atomtypes.atp
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.rtp
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.rtp
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.rtp
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.hdb
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.hdb
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.hdb
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.n.tdb
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.c.tdb
+Analysing hydrogen-bonding network for automated assignment of histidine
+ protonation. 156 donors and 162 acceptors were found.
+There are 274 hydrogen bonds
+Will use HISE for residue 46
+Will use HISE for residue 76
+Will use HISE for residue 111
+9 out of 9 lines of specbond.dat converted successfully
+Special Atom Distance matrix:
+                   CYS45   HIS46   CYS69   HIS76  CYS108
+                   SG144  NE2154   SG333  NE2390   SG627
+   HIS46  NE2154   1.052
+   CYS69   SG333   1.283   1.639
+   HIS76  NE2390   1.873   2.660   1.225
+  CYS108   SG627   0.376   1.221   0.968   1.538
+  HIS111  NE2657   1.218   1.855   1.171   1.317   0.911
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.arn
+Before cleaning: 4169 pairs
+Before cleaning: 4359 dihedrals
+Analysing hydrogen-bonding network for automated assignment of histidine
+ protonation. 190 donors and 180 acceptors were found.
+There are 313 hydrogen bonds
+Will use HISE for residue 35
+9 out of 9 lines of specbond.dat converted successfully
+Special Atom Distance matrix:
+                   CYS22   MET34   HIS35   MET48   MET70   MET81
+                   SG155   SD253  NE2264   SD372   SD532   SD618
+   MET34   SD253   0.601
+   HIS35  NE2264   1.210   0.923
+   MET48   SD372   1.288   1.388   1.239
+   MET70   SD532   1.136   0.889   0.914   0.780
+   MET81   SD618   1.188   1.253   1.412   0.501   0.655
+   CYS96   SG739   0.364   0.483   0.883   1.032   0.826   0.995
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.arn
+Before cleaning: 4716 pairs
+Before cleaning: 4825 dihedrals
+9 out of 9 lines of specbond.dat converted successfully
+Special Atom Distance matrix:
+                   CYS23
+                   SG177
+   CYS89   SG686   0.353
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/aminoacids.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/dna.arn
+Opening force field file /opt/gromacs-2024.4/share/gromacs/top/amber99sb-ildn.ff/rna.arn
+Before cleaning: 4398 pairs
+Before cleaning: 4506 dihedrals
+
+GROMACS reminds you: "I Snipe Like Wesley" (Urban Dance Squad)
+
+Using the Amber99sb-ildn force field in directory amber99sb-ildn.ff
+
+going to rename amber99sb-ildn.ff/aminoacids.r2b
+
+going to rename amber99sb-ildn.ff/dna.r2b
+
+going to rename amber99sb-ildn.ff/rna.r2b
+Reading /home/bio/Desktop/jupyter_test/antibody_test/DATA/mtbind.pdb...
+Read '', 2560 atoms
+
+Analyzing pdb file
+Splitting chemical chains based on TER records or chain id changing.
+
+There are 3 chains and 0 blocks of water and 338 residues with 2560 atoms
+
+  chain  #res #atoms
+
+  1 'A'   105    802  
+
+  2 'B'   120    916  
+
+  3 'C'   113    842  
+
+All occupancies are one
+
+Reading residue database... (Amber99sb-ildn)
+
+Processing chain 1 'A' (802 atoms, 105 residues)
+
+Identified residue GLY25 as a starting terminus.
+
+Identified residue SER129 as a ending terminus.
+
+Checking for duplicate atoms....
+
+Generating any missing hydrogen atoms and/or adding termini.
+
+Now there are 105 residues with 1576 atoms
+Chain time...
+
+Making bonds...
+
+Number of bonds was 1594, now 1593
+
+Generating angles, dihedrals and pairs...
+
+Making cmap torsions...
+
+There are 4359 dihedrals,  318 impropers, 2868 angles
+          4142 pairs,     1593 bonds and     0 virtual sites
+
+Total mass 11397.734 a.m.u.
+
+Total charge -7.000 e
+
+Writing topology
+
+Processing chain 2 'B' (916 atoms, 120 residues)
+
+Identified residue GLU1 as a starting terminus.
+
+Identified residue SER120 as a ending terminus.
+
+Checking for duplicate atoms....
+
+Generating any missing hydrogen atoms and/or adding termini.
+
+Now there are 120 residues with 1797 atoms
+Chain time...
+
+Making bonds...
+
+Number of bonds was 1820, now 1819
+
+Generating angles, dihedrals and pairs...
+
+Making cmap torsions...
+
+There are 4825 dihedrals,  381 impropers, 3250 angles
+          4671 pairs,     1819 bonds and     0 virtual sites
+
+Total mass 13050.700 a.m.u.
+
+Total charge 2.000 e
+
+Writing topology
+
+Processing chain 3 'C' (842 atoms, 113 residues)
+
+Identified residue GLY-2 as a starting terminus.
+
+Identified residue ARG110 as a ending terminus.
+
+Checking for duplicate atoms....
+
+Generating any missing hydrogen atoms and/or adding termini.
+
+Now there are 113 residues with 1663 atoms
+Chain time...
+
+Making bonds...
+
+Number of bonds was 1682, now 1681
+
+Generating angles, dihedrals and pairs...
+
+Making cmap torsions...
+
+There are 4506 dihedrals,  344 impropers, 3017 angles
+          4365 pairs,     1681 bonds and     0 virtual sites
+
+Total mass 11965.380 a.m.u.
+
+Total charge 2.000 e
+
+Writing topology
+
+Including chain 1 in system: 1576 atoms 105 residues
+
+Including chain 2 in system: 1797 atoms 120 residues
+
+Including chain 3 in system: 1663 atoms 113 residues
+
+Now there are 5036 atoms and 338 residues
+
+Total mass in system 36413.815 a.m.u.
+
+Total charge in system -3.000 e
+
+Writing coordinate file...
+
+		--------- PLEASE NOTE ------------
+
+You have successfully generated a topology from: /home/bio/Desktop/jupyter_test/antibody_test/DATA/mtbind.pdb.
+
+The Amber99sb-ildn force field and the tip3p water model are used.
+
+		--------- ETON ESAELP ------------
+                     :-) GROMACS - gmx editconf, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241129_101159/configuration
+Command line:
+  gmx editconf -f system.pdb -bt triclinic -d 1.5 -o system.gro
+
+
+GROMACS reminds you: "I Snipe Like Wesley" (Urban Dance Squad)
+
+Note that major changes are planned in future for editconf, to improve usability and utility.
+Read 5036 atoms
+No velocities found
+    system size :  4.448  7.426  6.118 (nm)
+    center      :  5.128  9.605  5.296 (nm)
+    box vectors :  0.000  0.000  0.000 (nm)
+    box angles  :   0.00   0.00   0.00 (degrees)
+    box volume  :   0.00               (nm^3)
+    shift       : -1.404 -4.392 -0.737 (nm)
+new center      :  3.724  5.213  4.559 (nm)
+new box vectors :  7.448 10.426  9.118 (nm)
+new box angles  :  90.00  90.00  90.00 (degrees)
+new box volume  : 708.04               (nm^3)

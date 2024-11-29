@@ -1,6 +1,7 @@
 import subprocess
 import os
 import time
+import logging
 # ForceField="amber99sb-ildn"
 # NP=32
 def gmx_mmpbsa(cycle_number, conda_activate_path, conda_gmxmmpbsa_name, cycle_number_md_folder, conf_name, root_name, 
@@ -8,7 +9,8 @@ def gmx_mmpbsa(cycle_number, conda_activate_path, conda_gmxmmpbsa_name, cycle_nu
     """Main function to run the gmxMMPBSA cycle"""
     try:
         # Print log for starting the cycle
-        print(f"{time.strftime('%H:%M:%S')} --running gmxMMPBSA_cycle{cycle_number}..")
+        #print(f"{time.strftime('%H:%M:%S')} --running gmxMMPBSA_cycle{cycle_number}..")
+        logging.info(f"Running gmxMMPBSA_cycle{cycle_number}")
 
         # Activate conda environment
         #subprocess.check_call(f"source {conda_activate_path}/activate {conda_gmxmmpbsa_name}", shell=True, executable = "/bin/bash")

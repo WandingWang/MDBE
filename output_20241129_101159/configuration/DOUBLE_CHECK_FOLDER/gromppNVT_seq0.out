@@ -1,0 +1,69 @@
+                      :-) GROMACS - gmx grompp, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241129_101159/configuration
+Command line:
+  gmx grompp -f /home/bio/Desktop/jupyter_test/antibody_test/DATA/NVT.mdp -c system_compl_minim.gro -r system_compl_minim.gro -p topol.top -o system_NVT_MD.tpr
+
+Ignoring obsolete mdp entry 'ns-type'
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group Protein is 12635.00
+Number of degrees of freedom in T-Coupling group non-Protein is 128685.00
+
+GROMACS reminds you: "It is disconcerting to reflect on the number of students we have flunked in chemistry for not knowing what we later found to be untrue." (Robert L. Weber)
+
+Setting the LD random seed to -97523282
+
+Generated 2145 of the 2145 non-bonded parameter combinations
+
+Generated 2145 of the 2145 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_A'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_B'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_C'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'K'
+
+turning H bonds into constraints...
+
+Excluding 1 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Setting gen_seed to -335751201
+
+Velocities were taken from a Maxwell distribution at 300 K
+Analysing residue names:
+There are:   338    Protein residues
+There are: 21382      Water residues
+There are:   131        Ion residues
+Analysing Protein...
+
+The largest distance between excluded atoms is 0.420 nm between atom 2623 and 2630
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 300 K
+
+Calculated rlist for 1x1 atom pair-list as 1.012 nm, buffer size 0.012 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.000 nm, buffer size 0.000 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 60x84x80, spacing 0.124 0.124 0.114
+
+Estimate for the relative computational load of the PME mesh part: 0.26
+
+This run will generate roughly 9 Mb of data

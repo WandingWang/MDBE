@@ -1,0 +1,181 @@
+[INFO   ] Starting gmx_MMPBSA 1.6.4
+[INFO   ] Command-line
+  mpirun -np 16 gmx_MMPBSA MPI -O -i mmpbsa_LinearPB_amber99SB_ILDN.in -cs cycle1_newGRO.tpr -ci index.ndx -cg 0 1 -ct cycle1_noPBC.xtc -cr ./cycle1_starting_protein.pdb -cp topol_protein.top -eo gmx_MMPBSA_plot.csv -deo FINAL_DECOMP_MMPBSA.csv -nogui
+
+[INFO   ] Checking mmpbsa_LinearPB_amber99SB_ILDN.in input file...
+[WARNING] &decomp namelist has not been defined in the input file. Ignoring '-deo' flag... 
+[INFO   ] Checking mmpbsa_LinearPB_amber99SB_ILDN.in input file...Done.
+
+[INFO   ] Checking external programs...
+[INFO   ] cpptraj found! Using /home/bio/ls/envs/gmxMMPBSA/bin/cpptraj
+[INFO   ] tleap found! Using /home/bio/ls/envs/gmxMMPBSA/bin/tleap
+[INFO   ] parmchk2 found! Using /home/bio/ls/envs/gmxMMPBSA/bin/parmchk2
+[INFO   ] sander found! Using /home/bio/ls/envs/gmxMMPBSA/bin/sander
+[INFO   ] Using GROMACS version > 5.x.x!
+[INFO   ] gmx found! Using /opt/gromacs-2024.4/bin/gmx
+[INFO   ] Checking external programs...Done.
+
+[INFO   ] Building AMBER topologies from GROMACS files...
+[INFO   ] Get PDB files from GROMACS structures files...
+[INFO   ] Making gmx_MMPBSA index for complex...
+[INFO   ] Normal Complex: Saving group receptor_ligand (0_1) in _GMXMMPBSA_COM_index.ndx file as _GMXMMPBSA_COM.pdb
+[INFO   ] No receptor structure file was defined. Using ST approach...
+[INFO   ] Using receptor structure from complex to generate AMBER topology
+[INFO   ] Normal Receptor: Saving group receptor (0) in _GMXMMPBSA_COM_index.ndx file as _GMXMMPBSA_REC.pdb
+[INFO   ] No ligand structure file was defined. Using ST approach...
+[INFO   ] Using ligand structure from complex to generate AMBER topology
+[INFO   ] Normal Ligand: Saving group ligand (1) in _GMXMMPBSA_COM_index.ndx file as _GMXMMPBSA_LIG.pdb
+[INFO   ] Checking the structures consistency...
+[INFO   ] Assigning chain ID to structures files according to the reference structure...
+[INFO   ] 
+[INFO   ] Using topology conversion. Setting radiopt = 0...
+[INFO   ] Building Normal Complex Amber topology...
+[INFO   ] Detected Amber/OPLS force field topology format...
+[WARNING] 6 invalid DIHEDRAL_PERIODICITY = 0 found in Complex topology... Setting DIHEDRAL_PERIODICITY = 1
+[INFO   ] Assigning PBRadii mbondi2 to Complex...
+[INFO   ] Writing Normal Complex AMBER topology...
+[INFO   ] No Receptor topology file was defined. Using ST approach...
+[INFO   ] Building AMBER Receptor topology from Complex...
+[INFO   ] Assigning PBRadii mbondi2 to Receptor...
+[INFO   ] Writing Normal Receptor AMBER topology...
+[INFO   ] No Ligand topology file was defined. Using ST approach...
+[INFO   ] Building AMBER Ligand topology from Complex...
+[INFO   ] Assigning PBRadii mbondi2 to Ligand...
+[INFO   ] Writing Normal Ligand AMBER topology...
+[INFO   ] Cleaning normal complex trajectories...
+[INFO   ] Building AMBER topologies from GROMACS files... Done.
+
+[INFO   ] Loading and checking parameter files for compatibility...
+[INFO   ] Preparing trajectories for simulation...
+
+[INFO   ] 151 frames were processed by cpptraj for use in calculation.
+[INFO   ] Starting calculations in 16 CPUs...
+[WARNING] PB/RISM/NMODE will be calculated with multiple threads, make sure you have enough RAM.
+[INFO   ] Running calculations on normal system...
+[INFO   ] Beginning PB calculations with /home/bio/ls/envs/gmxMMPBSA/bin/sander
+[INFO   ]   calculating complex contribution...
+
+              0%|          | 0/151 [elapsed: 00:00 remaining: ?]
+              5%|5         | 8/151 [elapsed: 00:15 remaining: 04:28]
+             16%|#5        | 24/151 [elapsed: 00:26 remaining: 02:06]
+             21%|##1       | 32/151 [elapsed: 00:32 remaining: 01:48]
+             32%|###1      | 48/151 [elapsed: 00:45 remaining: 01:28]
+             37%|###7      | 56/151 [elapsed: 00:52 remaining: 01:22]
+             38%|###7      | 57/151 [elapsed: 00:59 remaining: 01:47]
+             48%|####7     | 72/151 [elapsed: 01:06 remaining: 01:04]
+             53%|#####2    | 80/151 [elapsed: 01:13 remaining: 00:58]
+             54%|#####3    | 81/151 [elapsed: 01:20 remaining: 01:17]
+             64%|######3   | 96/151 [elapsed: 01:27 remaining: 00:43]
+             69%|######8   | 104/151 [elapsed: 01:34 remaining: 00:38]
+             70%|######9   | 105/151 [elapsed: 01:41 remaining: 00:50]
+             77%|#######6  | 116/151 [elapsed: 01:48 remaining: 00:31]
+             79%|#######8  | 119/151 [elapsed: 01:55 remaining: 00:35]
+             79%|#######9  | 120/151 [elapsed: 02:02 remaining: 00:45]
+             81%|########1 | 123/151 [elapsed: 02:09 remaining: 00:46]
+             84%|########4 | 127/151 [elapsed: 02:16 remaining: 00:40]
+             85%|########4 | 128/151 [elapsed: 02:23 remaining: 00:50]
+             87%|########6 | 131/151 [elapsed: 02:30 remaining: 00:44]
+             89%|########9 | 135/151 [elapsed: 02:37 remaining: 00:32]
+             90%|######### | 136/151 [elapsed: 02:44 remaining: 00:39]
+             93%|#########2| 140/151 [elapsed: 02:51 remaining: 00:25]
+             95%|#########4| 143/151 [elapsed: 02:58 remaining: 00:18]
+             95%|#########5| 144/151 [elapsed: 03:05 remaining: 00:20]
+             98%|#########8| 148/151 [elapsed: 03:12 remaining: 00:07]
+            100%|##########| 151/151 [elapsed: 03:19 remaining: 00:00]
+                                                                      
+
+            100%|##########| 151/151 [elapsed: 03:19 remaining: 00:00]
+[INFO   ]   calculating receptor contribution...
+
+              0%|          | 0/151 [elapsed: 00:00 remaining: ?]
+             52%|#####2    | 79/151 [elapsed: 00:01 remaining: 00:00]
+             60%|#####9    | 90/151 [elapsed: 00:08 remaining: 00:07]
+             62%|######2   | 94/151 [elapsed: 00:10 remaining: 00:08]
+             64%|######3   | 96/151 [elapsed: 00:12 remaining: 00:10]
+             65%|######4   | 98/151 [elapsed: 00:14 remaining: 00:13]
+             69%|######8   | 104/151 [elapsed: 00:16 remaining: 00:12]
+             70%|######9   | 105/151 [elapsed: 00:18 remaining: 00:16]
+             71%|#######   | 107/151 [elapsed: 00:20 remaining: 00:19]
+             74%|#######3  | 111/151 [elapsed: 00:22 remaining: 00:18]
+             76%|#######6  | 115/151 [elapsed: 00:24 remaining: 00:16]
+             77%|#######7  | 117/151 [elapsed: 00:26 remaining: 00:19]
+             79%|#######9  | 120/151 [elapsed: 00:28 remaining: 00:18]
+             83%|########2 | 125/151 [elapsed: 00:30 remaining: 00:13]
+             83%|########3 | 126/151 [elapsed: 00:32 remaining: 00:16]
+             85%|########4 | 128/151 [elapsed: 00:34 remaining: 00:16]
+             88%|########8 | 133/151 [elapsed: 00:36 remaining: 00:10]
+             89%|########9 | 135/151 [elapsed: 00:38 remaining: 00:10]
+             91%|######### | 137/151 [elapsed: 00:40 remaining: 00:10]
+             93%|#########3| 141/151 [elapsed: 00:42 remaining: 00:06]
+             94%|#########4| 142/151 [elapsed: 00:44 remaining: 00:07]
+             95%|#########5| 144/151 [elapsed: 00:46 remaining: 00:06]
+             97%|#########7| 147/151 [elapsed: 00:48 remaining: 00:03]
+             98%|#########8| 148/151 [elapsed: 00:50 remaining: 00:02]
+             99%|#########8| 149/151 [elapsed: 00:52 remaining: 00:02]
+             99%|#########9| 150/151 [elapsed: 00:54 remaining: 00:01]
+            100%|##########| 151/151 [elapsed: 00:56 remaining: 00:00]
+                                                                      
+
+            100%|##########| 151/151 [elapsed: 00:56 remaining: 00:00]
+[INFO   ]   calculating ligand contribution...
+
+              0%|          | 0/151 [elapsed: 00:00 remaining: ?]
+             50%|#####     | 76/151 [elapsed: 00:01 remaining: 00:00]
+             56%|#####5    | 84/151 [elapsed: 00:07 remaining: 00:07]
+             60%|######    | 91/151 [elapsed: 00:12 remaining: 00:11]
+             62%|######2   | 94/151 [elapsed: 00:14 remaining: 00:13]
+             64%|######3   | 96/151 [elapsed: 00:16 remaining: 00:15]
+             66%|######5   | 99/151 [elapsed: 00:18 remaining: 00:17]
+             68%|######7   | 102/151 [elapsed: 00:20 remaining: 00:19]
+             70%|######9   | 105/151 [elapsed: 00:22 remaining: 00:20]
+             71%|#######   | 107/151 [elapsed: 00:24 remaining: 00:22]
+             73%|#######2  | 110/151 [elapsed: 00:26 remaining: 00:22]
+             75%|#######5  | 114/151 [elapsed: 00:28 remaining: 00:19]
+             76%|#######6  | 115/151 [elapsed: 00:30 remaining: 00:24]
+             77%|#######7  | 117/151 [elapsed: 00:32 remaining: 00:25]
+             79%|#######9  | 120/151 [elapsed: 00:34 remaining: 00:22]
+             82%|########2 | 124/151 [elapsed: 00:36 remaining: 00:17]
+             83%|########3 | 126/151 [elapsed: 00:38 remaining: 00:17]
+             85%|########5 | 129/151 [elapsed: 00:40 remaining: 00:15]
+             87%|########7 | 132/151 [elapsed: 00:42 remaining: 00:13]
+             89%|########8 | 134/151 [elapsed: 00:44 remaining: 00:12]
+             89%|########9 | 135/151 [elapsed: 00:46 remaining: 00:14]
+             91%|#########1| 138/151 [elapsed: 00:48 remaining: 00:10]
+             93%|#########3| 141/151 [elapsed: 00:50 remaining: 00:07]
+             94%|#########4| 142/151 [elapsed: 00:52 remaining: 00:08]
+             98%|#########8| 148/151 [elapsed: 00:57 remaining: 00:02]
+            100%|##########| 151/151 [elapsed: 01:04 remaining: 00:00]
+                                                                      
+
+            100%|##########| 151/151 [elapsed: 01:04 remaining: 00:00]
+[INFO   ] Parsing results to output files...
+
+[INFO   ] Timing:
+[INFO   ] Total GROMACS setup time:                   0.076 min.
+[INFO   ] Total AMBER setup time:                     0.013 min.
+[INFO   ] Creating trajectories with cpptraj:         0.016 min.
+[INFO   ] Total calculation time:                     5.320 min.
+[INFO   ] Total PB calculation time:                  2.969 min.
+[INFO   ] Statistics calculation & output writing:    0.000 min.
+[INFO   ] Total time taken:                           5.425 min.
+
+[INFO   ] 
+   Finalizing gmx_MMPBSA: [ERROR  ] = 0; [WARNING] = 3
+   Check the gmx_MMPBSA.log file for more details...
+
+[INFO   ] 
+ Thank you for using gmx_MMPBSA. Please consider supporting gmx_MMPBSA by citing our publication:
+    Valdés-Tresanco, M.S., Valdés-Tresanco, M.E., Valiente, P.A. and Moreno E. 
+    gmx_MMPBSA: A New Tool to Perform End-State Free Energy Calculations with GROMACS. 
+    J Chem Theory Comput., 2021, 17 (10):6281-6291. Epub 2021 Sep 29. PMID: 34586825.
+    https://pubs.acs.org/doi/10.1021/acs.jctc.1c00645
+
+Also consider citing MMPBSA.py:
+    Miller III, B. R., McGee Jr., T. D., Swails, J. M. Homeyer, N. Gohlke, H. and Roitberg, A. E.
+    MMPBSA.py: An Efficient Program for End-State Free Energy Calculations.
+    J. Chem. Theory Comput., 2012, 8 (9) pp 3314-3321
+
+[INFO   ] Finalized...
+
+
+

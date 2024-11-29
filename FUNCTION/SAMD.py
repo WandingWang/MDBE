@@ -1,6 +1,7 @@
 import subprocess
 import os
 import time
+import logging
 
 def run_gromacs_command(command, error_message, pipe_file, output_file=None):
     """
@@ -34,7 +35,8 @@ def make_new_minim_config_samd(input_structure_file, samd_mdp, output_gro, seque
     pipe_file (str): Pipe file for signaling errors. Default is "samd_out.out".
     """
     # SAMD 
-    print(f"{time.strftime('%H:%M:%S')} -- Running SAMD ")
+    #print(f"{time.strftime('%H:%M:%S')} -- Running SAMD ")
+    logging.info("Running Simulated Annealing MD.")
     grompp_samd_out = f"gromppSAMD_seq{sequence}.out"
     mdrun_samd_out = f"mdoutSAMD_seq{sequence}.out"
 
