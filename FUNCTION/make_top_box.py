@@ -1,6 +1,7 @@
 import os
 import subprocess
 import glob
+import logging
 
 def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, topfile):
     """
@@ -28,7 +29,8 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
         return
 
 
-    print("Topology generation completed successfully.")
+    #print("Topology generation completed successfully.")
+    logging.info("Topology generation completed successfully.")
 
     # input and ouput for buiding box
     input_file = "system.pdb"
@@ -36,6 +38,7 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
 
     # box type
     editconf_option = "-bt triclinic -d 1.5"  
+    #editconf_option = "-c -bt cubic -d 1.5"
 
     try:
         # run editconf to buid box
@@ -46,4 +49,5 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
     except subprocess.CalledProcessError:
         print("Something went wrong with editconf!")
 
-    print("Simulation box definition completed successfully.")
+    #print("Simulation box definition completed successfully.")
+    logging.info("Simulation box definition completed successfully.")

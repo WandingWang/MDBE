@@ -1,6 +1,7 @@
 import subprocess
 import os
 import time
+import logging
 
 def run_gromacs_command(command, error_message, pipe_file, output_file=None):
     """
@@ -33,7 +34,8 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     pipe_file (str): Pipe file for signaling errors. Default is "out.out".
     """
     # NVT
-    print(f"{time.strftime('%H:%M:%S')} -- Running NVT MD for temperature equilibration...")
+    logging.info("Running NVT MD for temperature equilibration.")
+    #print(f"{time.strftime('%H:%M:%S')} -- Running NVT MD for temperature equilibration...")
     grompp_nvt_out = f"gromppNVT_seq{sequence}.out"
     mdrun_nvt_out = f"mdrun_NVT_MD_seq{sequence}.out"
 
@@ -50,7 +52,8 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     run_gromacs_command(nvt_mdrun_command, "Something wrong on NVT MDRUN", pipe_file, output_file=mdrun_nvt_out)
 
     # NPT
-    print(f"{time.strftime('%H:%M:%S')} -- Running NPT MD for pressure equilibration...")
+    logging.info("Running NPT MD for pressure equilibration")
+    #print(f"{time.strftime('%H:%M:%S')} -- Running NPT MD for pressure equilibration...")
     grompp_npt_out = f"gromppNPT_seq{sequence}.out"
     mdrun_npt_out = f"mdrun_NPT_MD_seq{sequence}.out"
 
@@ -77,8 +80,8 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     except subprocess.CalledProcessError:
         print("Something went wrong on the energy check...")
         return
-
-    print("Equilibration completed successfully!")
+    
+    logging.info("Equilibration completed successfully.")
 
     # Copy output files to the specified folder for checking
     os.makedirs("DOUBLE_CHECK_FOLDER", exist_ok=True)

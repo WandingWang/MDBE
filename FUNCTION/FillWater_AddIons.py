@@ -1,5 +1,6 @@
 import subprocess
 import os
+import logging
 
 out_file = "fill_water_ions.out"  
 
@@ -45,7 +46,7 @@ def fill_water_ions(starting_system, topology, mdp_file):
         return 
 
     #add ions
-    genion_cmd = f'echo "SOL" | gmx genion -s system_ions.tpr -o system_ions.gro -p {topology}.top -pname K -nname CL -neutral'
+    genion_cmd = f'echo "SOL" | gmx genion -s system_ions.tpr -o system_ions.gro -p {topology}.top -pname K -nname CL -neutral -conc 0.15'
 
     try:
         with open(out_file, 'a') as log:
@@ -53,7 +54,8 @@ def fill_water_ions(starting_system, topology, mdp_file):
     except subprocess.CalledProcessError:
         print("Something went wrong on genion!")
         return 
-    print("Water and ions successfully added to the system!")
+    #print("Water and ions successfully added to the system!")
+    logging.info("Water and ions successfully added to the system.")
 
 # Example usage:
 # fill_water_ions("system.gro", "topol.top", "ions.mdp")

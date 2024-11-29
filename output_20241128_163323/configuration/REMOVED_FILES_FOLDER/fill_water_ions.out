@@ -1,0 +1,315 @@
+                     :-) GROMACS - gmx solvate, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241128_163323/configuration
+Command line:
+  gmx solvate -cp system.gro -cs spc216.gro -o system_water.gro -p topol.top
+
+Reading solute configuration
+Reading solvent configuration
+
+Initialising inter-atomic distances...
+
+WARNING: Masses and atomic (Van der Waals) radii will be guessed
+         based on residue and atom names, since they could not be
+         definitively assigned from the information in your input
+         files. These guessed numbers might deviate from the mass
+         and radius of the atom type. Please check the output
+         files if necessary. Note, that this functionality may
+         be removed in a future GROMACS version. Please, consider
+         using another file format for your input.
+
+NOTE: From version 5.0 gmx solvate uses the Van der Waals radii
+from the source below. This means the results may be different
+compared to previous GROMACS versions.
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+A. Bondi
+van der Waals Volumes and Radii
+J. Phys. Chem. 68 (1964) pp. 441-451
+-------- -------- --- Thank You --- -------- --------
+
+Generating solvent configuration
+Will generate new solvent configuration of 6x5x6 boxes
+Solvent box contains 85083 atoms in 28361 residues
+Removed 9288 solvent atoms due to solvent-solvent overlap
+Removed 6189 solvent atoms due to solute-solvent overlap
+Sorting configuration
+Found 1 molecule type:
+    SOL (   3 atoms): 23202 residues
+Generated solvent containing 69606 atoms in 23202 residues
+Writing generated configuration to system_water.gro
+
+Output configuration contains 76004 atoms in 23615 residues
+Volume                 :     773.377 (nm^3)
+Density                :     1004.32 (g/l)
+Number of solvent molecules:  23202   
+
+Processing topology
+
+Back Off! I just backed up topol.top to ./#topol.top.1#
+
+GROMACS reminds you: "You should call it 'entropy'. No one knows what entropy really is, so in a debate you will always have the advantage." (John von Neumann to Claude Shannon, on why he should borrow the term for information theory)
+
+Adding line for 23202 solvent molecules with resname (SOL) to topology file (topol.top)
+                      :-) GROMACS - gmx grompp, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241128_163323/configuration
+Command line:
+  gmx grompp -f /home/bio/Desktop/jupyter_test/antibody_test/DATA/ions.mdp -c system_water.gro -p topol.top -o system_ions.tpr -maxwarn 1
+
+Generating 1-4 interactions: fudge = 0.5
+
+NOTE 1 [file topol.top, line 52]:
+  System has non-zero total charge: -1.000000
+  Total charge should normally be an integer. See
+  https://manual.gromacs.org/current/user-guide/floating-point.html
+  for discussion on how close it should be to an integer.
+
+
+
+
+WARNING 1 [file topol.top, line 52]:
+  You are using Ewald electrostatics in a system with net charge. This can
+  lead to severe artifacts, such as ions moving into regions with low
+  dielectric, due to the uniform background charge. We suggest to
+  neutralize your system with counter ions, possibly in combination with a
+  physiological salt concentration.
+
+Setting the LD random seed to -29956141
+
+Generated 2145 of the 2145 non-bonded parameter combinations
+
+Generated 2145 of the 2145 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_P'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_A'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_H'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'Protein_chain_L'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+J. S. Hub, B. L. de Groot, H. Grubmueller, G. Groenhof
+Quantifying Artifacts in Ewald Simulations of Inhomogeneous Systems with a Net
+Charge
+J. Chem. Theory Comput. 10 (2014) pp. 381-393
+-------- -------- --- Thank You --- -------- --------
+
+Number of degrees of freedom in T-Coupling group rest is 155297.00
+The integrator does not provide a ensemble temperature, there is no system ensemble temperature
+
+There was 1 NOTE
+
+There was 1 WARNING
+
+GROMACS reminds you: "You should call it 'entropy'. No one knows what entropy really is, so in a debate you will always have the advantage." (John von Neumann to Claude Shannon, on why he should borrow the term for information theory)
+
+Analysing residue names:
+There are:   413    Protein residues
+There are: 23202      Water residues
+Analysing Protein...
+
+The largest distance between excluded atoms is 0.460 nm between atom 3219 and 4352
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 80x72x80, spacing 0.117 0.118 0.122
+
+Estimate for the relative computational load of the PME mesh part: 0.24
+
+This run will generate roughly 6 Mb of data
+                      :-) GROMACS - gmx genion, 2024.4 (-:
+
+Executable:   /opt/gromacs-2024.4/bin/gmx
+Data prefix:  /opt/gromacs-2024.4
+Working dir:  /home/bio/Desktop/jupyter_test/antibody_test/output_20241128_163323/configuration
+Command line:
+  gmx genion -s system_ions.tpr -o system_ions.gro -p topol.top -pname K -nname CL -neutral -conc 0.15
+
+Reading file system_ions.tpr, VERSION 2024.4 (single precision)
+Reading file system_ions.tpr, VERSION 2024.4 (single precision)
+Group     0 (         System) has 76004 elements
+Group     1 (        Protein) has  6398 elements
+Group     2 (      Protein-H) has  3292 elements
+Group     3 (        C-alpha) has   413 elements
+Group     4 (       Backbone) has  1239 elements
+Group     5 (      MainChain) has  1656 elements
+Group     6 (   MainChain+Cb) has  2035 elements
+Group     7 (    MainChain+H) has  2063 elements
+Group     8 (      SideChain) has  4335 elements
+Group     9 (    SideChain-H) has  1636 elements
+Group    10 (    Prot-Masses) has  6398 elements
+Group    11 (    non-Protein) has 69606 elements
+Group    12 (          Water) has 69606 elements
+Group    13 (            SOL) has 69606 elements
+Group    14 (      non-Water) has  6398 elements
+Select a group: Number of (3-atomic) solvent molecules: 23202
+
+Back Off! I just backed up topol.top to ./#topol.top.2#
+Using random seed 2135948799.
+Replacing solvent molecule 356 (atom 7466) with K
+Replacing solvent molecule 4276 (atom 19226) with K
+Replacing solvent molecule 5939 (atom 24215) with K
+Replacing solvent molecule 8435 (atom 31703) with K
+Replacing solvent molecule 21512 (atom 70934) with K
+Replacing solvent molecule 3866 (atom 17996) with K
+Replacing solvent molecule 8995 (atom 33383) with K
+Replacing solvent molecule 19116 (atom 63746) with K
+Replacing solvent molecule 18171 (atom 60911) with K
+Replacing solvent molecule 11720 (atom 41558) with K
+Replacing solvent molecule 6512 (atom 25934) with K
+Replacing solvent molecule 22729 (atom 74585) with K
+Replacing solvent molecule 13070 (atom 45608) with K
+Replacing solvent molecule 5907 (atom 24119) with K
+Replacing solvent molecule 9757 (atom 35669) with K
+Replacing solvent molecule 16272 (atom 55214) with K
+Replacing solvent molecule 2840 (atom 14918) with K
+Replacing solvent molecule 11520 (atom 40958) with K
+Replacing solvent molecule 20599 (atom 68195) with K
+Replacing solvent molecule 1501 (atom 10901) with K
+Replacing solvent molecule 368 (atom 7502) with K
+Replacing solvent molecule 6426 (atom 25676) with K
+Replacing solvent molecule 22759 (atom 74675) with K
+Replacing solvent molecule 17372 (atom 58514) with K
+Replacing solvent molecule 10556 (atom 38066) with K
+Replacing solvent molecule 1287 (atom 10259) with K
+Replacing solvent molecule 17821 (atom 59861) with K
+Replacing solvent molecule 19617 (atom 65249) with K
+Replacing solvent molecule 4107 (atom 18719) with K
+Replacing solvent molecule 18066 (atom 60596) with K
+Replacing solvent molecule 11958 (atom 42272) with K
+Replacing solvent molecule 5936 (atom 24206) with K
+Replacing solvent molecule 1714 (atom 11540) with K
+Replacing solvent molecule 21466 (atom 70796) with K
+Replacing solvent molecule 8917 (atom 33149) with K
+Replacing solvent molecule 13345 (atom 46433) with K
+Replacing solvent molecule 17204 (atom 58010) with K
+Replacing solvent molecule 18655 (atom 62363) with K
+Replacing solvent molecule 3962 (atom 18284) with K
+Replacing solvent molecule 1910 (atom 12128) with K
+Replacing solvent molecule 20164 (atom 66890) with K
+Replacing solvent molecule 14929 (atom 51185) with K
+Replacing solvent molecule 2037 (atom 12509) with K
+Replacing solvent molecule 5141 (atom 21821) with K
+Replacing solvent molecule 5149 (atom 21845) with K
+Replacing solvent molecule 18093 (atom 60677) with K
+Replacing solvent molecule 11960 (atom 42278) with K
+Replacing solvent molecule 12891 (atom 45071) with K
+Replacing solvent molecule 9632 (atom 35294) with K
+Replacing solvent molecule 13710 (atom 47528) with K
+Replacing solvent molecule 4344 (atom 19430) with K
+Replacing solvent molecule 17752 (atom 59654) with K
+Replacing solvent molecule 14068 (atom 48602) with K
+Replacing solvent molecule 2852 (atom 14954) with K
+Replacing solvent molecule 10499 (atom 37895) with K
+Replacing solvent molecule 16517 (atom 55949) with K
+Replacing solvent molecule 20692 (atom 68474) with K
+Replacing solvent molecule 12887 (atom 45059) with K
+Replacing solvent molecule 18063 (atom 60587) with K
+Replacing solvent molecule 8142 (atom 30824) with K
+Replacing solvent molecule 11860 (atom 41978) with K
+Replacing solvent molecule 7976 (atom 30326) with K
+Replacing solvent molecule 6279 (atom 25235) with K
+Replacing solvent molecule 585 (atom 8153) with K
+Replacing solvent molecule 18372 (atom 61514) with K
+Replacing solvent molecule 10661 (atom 38381) with K
+Replacing solvent molecule 10350 (atom 37448) with K
+Replacing solvent molecule 22722 (atom 74564) with K
+Replacing solvent molecule 19301 (atom 64301) with K
+Replacing solvent molecule 19285 (atom 64253) with K
+Replacing solvent molecule 13837 (atom 47909) with K
+Replacing solvent molecule 11083 (atom 39647) with CL
+Replacing solvent molecule 2720 (atom 14558) with CL
+Replacing solvent molecule 2329 (atom 13385) with CL
+Replacing solvent molecule 13208 (atom 46022) with CL
+Replacing solvent molecule 11302 (atom 40304) with CL
+Replacing solvent molecule 9489 (atom 34865) with CL
+Replacing solvent molecule 10395 (atom 37583) with CL
+Replacing solvent molecule 3359 (atom 16475) with CL
+Replacing solvent molecule 5961 (atom 24281) with CL
+Replacing solvent molecule 9585 (atom 35153) with CL
+Replacing solvent molecule 14843 (atom 50927) with CL
+Replacing solvent molecule 14244 (atom 49130) with CL
+Replacing solvent molecule 8674 (atom 32420) with CL
+Replacing solvent molecule 20364 (atom 67490) with CL
+Replacing solvent molecule 849 (atom 8945) with CL
+Replacing solvent molecule 18385 (atom 61553) with CL
+Replacing solvent molecule 8660 (atom 32378) with CL
+Replacing solvent molecule 8898 (atom 33092) with CL
+Replacing solvent molecule 14980 (atom 51338) with CL
+Replacing solvent molecule 3761 (atom 17681) with CL
+Replacing solvent molecule 2373 (atom 13517) with CL
+Replacing solvent molecule 10312 (atom 37334) with CL
+Replacing solvent molecule 79 (atom 6635) with CL
+Replacing solvent molecule 14681 (atom 50441) with CL
+Replacing solvent molecule 17501 (atom 58901) with CL
+Replacing solvent molecule 7972 (atom 30314) with CL
+Replacing solvent molecule 16181 (atom 54941) with CL
+Replacing solvent molecule 9731 (atom 35591) with CL
+Replacing solvent molecule 8625 (atom 32273) with CL
+Replacing solvent molecule 14860 (atom 50978) with CL
+Replacing solvent molecule 19720 (atom 65558) with CL
+Replacing solvent molecule 4195 (atom 18983) with CL
+Replacing solvent molecule 2975 (atom 15323) with CL
+Replacing solvent molecule 2175 (atom 12923) with CL
+Replacing solvent molecule 17189 (atom 57965) with CL
+Replacing solvent molecule 6221 (atom 25061) with CL
+Replacing solvent molecule 8207 (atom 31019) with CL
+Replacing solvent molecule 19244 (atom 64130) with CL
+Replacing solvent molecule 20614 (atom 68240) with CL
+Replacing solvent molecule 11997 (atom 42389) with CL
+Replacing solvent molecule 11425 (atom 40673) with CL
+Replacing solvent molecule 11387 (atom 40559) with CL
+Replacing solvent molecule 7135 (atom 27803) with CL
+Replacing solvent molecule 11321 (atom 40361) with CL
+Replacing solvent molecule 505 (atom 7913) with CL
+Replacing solvent molecule 10871 (atom 39011) with CL
+Replacing solvent molecule 5905 (atom 24113) with CL
+Replacing solvent molecule 12579 (atom 44135) with CL
+Replacing solvent molecule 78 (atom 6632) with CL
+Replacing solvent molecule 2831 (atom 14891) with CL
+Replacing solvent molecule 4161 (atom 18881) with CL
+Replacing solvent molecule 22275 (atom 73223) with CL
+Replacing solvent molecule 3020 (atom 15458) with CL
+Replacing solvent molecule 22139 (atom 72815) with CL
+Replacing solvent molecule 7392 (atom 28574) with CL
+Replacing solvent molecule 14984 (atom 51350) with CL
+Replacing solvent molecule 44 (atom 6530) with CL
+Replacing solvent molecule 13153 (atom 45857) with CL
+Replacing solvent molecule 17339 (atom 58415) with CL
+Replacing solvent molecule 6136 (atom 24806) with CL
+Replacing solvent molecule 12962 (atom 45284) with CL
+Replacing solvent molecule 4579 (atom 20135) with CL
+Replacing solvent molecule 20360 (atom 67478) with CL
+Replacing solvent molecule 20340 (atom 67418) with CL
+Replacing solvent molecule 13203 (atom 46007) with CL
+Replacing solvent molecule 18942 (atom 63224) with CL
+Replacing solvent molecule 22806 (atom 74816) with CL
+Replacing solvent molecule 20283 (atom 67247) with CL
+Replacing solvent molecule 16990 (atom 57368) with CL
+Replacing solvent molecule 20467 (atom 67799) with CL
+
+
+GROMACS reminds you: "You should call it 'entropy'. No one knows what entropy really is, so in a debate you will always have the advantage." (John von Neumann to Claude Shannon, on why he should borrow the term for information theory)
+
+Will try to add 71 K ions and 70 CL ions.
+Select a continuous group of solvent molecules
+Selected 13: 'SOL'
+
+Processing topology
+Replacing 141 solute molecules in topology file (topol.top)  by 71 K and 70 CL ions.
