@@ -156,7 +156,7 @@ def run_command(cmd, input_data):
         print(f"Error executing command: {cmd}\n{e}")
         raise
 
-def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name):
+def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name,cycle_number):
     """remove PBC"""
     print("\t\t--running TRJCONV to remove the pbc from the trajectory..")
     
@@ -180,7 +180,7 @@ def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name):
     #print("\t\t--TRJCONV completed successfully!")
     # check
     output_file = "trj_check.out"
-    cmd_check = ["gmx", "check", "-f", f"./cycle1_BE/cycle1_noPBC.xtc", ">", output_file, "2>&1"]
+    cmd_check = ["gmx", "check", "-f", f"./cycle{cycle_number}_BE/cycle{cycle_number}_noPBC.xtc", ">", output_file, "2>&1"]
     run_command(["bash", "-c", " ".join(cmd_check)],input_data=None)
     print("\t\t--TRJCONV completed successfully!")
     
@@ -247,7 +247,7 @@ def count_his_residues(pdb_file):
     print(f"\t\t--Found HIS residues: {his_string.count('1')}")
     return his_string
 
-def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, startingFrameGMXPBSA = "2000", receptor_frag = "1", ab_chains = "2"):
+def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA = "2000", receptor_frag = "2", ab_chains = "2"):
     
     logging.info("Building input files for gmx MMPBSA.")
     if not check_file(f"{starting_gro_file}.gro") or not check_file(f"{trj_file}.xtc") or not check_file(f"{tpr_file}.tpr") or not check_file(f"{top_file}.top"):
@@ -280,7 +280,7 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
     # RUN GRO_TO_PDB
     GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
     
-    remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name)
+    remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name, cycle_number)
     make_index(conf_name, root_name, receptor_frag, ab_chains)
     create_protein_top(top_file)
     run_grompp(mdp_name, conf_name, top_file, root_name)
