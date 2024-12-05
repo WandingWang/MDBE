@@ -168,109 +168,6 @@ def Data_Analysis_Pre(cycle_number_MD_FOLDER, REMOVED_FILES_FOLDER, NUMframe = "
     except FileNotFoundError:
         raise SystemExit(f"Cannot enter '{cycle_number_MD_FOLDER}' folder")
 
-
-def Data_Analysis_Cal_child(input_file, output_file, Data_Analysis_Signal = True):
-    # 假设文件数据为 tab-separated
-    
-    df = pd.read_csv(input_file, delim_whitespace=True, header=None)
-    # 为了清晰，假设文件列对应以下字段
-    if Data_Analysis_Signal == True:
-        df.columns = ['frame', 'DeltaG', 'Coul', 'VdW', 'PolSol', 'NpoSol']
-    else:
-        df.columns = ['frame', 'DeltaG', 'Coul', 'VdW', 'PolSol', 'NpoSol', 'SF1', 'SF2', 'Canonical_AVG', 'MedianDG', 'DeltaG_2s']
-
-    # 初始化变量
-    Population = len(df)
-    DeltaG = df['DeltaG'].sum()
-    Coul = df['Coul'].sum()
-    VdW = df['VdW'].sum()
-    PolSol = df['PolSol'].sum()
-    NpoSol = df['NpoSol'].sum()
-
-    # 计算 SF1 和 SF2
-    df['SF1'] = (df['Coul'] / 10) - (df['PolSol'] / 10) + (df['NpoSol'] * 10)
-    df['SF2'] = (3 * df['Coul']) + df['PolSol']
-
-    # 初始化变量
-    Canonical_AVG = 0.0
-    Canonical_AVG_w = 0.0
-
-    for _, row in df.iterrows():
-        # 尝试将 DeltaG 转换为浮动类型
-        DeltaG_temp = row[1]  # 使用列名访问 DeltaG
-        # 计算指数加权值
-        weight = math.exp(-int(DeltaG_temp / 2.479))
-        # 累加计算
-        Canonical_AVG += DeltaG_temp * weight
-        Canonical_AVG_w += weight
-
-    # 归一化
-    if Canonical_AVG_w != 0:
-        Canonical_AVG /= Canonical_AVG_w
-
-    # 平均值计算
-    mean_DeltaG = DeltaG / Population
-    mean_Coul = Coul / Population
-    mean_VdW = VdW / Population
-    mean_PolSol = PolSol / Population
-    mean_NpoSol = NpoSol / Population
-
-    mean_SF1 = mean_Coul / 10 - mean_PolSol / 10 + mean_NpoSol * 10
-    mean_SF2 = (3 * mean_Coul) + mean_PolSol
-
-
-    # 计算标准差
-    std_DeltaG = np.std(df['DeltaG'], ddof=1)
-    std_Coul = np.std(df['Coul'], ddof=1)
-    std_VdW = np.std(df['VdW'], ddof=1)
-    std_PolSol = np.std(df['PolSol'], ddof=1)
-    std_NpoSol = np.std(df['NpoSol'], ddof=1)
-    std_SF1 = std_Coul / 10 - std_PolSol / 10 + std_NpoSol * 10
-    std_SF2 = (3 * std_Coul) + std_PolSol
-
-    # 计算 DeltaG 在2sigma内的值
-    DeltaG_2s = df[(np.abs(df['DeltaG'] - mean_DeltaG) < 2 * std_DeltaG)]['DeltaG'].mean()
-
-    # 计算中位数
-    median_DeltaG = df['DeltaG'].median()
-    # 计算标准差
-    std_DeltaG = np.std(df['DeltaG'], ddof=1)  # ddof=1 表示使用样本标准差公式（贝塞尔校正）
-
-
-    # 创建警告信息列表
-    warnings = []
-
-    # 遍历每一行，检查是否超出 2 sigma
-    for i, row in df.iterrows():
-        var = np.abs(row['DeltaG'] - mean_DeltaG)
-        if var >= 2 * std_DeltaG:
-            warnings.append(f"# WARNING: frame {row['frame']} is out of 2 sigma!!")
-
-    # 输出处理结果
-    with open(output_file, 'w') as f:
-        # 写入头部信息
-        f.write("# SF1=Coulomb/10-PolarSolvation/10+Non-PolarSolvation*10\n")
-        f.write("# SF2=3*Coulomb+PolarSolvation\n")
-        f.write("# C_AVG=norm(SUM Gi*e^BGi)\n")
-        f.write(f"#frame\tDeltaG(kJ/mol)\tCoul(kJ/mol)\tVdW(kJ/mol)\tPolSol(kJ/mol)\tNpoSol(kJ/mol)\tSF1\tSF2\n")
-
-        # 写入数据
-        for _, row in df.iterrows():
-            f.write(f"{row['frame']:<10}{row['DeltaG']:>12.3f}{row['Coul']:>13.3f}{row['VdW']:>13.3f}{row['PolSol']:>13.3f}{row['NpoSol']:>13.3f}{row['SF1']:>13.3f}{row['SF2']:>13.3f}\n")
-    
-         # 写入警告信息
-        for warning in warnings:
-            f.write(f"{warning}\n")   
-   
-        # 写入汇总信息表头
-        f.write("\n# FINAL RESULTS\n")
-        f.write(f"#frame\t{'DeltaG(kJ/mol)':>15}\t{'Coul(kJ/mol)':>15}\t{'VdW(kJ/mol)':>15}\t{'PolSol(kJ/mol)':>15}\t{'NpoSol(kJ/mol)':>15}\t{'SF1':>15}\t{'SF2':>15}\t{'Canonical_AVG':>15}\t{'MedianDeltaG(kJ/mol)':>15}\t{'DeltaG_2s(kJ/mol)':>15}\n")
-        # 写入汇总结果
-        f.write(f"#AVG\t{mean_DeltaG:>15.1f}\t{mean_Coul:>15.1f}\t{mean_VdW:>15.1f}\t{mean_PolSol:>15.1f}\t{mean_NpoSol:>15.1f}\t{mean_SF1:>15.1f}\t{mean_SF2:>15.1f}\t{Canonical_AVG:>15.1f}\t{median_DeltaG:>15.1f}\t{DeltaG_2s:>15.1f}\n")
-        f.write(f"#STD\t{std_DeltaG:>15.1f}\t{std_Coul:>15.1f}\t{std_VdW:>15.1f}\t{std_PolSol:>15.1f}\t{std_NpoSol:>15.1f}\t{std_SF1:>15.1f}\t{std_SF2:>15.1f}\t{"nan":>15}\t{"nan":>15}\t{std_DeltaG:>15.1f}\n")    
-
-
-
 def Data_Analysis_Cal(cycle_number, results_folder):
     
     logging.info("Data Analysis.")
@@ -278,9 +175,7 @@ def Data_Analysis_Cal(cycle_number, results_folder):
     input_file = 'energy_plot_temp.csv'  
     # NEED TO CHANGE cycle${Cycle_Number}_results.dat
     output_file = f'cycle{cycle_number}_results.dat'
-    Data_Analysis_Cal_child(input_file, output_file)
-    
-    '''
+
     # 假设文件数据为 tab-separated
     df = pd.read_csv(input_file, delim_whitespace=True, header=None)
 
@@ -377,7 +272,7 @@ def Data_Analysis_Cal(cycle_number, results_folder):
         f.write(f"#AVG\t{mean_DeltaG:>15.1f}\t{mean_Coul:>15.1f}\t{mean_VdW:>15.1f}\t{mean_PolSol:>15.1f}\t{mean_NpoSol:>15.1f}\t{mean_SF1:>15.1f}\t{mean_SF2:>15.1f}\t{Canonical_AVG:>15.1f}\t{median_DeltaG:>15.1f}\t{DeltaG_2s:>15.1f}\n")
         f.write(f"#STD\t{std_DeltaG:>15.1f}\t{std_Coul:>15.1f}\t{std_VdW:>15.1f}\t{std_PolSol:>15.1f}\t{std_NpoSol:>15.1f}\t{std_SF1:>15.1f}\t{std_SF2:>15.1f}\t{"nan":>15}\t{"nan":>15}\t{std_DeltaG:>15.1f}\n")
 
-    '''
+
     try:
         with open(f'cycle{cycle_number}_results.dat', 'r') as file:
             lines = file.readlines()
