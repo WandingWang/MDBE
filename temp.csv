@@ -1,0 +1,3 @@
+#RUNnumber,DeltaG(kJ/mol),Coul(kJ/mol),vdW(kJ/mol),PolSol(kJ/mol),NpoSol(kJ/mol),ScoreFunct,ScoreFunct2,Canonica_AVG,MedianDG,DeltaG_2s,dG_PotEn
+1,-76.1,-281.0,-98.5,303.4,0.0,-58.4,-539.7,-94.9,-77.0,-76.7,
+2,-73.0,-250.8,-97.3,275.1,0.0,-52.6,-477.2,-86.9,-73.7,-73.7,
