@@ -426,44 +426,4 @@ for cycle_number in range(1, cycle_num + 1):
 
 
 
-'''
-def parallel_md_and_gmx_mmpbsa(cycle_num, md_args, gmx_args):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        # 用来存储每个周期的 Future
-        futures_md = {}
-        futures_gmx = {}
 
-        # 提交第1周期的MD仿真任务
-        print(f"开始第 1 周期的 MD 仿真")
-        futures_md[1] = executor.submit(MD_for_each_cycle, 1, *md_args)
-
-        # 等待第1周期的MD仿真完成后，提交第1周期的gmx_mmpbsa分析任务
-        futures_md[1].result()  # 等待第 1 周期 MD 完成
-        print(f"开始第 1 周期的 gmx_mmpbsa 分析")
-        futures_gmx[1] = executor.submit(gmx_mmpbsa_for_each_cycle, 1, *gmx_args)
-
-        # 提交后续周期的 MD 仿真和 gmx_mmpbsa 分析任务
-        for cycle_number in range(2, cycle_num + 1):
-            # 等待上一个周期的 MD 仿真完成
-            futures_md[cycle_number - 1].result()  # 等待上一周期的 MD 完成
-
-            # 提交当前周期的 MD 仿真任务
-            print(f"开始第 {cycle_number} 周期的 MD 仿真")
-            futures_md[cycle_number] = executor.submit(MD_for_each_cycle, cycle_number, *md_args)
-
-            # 等待当前周期的 MD 仿真完成后，提交当前周期的 gmx_mmpbsa 分析任务
-            futures_md[cycle_number].result()  # 等待当前周期 MD 完成
-            print(f"开始第 {cycle_number} 周期的 gmx_mmpbsa 分析")
-            futures_gmx[cycle_number] = executor.submit(gmx_mmpbsa_for_each_cycle, cycle_number, *gmx_args)
-
-        # 等待所有的 gmx_mmpbsa 分析任务完成
-        for cycle_number in range(1, cycle_num + 1):
-            futures_gmx[cycle_number].result()  # 等待每个周期的 gmx_mmpbsa 分析完成
-cycle_num =2
-sequence = 0
-md_args = ("system_equil.gro",samd_mdp_path,"system_Compl_MDstart", sequence, md_mdp_path, "system_Compl_MD", "traj_MD")
-gmx_args = (only_protein_md_mdp_path,VMD_DIR,folders["TEMP_FILES_FOLDER"], FORCE_FIELD_PATH, MMPBSA_INFILE_PATH, folders["REMOVED_FILES_FOLDER"], folders["results"], folders["repository"], configuration_path)
-
-parallel_md_and_gmx_mmpbsa(cycle_num, md_args, gmx_args)
-
-'''
