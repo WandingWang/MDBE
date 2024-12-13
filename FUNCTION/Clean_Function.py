@@ -32,7 +32,7 @@ def move_and_copy_files(cycle_number, repository_folder, cycle_number_MD_folder,
                 shutil.move(filename, os.path.join(repository_folder, filename))
         
         # 复制文件
-        shutil.copy('system_Compl_MDstart.gro', os.path.join(repository_folder, f'system_cycle{cycle_number}_MDstart.gro'))
+        #shutil.copy('system_Compl_MDstart.gro', os.path.join(repository_folder, f'system_cycle{cycle_number}_MDstart.gro'))
         if os.path.isdir(cycle_number_MD_folder):
             shutil.copytree(cycle_number_MD_folder, os.path.join(repository_folder, f'cycle{cycle_number}_MD'))
         

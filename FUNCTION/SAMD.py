@@ -23,7 +23,7 @@ def run_gromacs_command(command, error_message, pipe_file, output_file=None):
         with open(pipe_file, "w") as f:
             f.write("exit")
         raise
-
+'''
 def make_new_minim_config_samd(input_structure_file, samd_mdp, output_gro, sequence, top_name="topol", pipe_file="samd_out.out"):
     """
     Performs SAMD using GROMACS commands, and logs outputs to files.
@@ -71,7 +71,7 @@ def make_new_minim_config_samd(input_structure_file, samd_mdp, output_gro, seque
     # Copy output files to the specified folder for checking
     os.makedirs("DOUBLE_CHECK_FOLDER", exist_ok=True)
     subprocess.run(f"cp ./grompp*.out ./*edr ./*xvg DOUBLE_CHECK_FOLDER", check=True, shell=True)
-
+'''
 def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol", pipe_file="Prod_MD.out"):
     """
     Runs a full MD cycle including energy and RMSD checks for the first cycle.
@@ -99,8 +99,8 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol
 
     # Run GROMPP
     grompp_command = (
-        f"gmx grompp -f {md_mdp} -c system_Compl_MDstart.gro -r system_Compl_MDstart.gro "
-        f"-p {top_name}.top -o {tpr_file}.tpr -t state_SAMD.cpt"
+        f"gmx grompp -f {md_mdp} -c system_equil.gro -r system_equil.gro "
+        f"-p {top_name}.top -o {tpr_file}.tpr"
     )
     run_gromacs_command(grompp_command, "Error in GROMPP", pipe_file, output_file = grompp_md_out)
 
