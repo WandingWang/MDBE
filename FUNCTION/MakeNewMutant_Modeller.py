@@ -8,7 +8,7 @@ from os.path import isfile
 from modeller import *
 from modeller.optimizers import MolecularDynamics, ConjugateGradients
 from modeller.automodel import autosched
-from compute_weights import compute_weights
+#from compute_weights import compute_weights
 #from FUNCTION.compute_weights import compute_weights
 
 #
@@ -267,7 +267,7 @@ def exchange_two_aa(pdb_file, modeller, res_pos1, res_chain_name1, res_pos_list,
 
 
 def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
-                      res_weight_files, new_restype_list, keep_hydration, output_name,
+                      new_restype_list, keep_hydration, output_name,
                       system=None, verbose=False):
     # Create a Modeller environment
     log.none()
@@ -297,7 +297,7 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
         #                     conserve the hydration properties of the protein (Carol method)
         # Randomly select one residue among the residue:chain of the list
         residue_pos_list = list(res_pos_list)
-
+        '''
         if len(res_weight_files) > 0:
             if verbose:
                 print("Computing the weights from " + str(res_weight_files) + "...")
@@ -314,10 +314,10 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
                 res_weight_list = []
                 for resid in residue_pos_list:
                     res_weight_list.append(res_weight_dic[resid])
-
+        '''
         if verbose:
             print("\nresidue_pos_list: " + str(residue_pos_list))
-            print("res_weight_files: " + str(res_weight_files))
+            #print("res_weight_files: " + str(res_weight_files))
             print("res_weight_list: " + str(res_weight_list))
         # print("residue_pos_list"+str(residue_pos_list)+" res_weight_list"+str(args.res_weight_list))
         # if not assigned, res_weight_list=None that is the Default value
@@ -388,9 +388,9 @@ if __name__ == "__main__":
     parser.add_argument('-n', '--new_restype', type=str, help='3letters name of the new residue')
     parser.add_argument('-rl', '--res_pos_list', type=str, nargs='+',
                         help='list of Residue "position:chain" of the residue you want to mutate')
-    parser.add_argument('-rw', '--res_weight_files', type=str, nargs='+', default=[],
-                        help='Input files name with the per-residue energy decomposition. I will extract the average.'
-                             '(Default: None)')
+    #parser.add_argument('-rw', '--res_weight_files', type=str, nargs='+', default=[],
+    #                    help='Input files name with the per-residue energy decomposition. I will extract the average.'
+    #                         '(Default: None)')
     parser.add_argument('-nl', '--new_restype_list', type=str, nargs='+',
                         default=['LEU', 'VAL', 'ILE', 'MET', 'PHE', 'TYR', 'TRP',
                                  'GLU', 'ASP',
@@ -411,7 +411,7 @@ if __name__ == "__main__":
                       chain=args.chain,
                       new_restype=args.new_restype,
                       res_pos_list=args.res_pos_list,
-                      res_weight_files=args.res_weight_files,
+                      #res_weight_files=args.res_weight_files,
                       new_restype_list=args.new_restype_list,
                       keep_hydration=args.keep_hydration,
                       output_name=args.output_name,
