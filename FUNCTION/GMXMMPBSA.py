@@ -247,7 +247,7 @@ def count_his_residues(pdb_file):
     print(f"\t\t--Found HIS residues: {his_string.count('1')}")
     return his_string
 
-def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA = "2000", receptor_frag = "1", ab_chains = "1"):
+def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA = "2000", receptor_frag = "2", ab_chains = "2"):
     
     logging.info("Building input files for gmx MMPBSA.")
     if not check_file(f"{starting_gro_file}.gro") or not check_file(f"{trj_file}.xtc") or not check_file(f"{tpr_file}.tpr") or not check_file(f"{top_file}.top"):

@@ -32,7 +32,7 @@ def move_and_copy_files(cycle_number, repository_folder, cycle_number_MD_folder,
                 shutil.move(filename, os.path.join(repository_folder, filename))
         
         # 复制文件
-        shutil.copy('system_Compl_MDstart.gro', os.path.join(repository_folder, f'system_cycle{cycle_number}_MDstart.gro'))
+        #shutil.copy('system_Compl_MDstart.gro', os.path.join(repository_folder, f'system_cycle{cycle_number}_MDstart.gro'))
         if os.path.isdir(cycle_number_MD_folder):
             shutil.copytree(cycle_number_MD_folder, os.path.join(repository_folder, f'cycle{cycle_number}_MD'))
         
@@ -64,14 +64,3 @@ def clean_for_each_cycle(cycle_number, repository_folder, cycle_number_MD_folder
     if os.path.exists(cycle_number_md_folder):
         shutil.rmtree(cycle_number_md_folder)
 
-    # 更新周期号及相关变量
-    cycle_number += 1
-    conf_name = f"cycle{cycle_number}"
-    root_name = f"cycle{cycle_number}_BE"
-    cycle_number_md_folder = os.path.join(current_conf_path, f"cycle{cycle_number}_MD")
-
-    # 输出相关信息
-    print(f"Cycle Number: {cycle_number}")
-    print(f"Configuration Name: {conf_name}")
-    print(f"Root Name: {root_name}")
-    print(f"MD Folder Path: {cycle_number_md_folder}")
