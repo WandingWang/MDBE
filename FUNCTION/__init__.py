@@ -4,7 +4,7 @@ from .FillWater_AddIons import fill_water_ions
 from .Energy_Minimization import energy_min
 from .Nvt_Npt import make_new_minim_nvt_npt
 #from .SAMD import make_new_minim_config_samd
-from .SAMD import run_md
+from .MD import run_md
 from .GMXMMPBSA import files_gmxmmpbsa
 from .GMXMMPBSA import GRO_to_PDB
 from .gmx_MMPBSA import gmx_mmpbsa

@@ -185,89 +185,8 @@ def mutate_residue(modelname, respos, chain, new_restype):
     return modelname[0:-4] + '_' + chain + '_' + start_res_type + str(respos) + new_restype + '.pdb'
 
 
-def substitution_single_aa(pdb_file, modeller, res_pos, res_chain_name, _verbose=False):
-    # Get the residue at the specified position and chain
-    _res_type = modeller.residues[res_pos + ':' + res_chain_name].pdb_name
-
-    # Choose a random amino acid from the same type
-    _new_restype = ""
-    for key in RESIDUE_TYPES.keys():
-        if _res_type in RESIDUE_TYPES[key]:
-            _residue_type_list = list(RESIDUE_TYPES[key])
-            _residue_type_list.remove(_res_type)
-            if _verbose:
-                print("Residue type: " + key)
-                print("Starting list:             " + str(RESIDUE_TYPES[key]))
-                print("Selecting a residue among: " + str(_residue_type_list))
-            _new_restype = RAND.choice(_residue_type_list)
-            break
-
-    # Replace the old amino acid with the new one
-    new_model_name = mutate_residue(pdb_file, res_pos, res_chain_name, _new_restype)
-
-    if _verbose:
-        # Check the residues that have been mutated and print them
-        log.none()
-        env = Environ(rand_seed=1037)
-        mut_mdl = Model(env, file=new_model_name)
-        res_type_mut = mut_mdl.residues[str(res_pos) + ':' + res_chain_name].pdb_name
-        print("Mutate_residue-> RES=" + _res_type + str(res_pos) + ":" + res_chain_name + " to " + _new_restype)
-        print("Check on the mutant->     " + res_type_mut + str(res_pos) + ":" + res_chain_name)
-    else:
-        print(res_chain_name + "_" + _res_type + str(res_pos) + _new_restype)
-    return new_model_name
-
-
-def exchange_two_aa(pdb_file, modeller, res_pos1, res_chain_name1, res_pos_list, res_weight_list=None, _verbose=False):
-    # Get the starting residue at the specified position and chain
-    res_pos2 = int()
-    res_chain_name2 = str()
-    res_type1 = modeller.residues[res_pos1 + ':' + res_chain_name1].pdb_name
-    # Remove the first residue from the residue list and Random select the second residue
-    res_pos_list2 = list(res_pos_list)
-    res_pos_list2.remove(res_pos1 + ":" + res_chain_name1)
-    if _verbose:
-        print("Starting residue list:     " + str(res_pos_list))
-        print("Selecting a residue among: " + str(res_pos_list2))
-    res_type2 = res_type1
-    while res_type2 == res_type1:
-        random_res_position2 = RAND.choices(res_pos_list2)[0]
-        if _verbose:
-            print("residue_pos_list :" + str(res_pos_list2))
-            print("res_weight_list :" + str(res_weight_list))
-            print("random_res_position2 :" + str(random_res_position2))
-        res_pos2 = random_res_position2.split(':')[0]
-        res_chain_name2 = random_res_position2.split(':')[1]
-
-        # Get the second residue at the specified position and chain
-        res_type2 = modeller.residues[res_pos2 + ':' + res_chain_name2].pdb_name
-
-    # Exchange the amino acids at the chosen positions
-    # I invoke mutate_residue twice because I have a double mutation
-    # mutate_residue(modelname, respos, chain, new_restype)
-    mutate_residue(pdb_file, res_pos1, res_chain_name1, res_type2)
-    new_model_name = mutate_residue(
-        pdb_file[0:-4] + '_' + res_chain_name1 + '_' + res_type1 + str(res_pos1) + res_type2 + '.pdb',
-        res_pos2, res_chain_name2, res_type1)
-    if _verbose:
-        # Check the residues that have been mutated and print them
-        log.none()
-        env = Environ(rand_seed=1037)
-        mut_mdl = Model(env, file=new_model_name)
-        res_type_mut = mut_mdl.residues[str(res_pos1) + ':' + res_chain_name1].pdb_name
-        res_type_mut2 = mut_mdl.residues[str(res_pos2) + ':' + res_chain_name2].pdb_name
-        print("Exchange_residues  -> RES=" + res_type1 + str(res_pos1) + ":" + res_chain_name1 + " to " + res_type2)
-        print("                      RES=" + res_type2 + str(res_pos2) + ":" + res_chain_name2 + " to " + res_type1)
-        print("Check on the mutant->     " + res_type_mut + str(res_pos1) + ":" + res_chain_name1)
-        print("                          " + res_type_mut2 + str(res_pos2) + ":" + res_chain_name2)
-    else:
-        print(res_chain_name1 + "_" + res_type1 + str(res_pos1) + res_type2 + " and " +
-              res_chain_name2 + "_" + res_type2 + str(res_pos2) + res_type1)
-    return new_model_name
-
-
-def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
-                      new_restype_list, keep_hydration, output_name,
+def make_new_mutation(pdb_file,res_pos_list,
+                      new_restype_list, output_name,
                       system=None, verbose=False):
     # Create a Modeller environment
     log.none()
@@ -275,23 +194,9 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
     # Read the PDB file into a Modeller model
     mdl = Model(env, file=pdb_file)
     new_model_name = ""
-    res_weight_list = None
+    #res_weight_list = None
 
-    if res_position and chain and new_restype:
-        # If I have the res-pos, chain and new-res-type I do a simple mutation
-        res_type = mdl.residues[str(res_position) + ':' + chain].pdb_name
-
-        new_model_name = mutate_residue(pdb_file, str(res_position), chain, new_restype)
-        if verbose:
-            # Check the residues that have been mutated and print them
-            mut_mdl = Model(env, file=new_model_name)
-            res_type_mut = mut_mdl.residues[str(res_position) + ':' + chain].pdb_name
-            print("Mutate_residue     -> RES=" + res_type + str(res_position) + ":" + chain + " to " + new_restype)
-            print("Check on the mutant->     " + res_type_mut + str(res_position) + ":" + chain)
-        else:
-            print(" " + chain + "_" + res_type + str(res_position) + new_restype)
-
-    elif res_pos_list:
+    if res_pos_list:
         # If I get the res-pos-list I need to select one random residue from it.
         # I have two methods: random mutation in a random residue from a list of res-type
         #                     conserve the hydration properties of the protein (Carol method)
@@ -330,6 +235,7 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
             print("\nres_position: " + str(res_position))
             print("chain: " + str(chain))
             print("res_type: " + str(res_type))
+        '''
         if keep_hydration:
             # Carol method. https://doi.org/10.1080/07391102.2013.825757
             # First I need to find if I change one aa or if I swap two
@@ -346,7 +252,8 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
                 if verbose: print('->Swap of two amino acids')
                 new_model_name = exchange_two_aa(pdb_file, mdl, res_position, chain, residue_pos_list,
                                                  res_weight_list=res_weight_list, _verbose=verbose)
-        elif new_restype_list:
+            '''
+        if new_restype_list:
             res_type = mdl.residues[str(res_position) + ':' + chain].pdb_name
             new_restype_list = list(new_restype_list)
             if res_type in new_restype_list:
@@ -364,11 +271,10 @@ def make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,
             else:
                 print(chain + "_" + res_type + str(res_position) + new_restype)
         else:
-            print("ERROR: you must should use the -kh mode or provide a non-empty new_restype_list")
+            print("ERROR: you must provide a non-empty new_restype_list")
             exit(1)
     else:
-        print("ERROR: you must provide the residue to change (residue position, chain and new residue name) "
-              "or a list of residue from which choose (list with res_pos:chain)")
+        print("ERROR: you must provide a list of residue from which choose (list with res_pos:chain)")
         exit(1)
 
     if output_name:
@@ -382,10 +288,6 @@ if __name__ == "__main__":
                                                  'modelname.pdb The conformation of the mutant sidechain is optimized '
                                                  'by conjugate gradient and refined using some MD.')
     parser.add_argument('pdb_file', type=str, help='PDB file with the starting model')
-    parser.add_argument('-r', '--res_position', type=int,
-                        help='Residue position (in the chain) of the residue you want to mutate')
-    parser.add_argument('-c', '--chain', type=str, help='Chain of the residue you want to mutate')
-    parser.add_argument('-n', '--new_restype', type=str, help='3letters name of the new residue')
     parser.add_argument('-rl', '--res_pos_list', type=str, nargs='+',
                         help='list of Residue "position:chain" of the residue you want to mutate')
     #parser.add_argument('-rw', '--res_weight_files', type=str, nargs='+', default=[],
@@ -397,8 +299,6 @@ if __name__ == "__main__":
                                  'ARG', 'LYS',
                                  'SER', 'THR', 'ASN', 'GLN', 'HIS'],
                         help='list of 3letters name of the new possible residues')
-    parser.add_argument('-kh', '--keep_hydration', action='store_true',
-                        help='Use a different method to select the new residue type (Carol K. paper)')
     parser.add_argument('-o', '--output_name', type=str, help='output file name (with no extention)', default="")
     parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
     parser.add_argument('-s', '--system', default=None,
@@ -407,13 +307,10 @@ if __name__ == "__main__":
     # verbose = args.verbose
 
     make_new_mutation(pdb_file=args.pdb_file,
-                      res_position=args.res_position,
-                      chain=args.chain,
-                      new_restype=args.new_restype,
                       res_pos_list=args.res_pos_list,
                       #res_weight_files=args.res_weight_files,
                       new_restype_list=args.new_restype_list,
-                      keep_hydration=args.keep_hydration,
+                      #keep_hydration=args.keep_hydration,
                       output_name=args.output_name,
                       system=args.system,
                       verbose=args.verbose)

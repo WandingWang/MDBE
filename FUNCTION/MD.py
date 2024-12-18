@@ -72,7 +72,7 @@ def make_new_minim_config_samd(input_structure_file, samd_mdp, output_gro, seque
     os.makedirs("DOUBLE_CHECK_FOLDER", exist_ok=True)
     subprocess.run(f"cp ./grompp*.out ./*edr ./*xvg DOUBLE_CHECK_FOLDER", check=True, shell=True)
 '''
-def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol", pipe_file="Prod_MD.out"):
+def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, gmx_path, top_name = "topol", pipe_file="Prod_MD.out"):
     """
     Runs a full MD cycle including energy and RMSD checks for the first cycle.
 
@@ -99,14 +99,14 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol
 
     # Run GROMPP
     grompp_command = (
-        f"gmx grompp -f {md_mdp} -c system_equil.gro -r system_equil.gro "
+        f"{gmx_path} grompp -f {md_mdp} -c system_equil.gro -r system_equil.gro "
         f"-p {top_name}.top -o {tpr_file}.tpr"
     )
     run_gromacs_command(grompp_command, "Error in GROMPP", pipe_file, output_file = grompp_md_out)
 
     # Run MDRUN
     mdrun_command = (
-        f"gmx mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu -s {tpr_file}.tpr -c system_Compl_MD.gro -x {trj_name}.xtc -e PROD.edr -v"
+        f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu -s {tpr_file}.tpr -c system_Compl_MD.gro -x {trj_name}.xtc -e PROD.edr -v"
     )
     run_gromacs_command(mdrun_command, "Something wrong on MD MDRUN", pipe_file, output_file = mdrun_md_out)
 
@@ -114,7 +114,7 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol
         try:
             # Energy Check
             energy_command = (
-                f"echo 'Temperature\nPressure\nDensity\n0\n' | gmx energy -f PROD.edr -o PROD{sequence}.xvg"
+                f"echo 'Temperature\nPressure\nDensity\n0\n' | {gmx_path} energy -f PROD.edr -o PROD{sequence}.xvg"
             )
             run_gromacs_command(
                 command=energy_command,
@@ -124,7 +124,7 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, top_name = "topol
 
             # RMSD Check
             rms_command = (
-                f"printf '1\n1\n' | gmx rms -s {tpr_file}.tpr -f {trj_name}.xtc -o rmsd_PROD{sequence}.xvg "
+                f"printf '1\n1\n' | {gmx_path} rms -s {tpr_file}.tpr -f {trj_name}.xtc -o rmsd_PROD{sequence}.xvg "
                 f"-a avgPROD{sequence}.xvg -tu ps"
             )
             run_gromacs_command(

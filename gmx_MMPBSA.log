@@ -1,0 +1,15 @@
+[INFO   ] Starting gmx_MMPBSA 1.6.4
+[DEBUG  ] WDIR          : /home/bio/Desktop/jupyter_test/antibody_test
+[DEBUG  ] AMBERHOME     : /home/bio/ls/envs/gmxMMPBSA
+[DEBUG  ] PYTHON EXE    : /home/bio/ls/envs/gmxMMPBSA/bin/python
+[DEBUG  ] PYTHON VERSION: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
+[DEBUG  ] MPI           : /home/bio/ls/envs/gmxMMPBSA/bin/mpirun
+[DEBUG  ] ParmEd        : 4.3.0
+[DEBUG  ] OS PLATFORM   : Linux-6.5.0-18-generic-x86_64-with-glibc2.35
+[DEBUG  ] OS SYSTEM     : Linux
+[DEBUG  ] OS VERSION    : #18~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Feb  7 11:40:03 UTC 2
+[DEBUG  ] OS PROCESSOR  : x86_64
+
+[INFO   ] Command-line
+  gmx_MMPBSA -h
+

@@ -51,13 +51,9 @@ def gmx_mmpbsa(cycle_number, conda_activate_path, conda_gmxmmpbsa_name, cycle_nu
           f"-eo gmx_MMPBSA_plot.csv -nogui"
         
         
-        '''
-        command = f"mpirun -np {np_used} gmx_MMPBSA MPI -O -i {mmpbsa_infile} -cs {conf_name}_newGRO.tpr -ci index.ndx " \
-          f"-cg 0 1 -ct {conf_name}_noPBC.xtc -cr ./{conf_name}_starting_protein.pdb -cp topol_protein.top " \
-          f"-eo gmx_MMPBSA_plot.csv -deo FINAL_DECOMP_MMPBSA.csv -nogui"
-        '''       
         
-        full_command = f"conda run -n {gmxMMPBSA_env} {command}"
+        #full_command = f"conda run -n {gmxMMPBSA_env} {command}"
+        full_command = f"source {conda_activate_path} {gmxMMPBSA_env} && {command}"
      
         # output file
         output_file = "gmx_mmpbsa.out"

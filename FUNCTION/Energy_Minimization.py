@@ -2,7 +2,7 @@ import subprocess
 import os
 import logging
 
-def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1, max_warn=0):
+def energy_min(minim_mdp_path, gro_name, top_name, output_name, gmx_path, number_of_run=1, max_warn=0):
     """
     Perform energy minimization using GROMACS tools (grompp and mdrun).
 
@@ -18,7 +18,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1,
     log_file = "energy_minimization.out"
 
     # Run the first 
-    grompp_cmd = f"gmx grompp -f {minim_mdp_path} -c {gro_name}.gro -p {top_name}.top -o {gro_name}_EM1.tpr -maxwarn 0"
+    grompp_cmd = f"{gmx_path} grompp -f {minim_mdp_path} -c {gro_name}.gro -p {top_name}.top -o {gro_name}_EM1.tpr -maxwarn 0"
     try:
         subprocess.run(grompp_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
@@ -26,7 +26,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1,
         return
 
     # Run the first 
-    mdrun_cmd = f"gmx mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM1.tpr -c {gro_name}_EM1.gro -v"
+    mdrun_cmd = f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM1.tpr -c {gro_name}_EM1.gro -v"
     try:
         subprocess.run(mdrun_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
@@ -38,7 +38,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1,
         start = 1
         for run in range(2, number_of_run + 1):
             # Run grompp for the next step
-            grompp_cmd = f"gmx grompp -f {minim_mdp_path} -c {gro_name}_EM{start}.gro -p {top_name}.top -o {gro_name}_EM{run}.tpr -maxwarn {max_warn}"
+            grompp_cmd = f"{gmx_path} grompp -f {minim_mdp_path} -c {gro_name}_EM{start}.gro -p {top_name}.top -o {gro_name}_EM{run}.tpr -maxwarn {max_warn}"
             try:
                 subprocess.run(grompp_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError:
@@ -46,7 +46,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, number_of_run=1,
                 return
 
             # Run mdrun for the next step
-            mdrun_cmd = f"gmx mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM{run}.tpr -c {gro_name}_EM{run}.gro -v"
+            mdrun_cmd = f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM{run}.tpr -c {gro_name}_EM{run}.gro -v"
             try:
                 subprocess.run(mdrun_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError:

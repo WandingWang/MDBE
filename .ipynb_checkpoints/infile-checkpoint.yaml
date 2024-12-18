@@ -1,0 +1,60 @@
+# 输入输出设置
+input_files:
+  structure_infile_name: "HLA_BiAB_protein_50ns"  # no extension
+  structure_file_path: "/home/bio/Desktop/jupyter_test/antibody_test/DATA/HLA_BiAB_protein_50ns.pdb"   # 结构文件路径
+
+output_files:
+  result_file: "output.txt"     # 结果输出文件
+  processed_trajectory: "output_processed.xtc"  # 处理后的轨迹文件
+
+Basic_setting:
+  conda_activate_path: "/home/bio/ls/bin/conda"
+  VMD_path:
+  GROMACS_activate_path: "/opt/gromacs-2024.4/bin"
+  conda_gmx_MMPBSA_name: "gmxMMPBSA"
+  conda_Modeller_name: "modeller"
+
+# GROMACS 设置
+gromacs:
+  run_gmx: true               # 是否运行 GROMACS 模拟
+  gmx_options:
+    nsteps: 50000             # 步数
+    temperature: 300          # 模拟温度（K）
+    pressure: 1.0             # 模拟压力（atm）
+
+# gmx_mmpbsa
+gmx_mmpbsa:
+  receptorFRAG: "2"     # Number of Fragment in the receptor (FIRST molecule in the starting pdb file)
+  ABchains: "2"         # Number of Fragment in the antibody (SECOND molecule in the starting pdb file)
+  startingFrameGMXPBSA: "2000"
+  
+
+# Modeller 设置（假设是结构优化或者模型构建）
+modeller:
+  use_modeller: false              # 是否使用 Modeller
+  modeller_path: 
+
+
+# 其他参数设置
+general:
+  path_setting:
+    conda_path:
+    VMD_path:
+    GROMACS_path:
+    gmx_MMPBSA_path:
+    Modeller_path:
+  
+  temperature: 298.15      # 温度，单位 K
+  pressure: 1.0           # 压力，单位 atm
+  simulation_type: "equilibration"  # 模拟类型，支持 "equilibration", "production", "minimization"
+
+# 运行设置
+run:
+  num_processors: 4        # 使用的处理器数
+  wall_time: "02:00:00"    # 最大运行时间（HH:MM:SS）
+  job_queue: "default"     # 任务队列
+
+# 额外的命令行参数（例如，为你的 pipeline 增加可选参数）
+extra_options:
+  verbose: true            # 是否输出详细的日志信息
+  log_file: "pipeline.log" # 日志文件路径
