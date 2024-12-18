@@ -4,7 +4,7 @@ import logging
 
 out_file = "fill_water_ions.out"  
 
-def fill_water_ions(starting_system, topology, mdp_file):
+def fill_water_ions(starting_system, topology, mdp_file, gmx_path):
     """
     Function to add water and ions to a system.
     - starting_system: GRO file from last step
@@ -28,7 +28,7 @@ def fill_water_ions(starting_system, topology, mdp_file):
     
 
     # Add water to the system using gmx solvate
-    genbox_cmd = f"gmx solvate  -cp {starting_system}.gro -cs spc216.gro -o system_water.gro -p {topology}.top"
+    genbox_cmd = f"{gmx_path} solvate  -cp {starting_system}.gro -cs spc216.gro -o system_water.gro -p {topology}.top"
     try:
         with open(out_file, 'a') as log:
             subprocess.run(genbox_cmd, shell=True, check=True, stdout=log, stderr=subprocess.STDOUT)
@@ -37,7 +37,7 @@ def fill_water_ions(starting_system, topology, mdp_file):
         return 
 
     # preparing input file for gmx genion by gmx grommp
-    grompp_cmd = f"gmx grompp -f {mdp_file} -c system_water.gro -p {topology}.top -o system_ions.tpr -maxwarn 1"
+    grompp_cmd = f"{gmx_path} grompp -f {mdp_file} -c system_water.gro -p {topology}.top -o system_ions.tpr -maxwarn 1"
     try:
         with open(out_file, 'a') as log:
             subprocess.run(grompp_cmd, shell=True, check=True, stdout=log, stderr=subprocess.STDOUT)
@@ -46,7 +46,7 @@ def fill_water_ions(starting_system, topology, mdp_file):
         return 
 
     #add ions
-    genion_cmd = f'echo "SOL" | gmx genion -s system_ions.tpr -o system_ions.gro -p {topology}.top -pname K -nname CL -neutral -conc 0.15'
+    genion_cmd = f'echo "SOL" | {gmx_path} genion -s system_ions.tpr -o system_ions.gro -p {topology}.top -pname K -nname CL -neutral -conc 0.15'
 
     try:
         with open(out_file, 'a') as log:

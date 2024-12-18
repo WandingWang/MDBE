@@ -22,7 +22,7 @@ def run_gromacs_command(command, error_message, pipe_file, output_file=None):
             f.write("exit")
         raise SystemExit(error_message)
 
-def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, sequence, top_name="topol", pipe_file="out.out"):
+def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, sequence, gmx_path, top_name="topol", pipe_file="out.out"):
     """
     Performs NVT and NPT equilibration using GROMACS commands, and logs outputs to files.
 
@@ -40,13 +40,13 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     mdrun_nvt_out = f"mdrun_NVT_MD_seq{sequence}.out"
 
     nvt_grompp_command = (
-        f"gmx grompp -f {nvt_mdp} -c {input_structure_file} -r {input_structure_file} "
+        f"{gmx_path} grompp -f {nvt_mdp} -c {input_structure_file} -r {input_structure_file} "
         f"-p {top_name}.top -o system_NVT_MD.tpr"
     )
     run_gromacs_command(nvt_grompp_command, "Something wrong on NVT GROMPP", pipe_file, output_file=grompp_nvt_out)
 
     nvt_mdrun_command = (
-        "gmx mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu "
+        f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu "
         "-s system_NVT_MD.tpr -c system_NVT_MD.gro -cpo state_NVT_MD.cpt -e NVT.edr -v"
     )
     run_gromacs_command(nvt_mdrun_command, "Something wrong on NVT MDRUN", pipe_file, output_file=mdrun_nvt_out)
@@ -58,13 +58,13 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     mdrun_npt_out = f"mdrun_NPT_MD_seq{sequence}.out"
 
     npt_grompp_command = (
-        f"gmx grompp -f {npt_mdp} -c system_NVT_MD.gro -r system_NVT_MD.gro "
+        f"{gmx_path} grompp -f {npt_mdp} -c system_NVT_MD.gro -r system_NVT_MD.gro "
         f"-p {top_name}.top -o system_NPT_MD.tpr -t state_NVT_MD.cpt -maxwarn 1"
     )
     run_gromacs_command(npt_grompp_command, "Something wrong on NPT GROMPP", pipe_file, output_file=grompp_npt_out)
 
     npt_mdrun_command = (
-        f"gmx mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu "
+        f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -nb gpu -pme gpu -bonded gpu -update gpu "
         f"-s system_NPT_MD.tpr -c {output_gro}.gro -cpo state_NPT_MD.cpt -x traj_NPT_MD.xtc -e NPT.edr -v"
     )
     run_gromacs_command(npt_mdrun_command, "Something wrong on NPT MDRUN", pipe_file, output_file=mdrun_npt_out)
@@ -72,10 +72,10 @@ def make_new_minim_nvt_npt(input_structure_file, nvt_mdp, npt_mdp, output_gro, s
     # Energy checks
     try:
         # Correctly select Temperature for NVT energy file
-        subprocess.run(f"echo 'Temperature\n\n' | gmx energy -f NVT.edr -o temp_NVT.xvg", check=True, shell=True)
+        subprocess.run(f"echo 'Temperature\n\n' | {gmx_path} energy -f NVT.edr -o temp_NVT.xvg", check=True, shell=True)
     
         # Correctly select Pressure and DEnsity for NPT energy file
-        subprocess.run(f"echo 'Pressure\nDensity\n\n' | gmx energy -f NPT.edr -o press_NPT.xvg", check=True, shell=True)
+        subprocess.run(f"echo 'Pressure\nDensity\n\n' | {gmx_path} energy -f NPT.edr -o press_NPT.xvg", check=True, shell=True)
     
     except subprocess.CalledProcessError:
         print("Something went wrong on the energy check...")

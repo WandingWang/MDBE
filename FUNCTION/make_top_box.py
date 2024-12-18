@@ -3,7 +3,7 @@ import subprocess
 import glob
 import logging
 
-def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, topfile):
+def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, topfile, gmx_path):
     """
     generate GROMACS topology (.top and .itp) from .pdb
     buid box to get .gro
@@ -21,7 +21,7 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
 
 
     # use pdb2gmx to generate topology
-    pdb2gmx_cmd = f"gmx pdb2gmx -f {input_file_path} -o system.pdb -p {topfile}.top -ignh -ff {forcefield} -water {watermodel}"
+    pdb2gmx_cmd = f"{gmx_path} pdb2gmx -f {input_file_path} -o system.pdb -p {topfile}.top -ignh -ff {forcefield} -water {watermodel}"
     try:
         subprocess.run(pdb2gmx_cmd, shell=True, check=True, stdout=open(out_file, 'a'), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
@@ -42,7 +42,7 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
 
     try:
         # run editconf to buid box
-        editconf_cmd = f"gmx editconf -f {input_file} {editconf_option} -o {output_file}"
+        editconf_cmd = f"{gmx_path} editconf -f {input_file} {editconf_option} -o {output_file}"
         # log
         with open(out_file, 'a') as log:
             subprocess.run(editconf_cmd, shell=True, check=True, stdout=log, stderr=subprocess.STDOUT)

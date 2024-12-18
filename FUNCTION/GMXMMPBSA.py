@@ -156,20 +156,20 @@ def run_command(cmd, input_data):
         print(f"Error executing command: {cmd}\n{e}")
         raise
 
-def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name,cycle_number):
+def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name,cycle_number, gmx_path):
     """remove PBC"""
     print("\t\t--running TRJCONV to remove the pbc from the trajectory..")
     
     # first TRJCONV
     cmd1 = [
-        "gmx", "trjconv", "-n", "index.ndx", "-f", f"{trj_file}.xtc",
+        f"{gmx_path}", "trjconv", "-n", "index.ndx", "-f", f"{trj_file}.xtc",
         "-o", "./nptMD_nojump_temp.xtc", "-s", tpr_file, "-pbc", "nojump", "-b", startingFrameGMXPBSA
     ]
     run_command(cmd1, input_data="0\n")
     
     # second TRJCONV
     cmd2 = [
-        "gmx", "trjconv", "-n", "index.ndx", "-f", "./nptMD_nojump_temp.xtc",
+        f"{gmx_path}", "trjconv", "-n", "index.ndx", "-f", "./nptMD_nojump_temp.xtc",
         "-o", f"./{root_name}/{conf_name}_noPBC.xtc", "-s", tpr_file, "-pbc", "mol", "-center"
     ]
     run_command(cmd2, input_data="1\n0\n")
@@ -180,17 +180,17 @@ def remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name,cy
     #print("\t\t--TRJCONV completed successfully!")
     # check
     output_file = "trj_check.out"
-    cmd_check = ["gmx", "check", "-f", f"./cycle{cycle_number}_BE/cycle{cycle_number}_noPBC.xtc", ">", output_file, "2>&1"]
+    cmd_check = [f"{gmx_path}", "check", "-f", f"./cycle{cycle_number}_BE/cycle{cycle_number}_noPBC.xtc", ">", output_file, "2>&1"]
     run_command(["bash", "-c", " ".join(cmd_check)],input_data=None)
     print("\t\t--TRJCONV completed successfully!")
     
 
-def make_index(conf_name, root_name, receptor_frag, ab_chains):
+def make_index(conf_name, root_name, receptor_frag, ab_chains, gmx_path):
     """make index file"""
     print("\t\t--running MAKE_NDX to make index with only receptor, ligand and complex..")
         
     make_ndx_cmd = [
-        "gmx", "make_ndx", "-f", f"{conf_name}_starting_protein.pdb",
+        f"{gmx_path}", "make_ndx", "-f", f"{conf_name}_starting_protein.pdb",
         "-o", f"{root_name}/index.ndx"
     ]
     #ndx_string = f"{receptor_frag}\n{ab_chains}\nq\n"
@@ -215,25 +215,25 @@ def create_protein_top(top_file):
 
     print("\t\t--Protein topology file created successfully!")
 
-def run_grompp(mdp_name, conf_name, top_file, root_name):
+def run_grompp(mdp_name, conf_name, top_file, root_name, gmx_path):
     """run GROMPP to get tpr file"""
     print("\t\t--running GROMPP to make a protein tpr..")
     
     # first GROMPP
     cmd1 = [
-        "gmx", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
+        f"{gmx_path}", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
         "-p", f"{top_file}_protein.top", "-o", f"{root_name}/{conf_name}.tpr", "-maxwarn", "1"
     ]
     run_command(cmd1, input_data = None)
     
     # second GROMPP
     cmd2 = [
-        "gmx", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
+        f"{gmx_path}", "grompp", "-v", "-f", mdp_name, "-c", f"{conf_name}_starting_protein.pdb",
         "-p", f"{top_file}_protein.top", "-o", f"{root_name}/{conf_name}_newGRO.tpr", "-maxwarn", "1"
     ]
     run_command(cmd2, input_data = None)
     print("\t\t--GROMPP completed successfully!")
-
+'''
 def count_his_residues(pdb_file):
     """calcuate the number of  HIS residuals and get the residual string"""
     print("\t\t--Counting HIS residues in the PDB file..")
@@ -246,8 +246,8 @@ def count_his_residues(pdb_file):
                 his_string += "1\n"
     print(f"\t\t--Found HIS residues: {his_string.count('1')}")
     return his_string
-
-def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA = "2000", receptor_frag = "2", ab_chains = "2"):
+'''
+def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA, receptor_frag, ab_chains, gmx_path):
     
     logging.info("Building input files for gmx MMPBSA.")
     if not check_file(f"{starting_gro_file}.gro") or not check_file(f"{trj_file}.xtc") or not check_file(f"{tpr_file}.tpr") or not check_file(f"{top_file}.top"):
@@ -263,7 +263,7 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
 
     # use make_ndx to get index.ndx
     print("\t\t--running MAKE_NDX to create index.ndx..")
-    make_ndx_command = f"echo -e 'keep 1\n\nq\n' | gmx make_ndx -f {starting_gro_file}.gro -o index.ndx"
+    make_ndx_command = f"echo -e 'keep 1\n\nq\n' | {gmx_path} make_ndx -f {starting_gro_file}.gro -o index.ndx"
     try:
         subprocess.run(make_ndx_command, shell=True, check=True,executable = "/bin/bash")
     except subprocess.CalledProcessError:
@@ -280,11 +280,11 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
     # RUN GRO_TO_PDB
     GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
     
-    remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name, cycle_number)
-    make_index(conf_name, root_name, receptor_frag, ab_chains)
+    remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name, cycle_number,gmx_path)
+    make_index(conf_name, root_name, receptor_frag, ab_chains,gmx_path)
     create_protein_top(top_file)
-    run_grompp(mdp_name, conf_name, top_file, root_name)
-    his_string = count_his_residues(f"{conf_name}_starting_protein.pdb")
+    run_grompp(mdp_name, conf_name, top_file, root_name, gmx_path)
+    #his_string = count_his_residues(f"{conf_name}_starting_protein.pdb")
     
     #Trajectory (.xtc): Starting from the production-run .xtc, extract only the protein, remove water and ions, and unwrap PBC.(done)
     #Topology (.top, .itp): Keep only the protein and ensure all dependent files are correctly linked.
