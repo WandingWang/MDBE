@@ -363,7 +363,7 @@ protein_infile, _ =os.path.splitext(protein_infile)
 
 
 max_mutant = config['modeller']['max_mutant']
-cycle_num = 2 # the run cycle numbers for each configuration  Default:10
+cycle_num = 1 # the run cycle numbers for each configuration  Default:10
 MUTANT_signal = False
 #Stored Average BE from the last configuration. - Default: no
 #Stored_AVG= -92.8

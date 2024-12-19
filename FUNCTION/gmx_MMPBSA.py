@@ -18,16 +18,6 @@ def gmx_mmpbsa(cycle_number, conda_activate_path, conda_gmxmmpbsa_name, cycle_nu
         #%conda activate {conda_gmxmmpbsa_name}
 
         # Search for the ForceField in GMXLIB
-        '''
-        found = False
-        print(f"searching for ForceField({force_field}) in {FORCE_FIELD_PATH})")
-        ff_path = os.path.join(FORCE_FIELD_PATH, f"{force_field}.ff")
-        if os.path.isdir(ff_path):
-            print(f"found {ff_path}")
-            found = True     
-        if not found:
-            raise RuntimeError(f"ForceField {force_field} not found in FORCE_FIELD_PATH")
-        '''
 
         # Prepare files for MMPBSA
         cycle_folder = os.path.join(cycle_number_md_folder, root_name)

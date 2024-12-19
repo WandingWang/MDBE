@@ -1,5 +1,4 @@
 import argparse
-# import sys
 import os
 import random
 from os import access, R_OK
@@ -186,7 +185,7 @@ def mutate_residue(modelname, respos, chain, new_restype):
 
 
 def make_new_mutation(pdb_file,res_pos_list,
-                      new_restype_list, output_name,
+                      new_restype_list, output_name, 
                       system=None, verbose=False):
     # Create a Modeller environment
     log.none()
@@ -194,7 +193,7 @@ def make_new_mutation(pdb_file,res_pos_list,
     # Read the PDB file into a Modeller model
     mdl = Model(env, file=pdb_file)
     new_model_name = ""
-    #res_weight_list = None
+    res_weight_list = None
 
     if res_pos_list:
         # If I get the res-pos-list I need to select one random residue from it.
@@ -202,31 +201,15 @@ def make_new_mutation(pdb_file,res_pos_list,
         #                     conserve the hydration properties of the protein (Carol method)
         # Randomly select one residue among the residue:chain of the list
         residue_pos_list = list(res_pos_list)
-        '''
-        if len(res_weight_files) > 0:
-            if verbose:
-                print("Computing the weights from " + str(res_weight_files) + "...")
-            # the BE weights are an average of the BE contribution for each residue during the trajectories
-            res_weight_dic = compute_weights(input_files=res_weight_files, resid_chain_list=res_pos_list,
-                                             logfile="weights.log", adhoc_fixing=system ,verbose=verbose)
-            if len(res_weight_dic) != len(res_pos_list):
-                print("\nSomething wrong with the weights.. not using them")
-                print("len(res_weight_dic):" + str(len(res_weight_dic)) +
-                      " len(res_pos_list):" + str(len(res_pos_list)))
-                print("\nres_weight_dic:" + str(res_weight_dic) + " res_pos_list:" + str(res_pos_list))
-                res_weight_list = None
-            else:
-                res_weight_list = []
-                for resid in residue_pos_list:
-                    res_weight_list.append(res_weight_dic[resid])
-        '''
+
         if verbose:
             print("\nresidue_pos_list: " + str(residue_pos_list))
             #print("res_weight_files: " + str(res_weight_files))
-            print("res_weight_list: " + str(res_weight_list))
+            #print("res_weight_list: " + str(res_weight_list))
         # print("residue_pos_list"+str(residue_pos_list)+" res_weight_list"+str(args.res_weight_list))
         # if not assigned, res_weight_list=None that is the Default value
         random_res_position = RAND.choices(residue_pos_list, weights=res_weight_list)[0]
+        
         res_position = random_res_position.split(':')[0]
         chain = random_res_position.split(':')[1]
         res_type = mdl.residues[str(res_position) + ':' + chain].pdb_name
@@ -235,24 +218,7 @@ def make_new_mutation(pdb_file,res_pos_list,
             print("\nres_position: " + str(res_position))
             print("chain: " + str(chain))
             print("res_type: " + str(res_type))
-        '''
-        if keep_hydration:
-            # Carol method. https://doi.org/10.1080/07391102.2013.825757
-            # First I need to find if I change one aa or if I swap two
-            rand_0to1 = RAND.random()
-            if res_type == "GLY":
-                # I cannot mutate a GLY, I must swap
-                if verbose: print('Selected a ' + res_type + " -> forcing a swap")
-                rand_0to1 = 1
-            if rand_0to1 <= 0.5:
-                if verbose: print('->Single amino acid substitution')
-                new_model_name = substitution_single_aa(pdb_file, mdl, res_position, chain, _verbose=verbose)
 
-            elif rand_0to1 > 0.5:
-                if verbose: print('->Swap of two amino acids')
-                new_model_name = exchange_two_aa(pdb_file, mdl, res_position, chain, residue_pos_list,
-                                                 res_weight_list=res_weight_list, _verbose=verbose)
-            '''
         if new_restype_list:
             res_type = mdl.residues[str(res_position) + ':' + chain].pdb_name
             new_restype_list = list(new_restype_list)
@@ -290,9 +256,9 @@ if __name__ == "__main__":
     parser.add_argument('pdb_file', type=str, help='PDB file with the starting model')
     parser.add_argument('-rl', '--res_pos_list', type=str, nargs='+',
                         help='list of Residue "position:chain" of the residue you want to mutate')
-    #parser.add_argument('-rw', '--res_weight_files', type=str, nargs='+', default=[],
-    #                    help='Input files name with the per-residue energy decomposition. I will extract the average.'
-    #                         '(Default: None)')
+#    parser.add_argument('-rw', '--res_weight_files', type=str, nargs='+', default=[],
+#                       help='Input files name with the per-residue energy decomposition. I will extract the average.'
+#                           '(Default: None)')
     parser.add_argument('-nl', '--new_restype_list', type=str, nargs='+',
                         default=['LEU', 'VAL', 'ILE', 'MET', 'PHE', 'TYR', 'TRP',
                                  'GLU', 'ASP',
@@ -308,9 +274,8 @@ if __name__ == "__main__":
 
     make_new_mutation(pdb_file=args.pdb_file,
                       res_pos_list=args.res_pos_list,
-                      #res_weight_files=args.res_weight_files,
                       new_restype_list=args.new_restype_list,
-                      #keep_hydration=args.keep_hydration,
+                      #res_weight_files=args.res_weight_files,
                       output_name=args.output_name,
                       system=args.system,
                       verbose=args.verbose)

@@ -19,7 +19,7 @@ gmx_mmpbsa:
   
 # Modeller 
 modeller:
-  max_mutant: 0          # INIT: max mutation number
+  max_mutant: 2          # INIT: max mutation number
   res_pos_list: "28:H 29:H 30:H 31:H 32:H 52:H 54:H 55:H 56:H 57:H 98:H 100:H 102:H 105:H 93:L 94:L 95:L"
 
 # run 
