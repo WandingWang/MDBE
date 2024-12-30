@@ -353,7 +353,6 @@ ABchains = str(config['gmx_mmpbsa']['ABchains'])
 startingFrameGMXPBSA = config['gmx_mmpbsa']['startingFrameGMXPBSA']
 #protein_infile = config['input_files']['structure_infile_name']
 protein_file_path = config['input_files']['structure_file_path']
-
 if not os.path.exists(protein_file_path):
     raise ValueError(f"No path {protein_file_path}")
 else:
@@ -363,7 +362,7 @@ protein_infile, _ =os.path.splitext(protein_infile)
 
 
 max_mutant = config['modeller']['max_mutant']
-cycle_num = 1 # the run cycle numbers for each configuration  Default:10
+cycle_num = config['modeller']['cycle_num'] # the run cycle numbers for each configuration  Default:10
 MUTANT_signal = False
 #Stored Average BE from the last configuration. - Default: no
 #Stored_AVG= -92.8
