@@ -2,7 +2,13 @@
 # **Pipeline Name**
 
 ## **Overview**
-This pipeline is designed for **[multiple short MD simulations for binding energy calculation]**. It automates the process from input preparation to result generation.
+This pipeline is designed for **[multiple short MD simulations for binding energy calculation]**. 
+### **The whole process includes**
+**1. The initial MD：Make topolofy, Buid box, Add water and ions, Energy minimization, NVT and NTP; The prodcution MD;** 
+**2. The production MD;**
+**3. Binding free energy calculation: gmx_MMPBSA;**
+**4. Mutation.**
+It automates the process from input preparation to result generation.
 
 ---
 
