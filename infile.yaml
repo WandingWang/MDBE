@@ -2,6 +2,7 @@
 input_files:
   structure_file_path: "/home/bio/Desktop/jupyter_test/antibody_test/DATA/HLA_BiAB_protein_50ns.pdb"   # make sure receptor firstly and then antibody
 
+
 # IMPORTANT Basic setting
 Basic_setting:
   conda_activate_script_path: "/home/bio/ls/bin"
@@ -13,17 +14,18 @@ Basic_setting:
 
 # gmx_mmpbsa
 gmx_mmpbsa:
-  receptorFRAG: 2     # INIT: How many chains in RECEPTOR (FIRST molecule in the starting pdb file)  
-  ABchains: 2         # INIT: How many chains  in ANTIBODY (SECOND molecule in the starting pdb file)
+  receptorFRAG: 2     # INT: How many chains in RECEPTOR (FIRST molecule in the starting pdb file)  
+  ABchains: 2         # INT: How many chains  in ANTIBODY (SECOND molecule in the starting pdb file)
   startingFrameGMXPBSA: "2000"   # STRING
   
 # Modeller 
 modeller:
-  max_mutant: 2          # INIT: max mutation number
   res_pos_list: "28:H 29:H 30:H 31:H 32:H 52:H 54:H 55:H 56:H 57:H 98:H 100:H 102:H 105:H 93:L 94:L 95:L"
+  max_mutant: 4          # INT: max mutation number
+  cycle_num: 10          # 10 short MDs
 
 # run 
 run:
-  num_processors: 32        # INIT: number of processors you want to use
+  num_processors: 32        # INT: number of processors you want to use
 
 
