@@ -7,6 +7,7 @@ from os.path import isfile
 from modeller import *
 from modeller.optimizers import MolecularDynamics, ConjugateGradients
 from modeller.automodel import autosched
+
 #from compute_weights import compute_weights
 #from FUNCTION.compute_weights import compute_weights
 

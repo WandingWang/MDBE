@@ -195,7 +195,7 @@ def gmx_mmpbsa_for_each_cycle(work_dir, cycle_number,only_protein_md_mdp_path,VM
     # make files for gmx_mmpbsa
     # files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder)
 
-    files_gmxmmpbsa("system_Compl_MD", repository_pdb_file, "traj_MD", "system_Compl_MD", "topol", only_protein_md_mdp_path, RootName, ConfName, VMD_DIR, temp_files_folder, cycle_number, startingFrameGMXPBSA, receptorFRAG, ABchains,gmx_path)
+    files_gmxmmpbsa("system_Compl_MD", repository_pdb_file, "traj_MD", "system_Compl_MD", "topol", only_protein_md_mdp_path, RootName, ConfName, VMD_DIR, temp_files_folder, cycle_number, startingFrameGMXPBSA, receptorFRAG, ABchains,gmx_path, VMD_path )
     # get number of frames
     try:
         with open("trj_check.out", "r") as file:
@@ -298,13 +298,13 @@ logging.info(f"ROOT FOLDER PATH: {ROOT_OUTPUT}")
 ####################################### CHECK SYSTEM #############################################
 config_file = os.path.join(PROJECT_ROOT, 'infile.yaml')
 config = load_config(config_file )
-conda_path = config['Basic_setting']['conda_activate_script_path']
+conda_actiavte_path = config['Basic_setting']['conda_activate_script_path']
 VMD_path = config['Basic_setting']['VMD_path']
 gmx_path = config['Basic_setting']['GROMACS_executable_path']
 
 conda_gmxmmpbsa_name = config['Basic_setting']['conda_gmx_MMPBSA_name']
 conda_modeller_name = config['Basic_setting']['conda_Modeller_name']
-conda_actiavte_path = os.path.join(conda_path,"activate")
+
 
 # check conda
 if not os.path.isfile(conda_actiavte_path):
@@ -515,7 +515,7 @@ for sequence in range (0,max_mutant+1):
     pdb_name_without_extension = os.path.splitext(pdb_name_with_extension)[0] #xxxx
     fileNamePDB = pdb_name_without_extension
     FileNamePDB_OUT = f"LastFrame_cycle{cycle_number}"
-    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, VMD_DIR, folders["TEMP_FILES_FOLDER"])
+    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, VMD_DIR, folders["TEMP_FILES_FOLDER"], VMD_path)
     last_cycle_pdb = os.path.join(folders["repository"], f"LastFrame_cycle{cycle_number}.pdb")
     add_ter_to_pdb(last_cycle_pdb)        
     output_last_cycle_pdb = os.path.join(ROOT_OUTPUT, f"Mutant{sequence}_cycle{cycle_number}_LastFrameMD.pdb")
