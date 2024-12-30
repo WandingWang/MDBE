@@ -13,7 +13,7 @@ def check_file(file_path):
     return True
 
 #GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
-def GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder):
+def GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder,VMD_path ):
     """
     Converts a GRO file to a PDB file using VMD.
 
@@ -26,7 +26,8 @@ def GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_
         vmd_executable (str): Path to VMD executable.
     """
     
-    vmd = shutil.which("vmd")
+    #vmd = shutil.which("vmd")
+    vmd = VMD_path 
     if not vmd:
         raise FileNotFoundError("VMD not found. please ensure VMD is installed and added to PATH")
     # Paths and filenames
@@ -247,7 +248,7 @@ def count_his_residues(pdb_file):
     print(f"\t\t--Found HIS residues: {his_string.count('1')}")
     return his_string
 '''
-def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA, receptor_frag, ab_chains, gmx_path):
+def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, top_file, mdp_name, root_name, conf_name, vmd_function_folder, temp_files_folder, cycle_number, startingFrameGMXPBSA, receptor_frag, ab_chains, gmx_path, VMD_path ):
     
     logging.info("Building input files for gmx MMPBSA.")
     if not check_file(f"{starting_gro_file}.gro") or not check_file(f"{trj_file}.xtc") or not check_file(f"{tpr_file}.tpr") or not check_file(f"{top_file}.top"):
@@ -278,7 +279,7 @@ def files_gmxmmpbsa(starting_gro_file, repository_pdb_file, trj_file, tpr_file, 
     fileNamePDB = pdb_name_without_extension
     FileNamePDB_OUT = f"{conf_name}_starting_protein"
     # RUN GRO_TO_PDB
-    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder)
+    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, vmd_function_folder, temp_files_folder,VMD_path )
     
     remove_pbc(trj_file, tpr_file, startingFrameGMXPBSA, root_name, conf_name, cycle_number,gmx_path)
     make_index(conf_name, root_name, receptor_frag, ab_chains,gmx_path)

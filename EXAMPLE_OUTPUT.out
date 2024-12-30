@@ -1,0 +1,95 @@
+2024-12-30 13:39:13,560 - INFO -ROOT FOLDER PATH: /home/bio/Desktop/jupyter_test/antibody_test/output_20241230_133913
+2024-12-30 13:39:13,688 - INFO -conda activate path --> /home/bio/ls/bin/activate version: conda 24.11.1
+2024-12-30 13:39:13,689 - INFO -Python --> /home/bio/ls/bin/python version: Python 3.12.7
+2024-12-30 13:39:13,689 - INFO -VMD path --> /usr/local/bin/vmd 
+2024-12-30 13:39:13,689 - INFO -gmx path --> /opt/gromacs-2024.4/bin/gmx 
+2024-12-30 13:39:13,957 - INFO -gmxMMPBSA is installed
+2024-12-30 13:39:14,226 - INFO -modeller is installed
+2024-12-30 13:39:14,226 - INFO -The structure file is /home/bio/Desktop/jupyter_test/antibody_test/DATA/HLA_BiAB_protein_50ns.pdb
+2024-12-30 13:39:14,226 - INFO -#### Begin with configuration0 ####
+2024-12-30 13:39:14,226 - INFO -PATH : /home/bio/Desktop/jupyter_test/antibody_test/output_20241230_133913/configuration
+2024-12-30 13:39:14,382 - INFO -Topology generation completed successfully.
+2024-12-30 13:39:14,412 - INFO -Simulation box definition completed successfully.
+2024-12-30 13:39:15,021 - INFO -Water and ions successfully added to the system.
+2024-12-30 13:39:19,859 - INFO -Energy minimization completed successfully.
+2024-12-30 13:39:19,859 - INFO -Running NVT MD for temperature equilibration.
+2024-12-30 13:39:38,836 - INFO -Running NPT MD for pressure equilibration
+2024-12-30 13:39:58,329 - INFO -Equilibration completed successfully.
+2024-12-30 13:50:27,783 - INFO -Building input files for gmx MMPBSA.
+2024-12-30 13:50:29,843 - INFO -Running gmxMMPBSA_cycle1
+2024-12-30 13:56:55,905 - INFO -Data Analysis.
+2024-12-30 13:56:55,912 - INFO -Results for cycle1:
+Headers: frame | DeltaG(kJ/mol) | Coul(kJ/mol) | VdW(kJ/mol) | PolSol(kJ/mol) | NpoSol(kJ/mol) | SF1 | SF2 | Canonical_AVG | MedianDeltaG(kJ/mol) | DeltaG_2s(kJ/mol)
+AVG Values: AVG | -60.8 | -248.4 | -87.5 | 275.1 | 0.0 | -52.4 | -470.1 | -88.2 | -60.5 | -61.0
+STD Values: STD | 11.7 | 26.1 | 8.0 | 22.8 | 0.0 | 0.3 | 101.2 | nan | nan | 11.7
+2024-12-30 13:56:55,912 - INFO -Cleaning files.
+2024-12-30 13:56:55,912 - INFO -Moving files.
+2024-12-30 14:01:33,269 - INFO -Building input files for gmx MMPBSA.
+2024-12-30 14:01:34,970 - INFO -Running gmxMMPBSA_cycle2
+2024-12-30 14:07:29,494 - INFO -Data Analysis.
+2024-12-30 14:07:29,501 - INFO -Results for cycle2:
+Headers: frame | DeltaG(kJ/mol) | Coul(kJ/mol) | VdW(kJ/mol) | PolSol(kJ/mol) | NpoSol(kJ/mol) | SF1 | SF2 | Canonical_AVG | MedianDeltaG(kJ/mol) | DeltaG_2s(kJ/mol)
+AVG Values: AVG | -76.4 | -277.0 | -95.1 | 295.6 | 0.0 | -57.3 | -535.2 | -101.5 | -76.7 | -76.9
+STD Values: STD | 10.1 | 18.2 | 6.6 | 16.1 | 0.0 | 0.2 | 70.7 | nan | nan | 10.1
+2024-12-30 14:07:29,501 - INFO -Cleaning files.
+2024-12-30 14:07:29,519 - INFO -Moving files.
+2024-12-30 14:07:29,565 - INFO -Making the starting PDB for the next Mutation from LastFrame_cycle2.gro
+2024-12-30 14:07:29,903 - INFO -Making the average of the cycles results.
+2024-12-30 14:07:29,908 - INFO -Results for Configuation
+DeltaG(kJ/mol): -68.6 +- 11.0 kJ/mol
+Coul(kJ/mol): -262.7 +- 20.2 kJ/mol
+VdW(kJ/mol): -91.3 +- 5.4 kJ/mol
+PolSol(kJ/mol): 285.4 +- 14.5 kJ/mol
+NpoSol(kJ/mol): 0.0 +- 0.0 kJ/mol
+SF1: -54.8 +- 0.6 kJ/mol
+SF2: -502.7 +- 75.2 kJ/mol
+Canonical_AVG: -76.4 +- nan kJ/mol
+MedianDeltaG(kJ/mol): -68.6 +- nan kJ/mol
+DeltaG_2s(kJ/mol): -68.6 +- 11.0 kJ/mol
+2024-12-30 14:07:29,908 - INFO -Finished with Configuration0
+2024-12-30 14:07:29,908 - INFO -#### Begin with Mutant1 ####
+2024-12-30 14:07:29,908 - INFO -PATH : /home/bio/Desktop/jupyter_test/antibody_test/output_20241230_133913/Mutant1
+2024-12-30 14:07:29,908 - INFO -Making a new mutation.
+2024-12-30 14:07:30,692 - INFO -Topology generation completed successfully.
+2024-12-30 14:07:30,722 - INFO -Simulation box definition completed successfully.
+2024-12-30 14:07:31,431 - INFO -Water and ions successfully added to the system.
+2024-12-30 14:07:38,053 - INFO -Energy minimization completed successfully.
+2024-12-30 14:07:38,053 - INFO -Running NVT MD for temperature equilibration.
+2024-12-30 14:07:56,131 - INFO -Running NPT MD for pressure equilibration
+2024-12-30 14:08:14,867 - INFO -Equilibration completed successfully.
+2024-12-30 14:19:58,013 - INFO -Building input files for gmx MMPBSA.
+2024-12-30 14:20:00,209 - INFO -Running gmxMMPBSA_cycle1
+2024-12-30 14:26:27,565 - INFO -Data Analysis.
+2024-12-30 14:26:27,571 - INFO -Results for cycle1:
+Headers: frame | DeltaG(kJ/mol) | Coul(kJ/mol) | VdW(kJ/mol) | PolSol(kJ/mol) | NpoSol(kJ/mol) | SF1 | SF2 | Canonical_AVG | MedianDeltaG(kJ/mol) | DeltaG_2s(kJ/mol)
+AVG Values: AVG | -63.0 | -256.5 | -93.5 | 287.1 | 0.0 | -54.4 | -482.4 | -79.0 | -63.6 | -63.0
+STD Values: STD | 8.0 | 23.1 | 5.4 | 20.6 | 0.0 | 0.2 | 89.8 | nan | nan | 8.0
+2024-12-30 14:26:27,571 - INFO -Cleaning files.
+2024-12-30 14:26:27,571 - INFO -Moving files.
+2024-12-30 14:32:17,944 - INFO -Building input files for gmx MMPBSA.
+2024-12-30 14:32:19,732 - INFO -Running gmxMMPBSA_cycle2
+2024-12-30 14:38:13,307 - INFO -Data Analysis.
+2024-12-30 14:38:13,313 - INFO -Results for cycle2:
+Headers: frame | DeltaG(kJ/mol) | Coul(kJ/mol) | VdW(kJ/mol) | PolSol(kJ/mol) | NpoSol(kJ/mol) | SF1 | SF2 | Canonical_AVG | MedianDeltaG(kJ/mol) | DeltaG_2s(kJ/mol)
+AVG Values: AVG | -64.0 | -260.7 | -89.8 | 286.5 | 0.0 | -54.7 | -495.5 | -85.0 | -63.6 | -64.0
+STD Values: STD | 9.5 | 25.7 | 5.9 | 21.4 | 0.0 | 0.4 | 98.4 | nan | nan | 9.5
+2024-12-30 14:38:13,313 - INFO -Cleaning files.
+2024-12-30 14:38:13,313 - INFO -Moving files.
+2024-12-30 14:38:13,364 - INFO -Making the starting PDB for the next Mutation from LastFrame_cycle2.gro
+2024-12-30 14:38:13,735 - INFO -Making the average of the cycles results.
+2024-12-30 14:38:13,745 - INFO -Results for Configuation
+DeltaG(kJ/mol): -63.5 +- 0.7 kJ/mol
+Coul(kJ/mol): -258.6 +- 3.0 kJ/mol
+VdW(kJ/mol): -91.7 +- 2.6 kJ/mol
+PolSol(kJ/mol): 286.8 +- 0.4 kJ/mol
+NpoSol(kJ/mol): 0.0 +- 0.0 kJ/mol
+SF1: -54.5 +- 0.3 kJ/mol
+SF2: -489.0 +- 9.3 kJ/mol
+Canonical_AVG: -63.5 +- nan kJ/mol
+MedianDeltaG(kJ/mol): -63.5 +- nan kJ/mol
+DeltaG_2s(kJ/mol): -63.5 +- 0.7 kJ/mol
+2024-12-30 14:38:13,745 - INFO -Metropolis algorithm
+2024-12-30 14:38:13,745 - INFO -Random Number: 0.6870977270114133  Metropolis Prob: 0.026427944276123033  AVG: -63.5  Stored AVG: -68.6
+2024-12-30 14:38:13,745 - INFO -New Configuration Declined
+2024-12-30 14:38:13,745 - INFO -Finished Mutant1
+2024-12-30 14:38:13,745 - INFO -ALL DONE.

@@ -5,11 +5,11 @@ input_files:
 
 # IMPORTANT Basic setting
 Basic_setting:
-  conda_activate_script_path: "/home/bio/ls/bin"
-  VMD_path: "/usr/local/bin/vmd"
-  GROMACS_executable_path: "/opt/gromacs-2024.4/bin/gmx"
-  conda_gmx_MMPBSA_name: "gmxMMPBSA"
-  conda_Modeller_name: "modeller"
+  conda_activate_script_path: "/home/bio/ls/bin/activate"      # the path for command "conda activate", you can get it by: which activate 
+  VMD_path: "/usr/local/bin/vmd"                      # the path to run vmd, you can git it by: which vmd
+  GROMACS_executable_path: "/opt/gromacs-2024.4/bin/gmx" # the path to run GROMACS gmx, you can get it by: which gmx
+  conda_gmx_MMPBSA_name: "gmxMMPBSA"                     # your enviroment name for gmx_MMPBSA
+  conda_Modeller_name: "modeller"                        # your enviroment name for Modeller
 
 
 # gmx_mmpbsa
