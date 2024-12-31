@@ -5,7 +5,7 @@ import logging
 # ForceField="amber99sb-ildn"
 # NP=32
 def gmx_mmpbsa(cycle_number, conda_activate_path, conda_gmxmmpbsa_name, cycle_number_md_folder, conf_name, root_name, 
-                     force_field, FORCE_FIELD_PATH, mmpbsa_infile, MMPBSA_INFILE_PATH, np_value, number_of_frames):
+                      mmpbsa_infile, MMPBSA_INFILE_PATH, np_value, number_of_frames):
     """Main function to run the gmxMMPBSA cycle"""
     try:
         # Print log for starting the cycle
