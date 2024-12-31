@@ -9,11 +9,12 @@ import multiprocessing
 import re
 import subprocess
 import numpy as np
-import math
-import random
+#import math
+#import random
 import yaml
 
-from FUNCTION import make_top_protein, fill_water_ions, energy_min, make_new_minim_nvt_npt, run_md
+from FUNCTION import make_top_protein, fill_water_ions, energy_min, run_md
+#  make_new_minim_nvt_npt
 from FUNCTION import files_gmxmmpbsa, gmx_mmpbsa, Data_Analysis_Pre, Data_Analysis_Cal, clean_for_each_cycle, GRO_to_PDB
 from FUNCTION import Data_Analysis_Cal_child
 
@@ -208,14 +209,14 @@ def gmx_mmpbsa_for_each_cycle(work_dir, cycle_number,only_protein_md_mdp_path,VM
     #conda_activate_path="/home/bio/ls/bin"
 
     #conda_gmxmmpbsa_name="gmxMMPBSA"
-    forcefield="amber99sb-ildn"
+    #forcefield="amber99sb-ildn"
     #FORCE_FIELD_PATH = "/home/bio/Desktop/jupyter_test/antibody_test/FORCE_FIELD"
     mmpbsa_inFILE="mmpbsa_LinearPB_amber99SB_ILDN.in"
     #MMPBSA_INFILE_PATH = "/home/bio/Desktop/jupyter_test/antibody_test/gmx_mmpbsa_in"
     np_value = config['run']['num_processors']
     #gmx_mmpbsa(1, conda_activate_path, conda_gmxmmpbsa_name, cycle_number_MD_FOLDER, ConfName, RootName, forcefield, FORCE_FIELD_PATH, 
     #             mmpbsa_inFILE, MMPBSA_INFILE_PATH , np_value, number_of_frames)
-    gmx_mmpbsa(cycle_number, conda_actiavte_path, conda_gmxmmpbsa_name, cycle_number_MD_FOLDER, ConfName, RootName, forcefield, FORCE_FIELD_PATH, mmpbsa_inFILE, MMPBSA_INFILE_PATH, np_value, number_of_frames)
+    gmx_mmpbsa(cycle_number, conda_actiavte_path, conda_gmxmmpbsa_name, cycle_number_MD_FOLDER, ConfName, RootName, mmpbsa_inFILE, MMPBSA_INFILE_PATH, np_value, number_of_frames)
     # data analysis
     NUMframe = "all"
     Data_Analysis_Pre(cycle_number_MD_FOLDER, REMOVED_FILES_FOLDER, NUMframe)
@@ -267,21 +268,16 @@ MMPBSA_INFILE_PATH = os.path.join(PROJECT_ROOT, "gmx_mmpbsa_in")
 
 #protein_file_path = os.path.join(DATA_DIR, f"{protein_infile}.pdb")
 
-make_mutation_modeller_py = os.path.join(FUNCTION_DIR,"MakeNewMutant_Modeller.py") 
+#make_mutation_modeller_py = os.path.join(FUNCTION_DIR,"MakeNewMutant_Modeller.py") 
 # MDP files
 ions_mdp_file = "ions"
 minim_mdp_file = "minim"
-nvt_mdp_file = "NVT"
-npt_mdp_file = "NPT"
-#samd_mdp_file = "SAMD"
 md_mdp_file = "EngComp_ff14sb_custom"
 only_protein_md_mdp_file = "Protein_EngComp_ff14sb_custom"
 
 ions_mdp_path = os.path.join(DATA_DIR, f"{ions_mdp_file}.mdp")
 minim_mdp_path = os.path.join(DATA_DIR, f"{minim_mdp_file}.mdp")
-nvt_mdp_path = os.path.join(DATA_DIR, f"{nvt_mdp_file}.mdp")
-npt_mdp_path = os.path.join(DATA_DIR, f"{npt_mdp_file}.mdp")
-#samd_mdp_path = os.path.join(DATA_DIR, f"{samd_mdp_file}.mdp")
+
 md_mdp_path = os.path.join(DATA_DIR, f"{md_mdp_file}.mdp")
 only_protein_md_mdp_path = os.path.join(DATA_DIR, f"{only_protein_md_mdp_file}.mdp")
 
@@ -303,7 +299,7 @@ VMD_path = config['Basic_setting']['VMD_path']
 gmx_path = config['Basic_setting']['GROMACS_executable_path']
 
 conda_gmxmmpbsa_name = config['Basic_setting']['conda_gmx_MMPBSA_name']
-conda_modeller_name = config['Basic_setting']['conda_Modeller_name']
+#conda_modeller_name = config['Basic_setting']['conda_Modeller_name']
 
 
 # check conda
@@ -336,17 +332,6 @@ else:
 
 # check gmx_mmpbsa
 
-# check modeller
-if check_conda_env(conda_gmxmmpbsa_name):
-    logging.info(f"{conda_gmxmmpbsa_name} is installed")
-else:
-    logging.error(f"No {conda_gmxmmpbsa_name} founded, please check that")
-
-if check_conda_env(conda_modeller_name):
-    logging.info(f"{conda_modeller_name} is installed")
-else:
-    logging.error(f"No {conda_modeller_name} founded, please check that")
-
 # check parameters
 receptorFRAG = str(config['gmx_mmpbsa']['receptorFRAG'])
 ABchains = str(config['gmx_mmpbsa']['ABchains'])
@@ -361,281 +346,177 @@ protein_infile = os.path.basename(protein_file_path)
 protein_infile, _ =os.path.splitext(protein_infile)
 
 
-max_mutant = config['modeller']['max_mutant']
-cycle_num = config['modeller']['cycle_num'] # the run cycle numbers for each configuration  Default:10
-MUTANT_signal = False
-#Stored Average BE from the last configuration. - Default: no
-#Stored_AVG= -92.8
+#max_mutant = config['modeller']['max_mutant']
+#cycle_num = config['run']['cycle_num'] # the run cycle numbers for each configuration  Default:10
 
-#Stored BE standard deviation from the last configuration. - Default: no
-#Stored_STD= 4.3
-#Metropolis Temperature - Default: 2
-Metropolis_temp = 1.5
-#Metropolis Temperature top limit - Default: 4
-Metropolis_Temp_cap= 3
+cycle_num = 10
 
-#Metropolis Temperature Used during the calculations. It could change. - Default: 
-Eff_Metropolis_Temp= Metropolis_temp
-
-#Number of consecutive discarded results. - Default: 0
-Consecutive_DISCARD_Count= 4
 ######################################### MAIN PROCESS ######################################
 
 
-for sequence in range (0,max_mutant+1):
-    try:
-        os.chdir(ROOT_OUTPUT)
-    except OSError:
-        logging.error(f"Cannot enter {ROOT_OUTPUT} folder")
-        exit()
 
-    if sequence == 0:
-        
-        # create configuration folder
-        configuration_path = os.path.join(ROOT_OUTPUT,"configuration")
-        os.mkdir(configuration_path)
-        current_path_store = configuration_path
-        
-        print(f"Create directory: {configuration_path}")
-        os.chdir(configuration_path)
-        logging.info(f"#### Begin with configuration{sequence} ####")
-        logging.info(f"PATH : {configuration_path}")
-    else:
-        mutant_folder_path = os.path.join(ROOT_OUTPUT,f"Mutant{sequence}")
-        os.mkdir(mutant_folder_path)
-        current_path_store = mutant_folder_path
-        
-        print(f"Create directort: {mutant_folder_path}")
-        os.chdir(mutant_folder_path)
-        logging.info(f"#### Begin with Mutant{sequence} ####")
-        logging.info(f"PATH : {mutant_folder_path}")
-
-    if MUTANT_signal == True:
-        #attempts = 1
-        new_mutant = True
-        while new_mutant == True:
-            # pdb_file, res_position, chain, new_restype, res_pos_list,res_weight_files, new_restype_list, keep_hydration, output_name
-            pdb_file = os.path.join(ROOT_OUTPUT,f"{protein_infile}.pdb") #LastFRame_xxxx.pdb
-            #res_position = None
-            #chain = None
-            #new_restype = None
-            res_pos_list = config['modeller']['res_pos_list']
-            #new_restype_list = ['LEU', 'VAL', 'ILE', 'MET', 'PHE', 'TYR', 'TRP','GLU', 'ASP','ARG', 'LYS','SER', 'THR', 'ASN', 'GLN', 'HIS']
-
-            # NO CYS MET GLY PRO
-            new_restype_list = ['LEU', 'VAL', 'ILE', 'PHE', 'TYR', 'TRP','GLU', 'ASP','ARG', 'LYS','SER', 'THR', 'ASN', 'GLN', 'HIS']
-            output_name = f"Mutant{sequence}"
-
-            logging.info("Making a new mutation.")
-            #keep_hydration = False
-            #make_new_mutation(pdb_file, res_position, chain, new_restype, res_pos_list,res_weight_files, new_restype_list, keep_hydration, output_name)
-            command_mutant = (f"python {make_mutation_modeller_py} {pdb_file} -o ./Mutant{sequence} -rl {res_pos_list}-v")
-            subprocess.run(command_mutant, shell =True, check = True)
-            #attempts += 1
-            new_mutant =False
-        
-        # Check that the sequence hasn't be tested already (self avoiding walk)
-        #os.remove(pdb_file)
-        protein_infile= f"Mutant{sequence}"
-
-        protein_file_path= os.path.join(current_path_store, f"{protein_infile}.pdb")
-        #destination_file = os.path.join(current_path_store, f"{protein_infile}_noH.pdb")
-        #shutil.copy(protein_file_path, destination_file)
-
-
-    Metropolis_flag= 0
-    current_dir = os.getcwd()
-    folders = build_folders(current_dir,cycle_num)
-
-    # generating a topology and build box
-    make_top_protein(protein_file_path, "amber99sb-ildn", "tip3p", "system", "topol", gmx_path)
-
-    # cp system.pdb {protein_infile}.pdb in current folder
-    source = os.path.join(current_dir, "system.pdb")
-    destination = os.path.join(current_dir, f"{protein_infile }.pdb")
-    try:
-        shutil.copy(source,destination)
-    except Exception:
-        print("Copy system.pdb failed.")
-
-    add_ter_to_pdb(f"{protein_infile }.pdb")
-    output_pdb = os.path.join(ROOT_OUTPUT, f"{protein_infile}.pdb")
-    replace_his_residues_flexible(f"{protein_infile}.pdb",output_pdb)
-    # Adding water and ions
-    fill_water_ions("system", "topol", ions_mdp_path, gmx_path)
-    # Energy Minimiization
-    energy_min(minim_mdp_path, "system_ions", "topol", "system_compl",gmx_path)
-
-    
-    # Nvt and Npt
-    make_new_minim_nvt_npt("system_compl_minim.gro", nvt_mdp_path, npt_mdp_path, "system_equil", 0, gmx_path)
-
-    # Move .cpt, .top, and .itp files to repository folder
-    for file_pattern in [f"{current_dir}/*.cpt", f"{current_dir}/*.top", f"{current_dir}/*.itp"]:
-        for file in glob.glob(file_pattern):
-            shutil.move(file, folders["repository"])
-
-    # Move specific files to repository folder
-    shutil.move(f"{current_dir}/{protein_infile}.pdb", folders["repository"])
-    shutil.move(f"{current_dir}/system_compl_minim.gro", folders["repository"])
-    shutil.move(f"{current_dir}/system_equil.gro", folders["repository"])
-
-
-    # Move temp* and *out files to removed files folder
-    for file in glob.glob("./*temp*.*") + glob.glob("./*.temp") + glob.glob("./*out"):
-        shutil.move(file, folders["REMOVED_FILES_FOLDER"])
-
-    # Remove files with # in their name
-    for file in glob.glob("./#*"):
-        os.remove(file)
-
-    md_args = (sequence, md_mdp_path, "system_Compl_MD", "traj_MD", f"{gmx_path}")
-    gmx_args = (only_protein_md_mdp_path,VMD_DIR,folders["TEMP_FILES_FOLDER"], FORCE_FIELD_PATH, MMPBSA_INFILE_PATH, folders["REMOVED_FILES_FOLDER"], folders["results"], folders["repository"], current_path_store)
-    # 1st cycle MD
-    MD_for_each_cycle(folders["cycle1_MD"],1, *md_args)
-
-    # each cycle: gmx_mmpbsa and next MD
-    for cycle_number in range(1, cycle_num + 1):
-        run_cycle(cycle_number, cycle_num, md_args, gmx_args)
-
-    
-    last_cycle_MD_FOLDER = os.path.join(folders["repository"],f"cycle{cycle_number}_MD")
-    last_cycle_gro = os.path.join(last_cycle_MD_FOLDER,f"LastFrame_cycle{cycle_number}.gro")
-    shutil.copy(last_cycle_gro, os.path.join(folders["repository"],f"LastFrame_cycle{cycle_number}.gro"))
-    logging.info(f"Making the starting PDB for the next Mutation from LastFrame_cycle{cycle_number}.gro")
-    
-    os.chdir(current_path_store)
-    
-    repository_pdb_file = os.path.join(folders["repository"], f"{protein_infile}.pdb")
-
-    pathGRO = folders["repository"]
-    fileNameGRO = f"LastFrame_cycle{cycle_number}"
-    pathPDB = os.path.dirname(repository_pdb_file)
-    pdb_name_with_extension = os.path.basename(repository_pdb_file) #xxxx.pdb
-    pdb_name_without_extension = os.path.splitext(pdb_name_with_extension)[0] #xxxx
-    fileNamePDB = pdb_name_without_extension
-    FileNamePDB_OUT = f"LastFrame_cycle{cycle_number}"
-    GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, VMD_DIR, folders["TEMP_FILES_FOLDER"], VMD_path)
-    last_cycle_pdb = os.path.join(folders["repository"], f"LastFrame_cycle{cycle_number}.pdb")
-    add_ter_to_pdb(last_cycle_pdb)        
-    output_last_cycle_pdb = os.path.join(ROOT_OUTPUT, f"Mutant{sequence}_cycle{cycle_number}_LastFrameMD.pdb")
-    replace_his_residues_flexible(last_cycle_pdb,output_last_cycle_pdb)
-
-    protein_infile = f"Mutant{sequence}_cycle{cycle_number}_LastFrameMD"
-    logging.info("Making the average of the cycles results.")
-    
-    all_cycle_data = "All_cycle_data.out"
-    MoleculesResults_data = os.path.join(folders["results"], "MoleculesResults.dat")
-    data_analysis_temp = "DataAnalysis_temp.csv"
-
-    if os.path.exists(all_cycle_data):
-        os.remove(all_cycle_data)
-
-    flag_header = True
-
-    with open(MoleculesResults_data, 'r') as infile, open(all_cycle_data, 'w') as outfile:
-        for line in infile:
-            if flag_header == True:
-                # head row
-                outfile.write(f"#{'configNum':<10} \t{line}")
-                flag_header = False
-            else:
-                # data row
-                outfile.write(f"{'avg':<10} \t{line}")
-    # get the data from the second line
-    df = pd.read_csv(all_cycle_data, sep='\t')  
-    df_filtered = df.iloc[:, 1:]  # get the data from the second column
-
-    # save to csv
-    df_filtered.to_csv(data_analysis_temp, sep = '\t', index=False,header = False)
-    #Data_Analysis_Signal = False
-    Data_Analysis_Cal_child(data_analysis_temp, "AllData.temp", False)
-
-    frame_count = 0
-    # get AVG and STD to AllData.out
-    with open("AllData.temp", 'r') as temp_file, open(all_cycle_data, 'a') as outfile:
-        for line in temp_file:
-
-            if line.startswith("#frame"):
-                frame_count +=1
-                if frame_count ==2:
-                    outfile.write(line)
-            if line.startswith("#AVG") or line.startswith("#STD"):
-                outfile.write(line)
-    '''
-    # remove temp file
-    for temp_file in [all_data_temp, data_analysis_temp]:
-        shutil.move(temp_file, os.path.join(removed_files_folder, os.path.basename(temp_file)))
-    '''
-    frame = []
-    avg = []
-    std = []
-    with open(all_cycle_data, 'r') as infile:
-        for line in infile:
-            if line.startswith("#frame"):
-                frame = line.strip().split()[1:]
-            elif line.startswith("#AVG"):
-                avg = line.strip().split()[1:]
-            elif line.startswith("#STD"):
-                std = line.strip().split()[1:]
-    if frame and avg and std:
-        output_lines = ["Results for Configuation"]
-        output_lines += [f"{frame[i]}: {avg[i]} +- {std[i]} kJ/mol"
-                        for i in range(len(frame))
-                       ]
-        logging.info("\n".join(output_lines))
-    shutil.move("AllData.temp", folders["REMOVED_FILES_FOLDER"])
-    shutil.move(data_analysis_temp, folders["REMOVED_FILES_FOLDER"])
-    AVG = float(avg[0])
-    STD = float(std[0])
-    if sequence == 0:
-        MUTANT_signal = True
-        Stored_AVG = float(avg[0]) # DeltaG(kJ/mol)
-        Stored_STD = float(std[0])
-        Stored_system_file = protein_infile
-        logging.info(f"Finished with Configuration{sequence}")
-        sequence+=1
-        
-        os.chdir(ROOT_OUTPUT)
-        # if FAST == TRue delete removed files folder
-        continue
-    logging.info("Metropolis algorithm")
-    Prob = None
-    if not Prob:
-        RandNum = random.uniform(0,1)
-    else:
-        RandNum = float(Prob)
-    # Metropolis
-    MP = math.exp(-(AVG+STD/2-Stored_AVG) / Eff_Metropolis_Temp)
-    # new G < old G
-    if MP >= 1:
-        MP = 1
-    logging.info(f"Random Number: {RandNum}  Metropolis Prob: {MP}  AVG: {AVG}  Stored AVG: {Stored_AVG}")
-    Metropolis_flag = 1 if RandNum < MP else 0
-    if Metropolis_flag == 1:
-        logging.info("New Configuration Accepted")
-        Stored_AVG = AVG
-        Stored_STD = STD
-        Stored_system_file = protein_infile
-        Consecutive_DISCARD_Count = 0
-        Eff_Metropolis_Temp = Metropolis_temp
-    else:
-        logging.info("New Configuration Declined")
-        protein_infile = Stored_system_file
-        Consecutive_DISCARD_Count += 1
-        
-        if Consecutive_DISCARD_Count > 5:
-            if Eff_Metropolis_Temp < Metropolis_Temp_cap:
-                Eff_Metropolis_Temp += 0.5*(Consecutive_DISCARD_Count - 5)
-        if Eff_Metropolis_Temp > Metropolis_Temp_cap:
-            Eff_Metropolis_Temp = Metropolis_Temp_cap
-    
-    MUTANT_signal = True
-    logging.info(f"Finished Mutant{sequence}")
-    sequence += 1
+try:
     os.chdir(ROOT_OUTPUT)
+except OSError:
+    logging.error(f"Cannot enter {ROOT_OUTPUT} folder")
+    exit()
 
 
+sequence = 0
+# create configuration folder
+configuration_path = os.path.join(ROOT_OUTPUT,"configuration")
+os.mkdir(configuration_path)
+current_path_store = configuration_path
+        
+print(f"Create directory: {configuration_path}")
+os.chdir(configuration_path)
+logging.info(f"#### Begin with configuration ####")
+logging.info(f"PATH : {configuration_path}")
+
+
+current_dir = os.getcwd()
+folders = build_folders(current_dir,cycle_num)
+
+# generating a topology and build box
+make_top_protein(protein_file_path, "amber99sb-ildn", "tip3p", "system", "topol", gmx_path)
+
+# cp system.pdb {protein_infile}.pdb in current folder
+source = os.path.join(current_dir, "system.pdb")
+destination = os.path.join(current_dir, f"{protein_infile }.pdb")
+try:
+    shutil.copy(source,destination)
+except Exception:
+    print("Copy system.pdb failed.")
+
+add_ter_to_pdb(f"{protein_infile }.pdb")
+output_pdb = os.path.join(ROOT_OUTPUT, f"{protein_infile}.pdb")
+replace_his_residues_flexible(f"{protein_infile}.pdb",output_pdb)
+# Adding water and ions
+fill_water_ions("system", "topol", ions_mdp_path, gmx_path)
+# Energy Minimiization
+energy_min(minim_mdp_path, "system_ions", "topol", "system_compl",gmx_path)
+
+    
+# Nvt and Npt
+#make_new_minim_nvt_npt("system_compl_minim.gro", nvt_mdp_path, npt_mdp_path, "system_equil", 0, gmx_path)
+shutil.copy("system_compl_minim.gro",os.path.join(folders["repository"],"system_equil.gro"))
+
+for file_pattern in [f"{current_dir}/*.cpt", f"{current_dir}/*.top", f"{current_dir}/*.itp"]:
+    for file in glob.glob(file_pattern):
+        shutil.move(file, folders["repository"])
+
+# Move specific files to repository folder
+shutil.move(f"{current_dir}/{protein_infile}.pdb", folders["repository"])
+
+
+
+# Move temp* and *out files to removed files folder
+for file in glob.glob("./*temp*.*") + glob.glob("./*.temp") + glob.glob("./*out"):
+    shutil.move(file, folders["REMOVED_FILES_FOLDER"])
+  
+
+# Remove files with # in their name
+for file in glob.glob("./#*"):
+    os.remove(file)
+
+md_args = (sequence, md_mdp_path, "system_Compl_MD", "traj_MD", f"{gmx_path}")
+gmx_args = (only_protein_md_mdp_path,VMD_DIR,folders["TEMP_FILES_FOLDER"], FORCE_FIELD_PATH, MMPBSA_INFILE_PATH, folders["REMOVED_FILES_FOLDER"], folders["results"], folders["repository"], current_path_store)
+# 1st cycle MD
+MD_for_each_cycle(folders["cycle1_MD"],1, *md_args)
+
+# each cycle: gmx_mmpbsa and next MD
+for cycle_number in range(1, cycle_num + 1):
+    run_cycle(cycle_number, cycle_num, md_args, gmx_args)
+
+    
+last_cycle_MD_FOLDER = os.path.join(folders["repository"],f"cycle{cycle_number}_MD")
+last_cycle_gro = os.path.join(last_cycle_MD_FOLDER,f"LastFrame_cycle{cycle_number}.gro")
+shutil.copy(last_cycle_gro, os.path.join(folders["repository"],f"LastFrame_cycle{cycle_number}.gro"))
+
+    
+os.chdir(current_path_store)
+    
+repository_pdb_file = os.path.join(folders["repository"], f"{protein_infile}.pdb")
+
+pathGRO = folders["repository"]
+fileNameGRO = f"LastFrame_cycle{cycle_number}"
+pathPDB = os.path.dirname(repository_pdb_file)
+pdb_name_with_extension = os.path.basename(repository_pdb_file) #xxxx.pdb
+pdb_name_without_extension = os.path.splitext(pdb_name_with_extension)[0] #xxxx
+fileNamePDB = pdb_name_without_extension
+FileNamePDB_OUT = f"LastFrame_cycle{cycle_number}"
+GRO_to_PDB(pathGRO, fileNameGRO, pathPDB, fileNamePDB, FileNamePDB_OUT, VMD_DIR, folders["TEMP_FILES_FOLDER"], VMD_path)
+last_cycle_pdb = os.path.join(folders["repository"], f"LastFrame_cycle{cycle_number}.pdb")
+add_ter_to_pdb(last_cycle_pdb)        
+output_last_cycle_pdb = os.path.join(ROOT_OUTPUT, f"Mutant{sequence}_cycle{cycle_number}_LastFrameMD.pdb")
+replace_his_residues_flexible(last_cycle_pdb,output_last_cycle_pdb)
+
+protein_infile = f"Mutant{sequence}_cycle{cycle_number}_LastFrameMD"
+logging.info("Making the average of the cycles results.")
+    
+all_cycle_data = "All_cycle_data.out"
+MoleculesResults_data = os.path.join(folders["results"], "MoleculesResults.dat")
+data_analysis_temp = "DataAnalysis_temp.csv"
+
+if os.path.exists(all_cycle_data):
+    os.remove(all_cycle_data)
+
+flag_header = True
+
+with open(MoleculesResults_data, 'r') as infile, open(all_cycle_data, 'w') as outfile:
+    for line in infile:
+        if flag_header == True:
+            # head row
+            outfile.write(f"#{'configNum':<10} \t{line}")
+            flag_header = False
+        else:
+            # data row
+            outfile.write(f"{'avg':<10} \t{line}")
+# get the data from the second line
+df = pd.read_csv(all_cycle_data, sep='\t')  
+df_filtered = df.iloc[:, 1:]  # get the data from the second column
+
+# save to csv
+df_filtered.to_csv(data_analysis_temp, sep = '\t', index=False,header = False)
+#Data_Analysis_Signal = False
+Data_Analysis_Cal_child(data_analysis_temp, "AllData.temp", False)
+
+frame_count = 0
+# get AVG and STD to AllData.out
+with open("AllData.temp", 'r') as temp_file, open(all_cycle_data, 'a') as outfile:
+    for line in temp_file:
+
+        if line.startswith("#frame"):
+            frame_count +=1
+            if frame_count ==2:
+                outfile.write(line)
+        if line.startswith("#AVG") or line.startswith("#STD"):
+            outfile.write(line)
+
+frame = []
+avg = []
+std = []
+with open(all_cycle_data, 'r') as infile:
+    for line in infile:
+        if line.startswith("#frame"):
+            frame = line.strip().split()[1:]
+        elif line.startswith("#AVG"):
+            avg = line.strip().split()[1:]
+        elif line.startswith("#STD"):
+            std = line.strip().split()[1:]
+if frame and avg and std:
+    output_lines = ["Results for Configuation"]
+    output_lines += [f"{frame[i]}: {avg[i]} +- {std[i]} kJ/mol"
+                    for i in range(len(frame))
+                    ]
+    logging.info("\n".join(output_lines))
+shutil.move("AllData.temp", folders["REMOVED_FILES_FOLDER"])
+shutil.move(data_analysis_temp, folders["REMOVED_FILES_FOLDER"])
+    
+
+logging.info(f"Finished with Configuration")
+        
+os.chdir(ROOT_OUTPUT)
 
 logging.info("ALL DONE.")
     

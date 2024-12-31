@@ -1,6 +1,6 @@
 # input setting
 input_files:
-  structure_file_path: "/home/bio/Desktop/jupyter_test/antibody_test/DATA/HLA_BiAB_protein_50ns.pdb"   # make sure receptor firstly and then antibody
+  structure_file_path: "/home/bio/Desktop/jupyter_test/new_test/system_starting_protein.pdb"  # make sure receptor firstly and then antibody
 
 
 # IMPORTANT Basic setting
@@ -9,7 +9,6 @@ Basic_setting:
   VMD_path: "/usr/local/bin/vmd"                      # the path to run vmd, you can git it by: which vmd
   GROMACS_executable_path: "/opt/gromacs-2024.4/bin/gmx" # the path to run GROMACS gmx, you can get it by: which gmx
   conda_gmx_MMPBSA_name: "gmxMMPBSA"                     # your enviroment name for gmx_MMPBSA
-  conda_Modeller_name: "modeller"                        # your enviroment name for Modeller
 
 
 # gmx_mmpbsa
@@ -18,14 +17,9 @@ gmx_mmpbsa:
   ABchains: 2         # INT: How many chains  in ANTIBODY (SECOND molecule in the starting pdb file)
   startingFrameGMXPBSA: "2000"   # STRING
   
-# Modeller 
-modeller:
-  res_pos_list: "28:H 29:H 30:H 31:H 32:H 52:H 54:H 55:H 56:H 57:H 98:H 100:H 102:H 105:H 93:L 94:L 95:L"
-  max_mutant: 4          # INT: max mutation number
-  cycle_num: 10          # 10 short MDs
 
 # run 
 run:
-  num_processors: 32        # INT: number of processors you want to use
+  num_processors: 32        # INT: number of processors (CPU cores) you want to use, check your own computer
 
 
