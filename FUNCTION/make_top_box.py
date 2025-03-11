@@ -37,8 +37,8 @@ def make_top_protein(input_file_path, forcefield, watermodel, protein_outfile, t
     output_file = f"{protein_outfile}.gro"
 
     # box type
-    editconf_option = "-bt triclinic -d 1.5"  
-    #editconf_option = "-c -bt cubic -d 1.5"
+    #editconf_option = "-bt triclinic -d 1.5"  
+    editconf_option = "-c -bt cubic -d 1.5"
 
     try:
         # run editconf to buid box
