@@ -10,10 +10,10 @@ It automates the process from input preparation to result generation.
 
 ## **Installation**
 ### **Dependencies**
-- VMD: use for generating files for gmx_MMPBSA
-- GROMACS (GPU version)
-- gmx_MMPBSA: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/  
-- Other dependencies: Pandas, Numpy, Yaml, if you don't have them, please use 
+- **VMD**: use for generating files for gmx_MMPBSA
+- **GROMACS** (GPU version)
+- **gmx_MMPBSA**: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/ (**please do not use gmx_mpi when you run it in clusters**, cuase when running gmx_MMPBSA with MPI, GROMACS's gmx_mpi can't be used. This is probably because of gmx_mpi conflicts with mpirun.)    
+- **Other dependencies**: Pandas, Numpy, Yaml, if you don't have them, please use 
    ```bash
    conda install xxxx (like pandas)  
 
@@ -32,8 +32,7 @@ It automates the process from input preparation to result generation.
 ---
 
 ### **Steps to Prepare Your Structure for the pipeline**  
-1. **Obtain a Stable Conformation**: You will have a stable conformation of your system (e.g., the last frame of your NPT simulation). This is typically stored in a .gro file.  
-2. **Convert the GRO File to PDB**: You can convert the .gro file (which does not contain chain information) to a .pdb file using 'gmx editconf' or other tools like VMD. This command 'gmx editconf' will generate a PDB file from the GRO file, but without chain information.  
-3. **Remove Water and Ions**: Please remove water and ions. We will apply a uniform standard to avoid errors.   
-4. **Ensure Chain ID Information**: Ensure that chain IDs are properly assigned in the PDB file. The PDB format uses the CHAIN field to denote which molecules belong to which chain. If the CHAIN information is missing or improperly assigned, you can manually edit the PDB file to add chain IDs or use VMD or PyMOL to check and add chain IDs.  
-5. **Make Sure Receptor firstly and then Antibody in your PDB file**  
+1. **Obtain a Stable Conformation**: You will have a stable conformation of your system (e.g., the last frame or the equilibrated frame of your NPT simulation). Please prepare a PDB file with **chain information**.   
+2. **Remove Water and Ions**: Please remove water and ions. We will apply a uniform standard to avoid errors.   
+3. **Ensure Chain ID Information**: Ensure that chain IDs are properly assigned in the PDB file. The PDB format uses the CHAIN field to denote which molecules belong to which chain. If the CHAIN information is missing or improperly assigned, you can manually edit the PDB file to add chain IDs or use VMD or PyMOL to check and add chain IDs.  
+4. **Make Sure Receptor firstly and then Antibody in your PDB file**  
