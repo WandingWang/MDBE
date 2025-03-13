@@ -13,7 +13,7 @@ It automates the process from input preparation to result generation.
 - **VMD**: use for generating files for gmx_MMPBSA
 - **GROMACS** (GPU version)
 - **gmx_MMPBSA**: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/ (**please do not use gmx_mpi when you run it in clusters**, cuase when running gmx_MMPBSA with MPI, GROMACS's gmx_mpi can't be used. This is probably because of gmx_mpi conflicts with mpirun.)    
-- **Other dependencies**: Pandas, Numpy, Yaml, if you don't have them, please use 
+- **Other dependencies**: Pandas, Numpy, pyyaml, if you don't have them, please use 
    ```bash
    conda install xxxx (like pandas)  
 
