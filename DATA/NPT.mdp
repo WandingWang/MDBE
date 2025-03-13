@@ -9,7 +9,7 @@
 ;----------------------------------------------------
 
 integrator   		= md            ; sd->stochastic leap-frog integrator
-nsteps       		= 50000	; 2 * 50,000 fs = 100 ps
+nsteps       		= 1250000	; 2 * 50,000 fs = 100 ps change to 2.5ns
 dt           		= 0.002		    ; 2 fs
 comm-mode           = linear
 nstcomm      		= 100           ; frequency for center of mass motion removal
@@ -20,9 +20,9 @@ nstcomm      		= 100           ; frequency for center of mass motion removal
 nstxout 		    = 0         		; scrive ogni [50ps]steps (coordinates)
 nstvout  		    = 0         		; No output, except for last frame (velocities)
 nstfout 		    = 0    			    ; No output, except for last frame (forces)
-nstlog   		    = 7500 		; Write every step to the log
-nstenergy		    = 7500 		; Write energies at every step
-nstxout-compressed	    = 7500		; Write a compressed trajectory
+nstlog   		    = 1250 		; Write every step to the log
+nstenergy		    = 1250 		; Write energies at every step
+nstxout-compressed	    = 1250		; Write a compressed trajectory
 ;compressed-x-grps	= System    		; save the whole system
 
 ;----------------------------------------------------
