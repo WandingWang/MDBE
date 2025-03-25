@@ -93,7 +93,7 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, gmx_path, top_nam
         None
     """
     # MD
-    print(f"{time.strftime('%H:%M:%S')} -- Running MD ")
+    logging.info(f"Running MD Production")
     grompp_md_out = f"gromppPROD_seq{sequence}.out"
     mdrun_md_out = f"mdoutPROD_seq{sequence}.out"
 

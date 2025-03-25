@@ -22,7 +22,7 @@ def extract_delta_energy_terms(input_filename, output_filename):
         # search Delta Energy Terms 
         if "Delta Energy Terms" in line:
             delta_start = True
-            continue  # 跳过该行
+            continue  
         # get data
         if delta_start:
             if line.strip() == "":  # end
@@ -267,7 +267,7 @@ def Data_Analysis_Cal_child(input_file, output_file, Data_Analysis_Signal = True
         f.write(f"#frame\t{'DeltaG(kJ/mol)':>15}\t{'Coul(kJ/mol)':>15}\t{'VdW(kJ/mol)':>15}\t{'PolSol(kJ/mol)':>15}\t{'NpoSol(kJ/mol)':>15}\t{'SF1':>15}\t{'SF2':>15}\t{'Canonical_AVG':>15}\t{'MedianDeltaG(kJ/mol)':>15}\t{'DeltaG_2s(kJ/mol)':>15}\n")
        
         f.write(f"#AVG\t{mean_DeltaG:>15.1f}\t{mean_Coul:>15.1f}\t{mean_VdW:>15.1f}\t{mean_PolSol:>15.1f}\t{mean_NpoSol:>15.1f}\t{mean_SF1:>15.1f}\t{mean_SF2:>15.1f}\t{Canonical_AVG:>15.1f}\t{median_DeltaG:>15.1f}\t{DeltaG_2s:>15.1f}\n")
-        f.write(f"#STD\t{std_DeltaG:>15.1f}\t{std_Coul:>15.1f}\t{std_VdW:>15.1f}\t{std_PolSol:>15.1f}\t{std_NpoSol:>15.1f}\t{std_SF1:>15.1f}\t{std_SF2:>15.1f}\t{"nan":>15}\t{"nan":>15}\t{std_DeltaG:>15.1f}\n")    
+        f.write(f"#STD\t{std_DeltaG:>15.1f}\t{std_Coul:>15.1f}\t{std_VdW:>15.1f}\t{std_PolSol:>15.1f}\t{std_NpoSol:>15.1f}\t{std_SF1:>15.1f}\t{std_SF2:>15.1f}\t{'nan':>15}\t{'nan':>15}\t{std_DeltaG:>15.1f}\n")    
 
 
 

@@ -1,6 +1,6 @@
 # input setting
 input_files:
-  structure_file_path: "/home/bio/Desktop/jupyter_test/new_test/system_starting_protein.pdb"  # make sure receptor firstly and then antibody
+  structure_file_path: "/home/bio/Downloads/TIGITandPeptide.pdb"  # make sure receptor firstly and then antibody
 
 
 # IMPORTANT Basic setting
@@ -13,8 +13,8 @@ Basic_setting:
 
 # gmx_mmpbsa
 gmx_mmpbsa:
-  receptorFRAG: 2     # INT: How many chains in RECEPTOR (FIRST molecule in the starting pdb file)  
-  ABchains: 2         # INT: How many chains  in ANTIBODY (SECOND molecule in the starting pdb file)
+  receptorFRAG: 1     # INT: How many chains in RECEPTOR (FIRST molecule in the starting pdb file)  
+  ABchains: 1         # INT: How many chains  in ANTIBODY (SECOND molecule in the starting pdb file)
   startingFrameGMXPBSA: "2000"   # STRING
   
 

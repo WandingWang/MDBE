@@ -13,7 +13,7 @@ import numpy as np
 #import random
 import yaml
 
-from FUNCTION import make_top_protein, fill_water_ions, energy_min, run_md
+from FUNCTION import make_top_protein, fill_water_ions, energy_min, run_md, make_new_minim_nvt_npt
 #  make_new_minim_nvt_npt
 from FUNCTION import files_gmxmmpbsa, gmx_mmpbsa, Data_Analysis_Pre, Data_Analysis_Cal, clean_for_each_cycle, GRO_to_PDB
 from FUNCTION import Data_Analysis_Cal_child
@@ -274,10 +274,12 @@ ions_mdp_file = "ions"
 minim_mdp_file = "minim"
 md_mdp_file = "EngComp_ff14sb_custom"
 only_protein_md_mdp_file = "Protein_EngComp_ff14sb_custom"
-
+nvt_mdp_file = "NVT"
+npt_mdp_file = "NPT"
 ions_mdp_path = os.path.join(DATA_DIR, f"{ions_mdp_file}.mdp")
 minim_mdp_path = os.path.join(DATA_DIR, f"{minim_mdp_file}.mdp")
-
+nvt_mdp_path = os.path.join(DATA_DIR, f"{nvt_mdp_file}.mdp")
+npt_mdp_path = os.path.join(DATA_DIR, f"{npt_mdp_file}.mdp")
 md_mdp_path = os.path.join(DATA_DIR, f"{md_mdp_file}.mdp")
 only_protein_md_mdp_path = os.path.join(DATA_DIR, f"{only_protein_md_mdp_file}.mdp")
 
@@ -306,7 +308,7 @@ conda_gmxmmpbsa_name = config['Basic_setting']['conda_gmx_MMPBSA_name']
 if not os.path.isfile(conda_actiavte_path):
     logging.error(f"ERROR: cannot find conda activate scrpt path as {conda_actiavte_path}")
 else:
-    logging.info(f"conda activate path --> {conda_actiavte_path} version: {get_version("conda")}")
+    logging.info(f"conda activate path --> {conda_actiavte_path} version: {get_version('conda')}")
     
 # check python
 python_version = get_version("python")
@@ -400,8 +402,8 @@ energy_min(minim_mdp_path, "system_ions", "topol", "system_compl",gmx_path)
 
     
 # Nvt and Npt
-#make_new_minim_nvt_npt("system_compl_minim.gro", nvt_mdp_path, npt_mdp_path, "system_equil", 0, gmx_path)
-shutil.copy("system_compl_minim.gro",os.path.join(folders["repository"],"system_equil.gro"))
+make_new_minim_nvt_npt("system_compl_minim.gro", nvt_mdp_path, npt_mdp_path, "system_equil", 0, gmx_path)
+#shutil.copy("system_compl_minim.gro",os.path.join(folders["repository"],"system_equil.gro"))
 
 for file_pattern in [f"{current_dir}/*.cpt", f"{current_dir}/*.top", f"{current_dir}/*.itp"]:
     for file in glob.glob(file_pattern):
@@ -409,7 +411,8 @@ for file_pattern in [f"{current_dir}/*.cpt", f"{current_dir}/*.top", f"{current_
 
 # Move specific files to repository folder
 shutil.move(f"{current_dir}/{protein_infile}.pdb", folders["repository"])
-
+shutil.move(f"{current_dir}/system_compl_minim.gro", folders["repository"])
+shutil.move(f"{current_dir}/system_equil.gro", folders["repository"])
 
 
 # Move temp* and *out files to removed files folder
