@@ -106,7 +106,7 @@ def run_md(md_mdp, tpr_file, trj_name, sequence, cycle_number, gmx_path, top_nam
 
     # Run MDRUN
     mdrun_command = (
-        f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -s {tpr_file}.tpr -c system_Compl_MD.gro -x {trj_name}.xtc -e PROD.edr -v"
+        f"{gmx_path} mdrun -s {tpr_file}.tpr -c system_Compl_MD.gro -x {trj_name}.xtc -e PROD.edr -v"
     )
     run_gromacs_command(mdrun_command, "Something wrong on MD MDRUN", pipe_file, output_file = mdrun_md_out)
 

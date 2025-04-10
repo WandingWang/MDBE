@@ -26,7 +26,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, gmx_path, number
         return
 
     # Run the first 
-    mdrun_cmd = f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM1.tpr -c {gro_name}_EM1.gro -v"
+    mdrun_cmd = f"{gmx_path} mdrun -s {gro_name}_EM1.tpr -c {gro_name}_EM1.gro -v"
     try:
         subprocess.run(mdrun_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
@@ -46,7 +46,7 @@ def energy_min(minim_mdp_path, gro_name, top_name, output_name, gmx_path, number
                 return
 
             # Run mdrun for the next step
-            mdrun_cmd = f"{gmx_path} mdrun -ntmpi 1 -ntomp 8 -s {gro_name}_EM{run}.tpr -c {gro_name}_EM{run}.gro -v"
+            mdrun_cmd = f"{gmx_path} mdrun -s {gro_name}_EM{run}.tpr -c {gro_name}_EM{run}.gro -v"
             try:
                 subprocess.run(mdrun_cmd, shell=True, check=True, stdout=open(log_file, 'w'), stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError:
