@@ -9,10 +9,11 @@ import multiprocessing
 import re
 import subprocess
 import numpy as np
-#import math
-#import random
+import math
+import random
 import yaml
-
+import argparse
+import sys
 from FUNCTION import make_top_protein, fill_water_ions, energy_min, run_md, make_new_minim_nvt_npt
 #  make_new_minim_nvt_npt
 from FUNCTION import files_gmxmmpbsa, gmx_mmpbsa, Data_Analysis_Pre, Data_Analysis_Cal, clean_for_each_cycle, GRO_to_PDB
