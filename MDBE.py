@@ -386,7 +386,7 @@ protein_infile, _ =os.path.splitext(protein_infile)
 #max_mutant = config['modeller']['max_mutant']
 #cycle_num = config['run']['cycle_num'] # the run cycle numbers for each configuration  Default:10
 
-cycle_num = 2
+cycle_num = 10
 
 
 
