@@ -20,8 +20,8 @@ It automates the process from input preparation to result generation.
 ### **Installation Steps**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/WandingWang/MDFreeEnergy.git
-   cd MDFreeEnergy
+   git clone https://github.com/WandingWang/MDBE.git
+   cd MDBE
 2. Make sure you have all dependencies: check conda, python, vmd, gromacs, gmx_mmpbsa;
 3. Open the input file **[input.yaml]**, change parameters: **input setting, IMPORTANT Basic setting, gmx_mmpbsa, run**, You need to set the input file path, conda activation path, etc., as well as the number of chains, etc., based on your own requirements.
 4. When you make sure that all dependencies and setting are ok, run main script:
