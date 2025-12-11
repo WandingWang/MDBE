@@ -47,7 +47,7 @@ def check_conda_env(env):
             return False
     except subprocess.CalledProcessError:
         return False
-    
+'''    
 def create_output_directory():
     
     current_dir = os.getcwd()
@@ -63,6 +63,30 @@ def create_output_directory():
 
     
     
+    return output_dir_path
+'''
+
+def create_output_directory():
+    current_dir = os.getcwd()
+    
+    # Get the current date formatted as MMDD
+    date_str = datetime.datetime.now().strftime('%m%d')
+    base_name = f"output_{date_str}_"
+    index = 1
+    
+    # Generate a new directory name that doesn't already exist
+    while True:
+        output_dir_name = f"{base_name}{index}"
+        output_dir_path = os.path.join(current_dir, output_dir_name)
+        
+        if not os.path.exists(output_dir_path):
+            os.mkdir(output_dir_path)
+            print(f"Created directory: {output_dir_path}")
+            break
+        
+        index += 1
+
+    os.chdir(output_dir_path)
     return output_dir_path
 
 def build_folders(current_dir, cycle_num):
@@ -84,14 +108,14 @@ def build_folders(current_dir, cycle_num):
         os.makedirs(folder,exist_ok = True)
     '''
     header = [
-    "#RUNnumber", "DeltaG(kJ/mol)", "Coul(kJ/mol)", "vdW(kJ/mol)",
-    "PolSol(kJ/mol)", "NpoSol(kJ/mol)", "ScoreFunct", "ScoreFunct2",
+    "#RUNnumber", "DeltaG(kcal/mol)", "Coul(kcal/mol)", "vdW(kcal/mol)",
+    "PolSol(kcal/mol)", "NpoSol(kcal/mol)", "ScoreFunct", "ScoreFunct2",
     "Canonica_AVG", "MedianDG", "DeltaG_2s", "dG_PotEn"]
     '''
     
     header = [
-    "#RUNnumber", "DeltaG(kJ/mol)", "Coul(kJ/mol)", "vdW(kJ/mol)",
-    "PolSol(kJ/mol)", "NpoSol(kJ/mol)", "ScoreFunct", "ScoreFunct2",
+    "#RUNnumber", "DeltaG(kcal/mol)", "Coul(kcal/mol)", "vdW(kcal/mol)",
+    "PolSol(kcal/mol)", "NpoSol(kcal/mol)", "ScoreFunct", "ScoreFunct2",
     "Canonica_AVG", "MedianDG", "DeltaG_2s"]
 
     df = pd.DataFrame(columns=header)
@@ -183,7 +207,7 @@ def gmx_mmpbsa_for_each_cycle(work_dir, cycle_number,only_protein_md_mdp_path,VM
     ConfName = f"cycle{cycle_number}"
     RootName = f"cycle{cycle_number}_BE"
     cycle_number_MD_FOLDER = folders[f"cycle{cycle_number}_MD"]
-    # 输出相关信息
+
     print(f"Cycle Number: {cycle_number}")
     print(f"Configuration Name: {ConfName}")
     print(f"Root Name: {RootName}")
@@ -252,6 +276,17 @@ def run_cycle(cycle_number, cycle_num, md_args, gmx_args):
 
 ############################################# LOAD FILES ###########################################
 
+# Command-line argument parsing
+parser = argparse.ArgumentParser(description='MDBE Pipeline')
+parser.add_argument('-i', '--infile', type=str, required=True,
+                   help='Input YAML configuration file')
+
+args = parser.parse_args()
+
+# Load configuration from the provided YAML file
+config_file = args.infile
+config = load_config(config_file )
+
 
 #PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.getcwd()
@@ -294,8 +329,8 @@ logging.basicConfig(
 logging.info(f"ROOT FOLDER PATH: {ROOT_OUTPUT}")
 
 ####################################### CHECK SYSTEM #############################################
-config_file = os.path.join(PROJECT_ROOT, 'infile.yaml')
-config = load_config(config_file )
+#config_file = os.path.join(PROJECT_ROOT, 'infile.yaml')
+#config = load_config(config_file )
 conda_actiavte_path = config['Basic_setting']['conda_activate_script_path']
 VMD_path = config['Basic_setting']['VMD_path']
 gmx_path = config['Basic_setting']['GROMACS_executable_path']
@@ -351,7 +386,7 @@ protein_infile, _ =os.path.splitext(protein_infile)
 #max_mutant = config['modeller']['max_mutant']
 #cycle_num = config['run']['cycle_num'] # the run cycle numbers for each configuration  Default:10
 
-cycle_num = 10
+cycle_num = 2
 
 
 
@@ -511,7 +546,7 @@ with open(all_cycle_data, 'r') as infile:
             std = line.strip().split()[1:]
 if frame and avg and std:
     output_lines = ["Results for Configuation"]
-    output_lines += [f"{frame[i]}: {avg[i]} +- {std[i]} kJ/mol"
+    output_lines += [f"{frame[i]}: {avg[i]} +- {std[i]} kcal/mol"
                     for i in range(len(frame))
                     ]
     logging.info("\n".join(output_lines))

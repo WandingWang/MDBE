@@ -15,8 +15,8 @@ module load anaconda3
 module load gromacs/2023.2-gcc-9.5.0-jzxesel            
 
 # env with pandas numpy and pyyaml
-source activate wanding_env
+source activate MDBE
 
 # run
-python MDBE.py
+python MDBE.py -i infile_xjtlu_hpc.yaml
 

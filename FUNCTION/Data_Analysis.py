@@ -77,20 +77,20 @@ def Data_Analysis_Pre(cycle_number_MD_FOLDER, REMOVED_FILES_FOLDER, NUMframe = "
         # Frame #
         frame = row['Frame #']  
     
-        # DeltaG(kJ/mol)
+        # DeltaG(kcal/mol)
         delta_g = row['TOTAL']  
     
-        # Coul(kJ/mol) = EEL + EEL14
+        # Coul(kcal/mol) = EEL + EEL14
         EEL = row['EEL']  
         EEL14 = row['1-4 EEL']  
         coul = EEL + EEL14
     
-        # vdW(kJ/mol) = VDW + VDW14
+        # vdW(kcal/mol) = VDW + VDW14
         VDW = row['VDWAALS']  
         VDW14 = row['1-4 VDW']  
         vdW = VDW + VDW14
     
-        # PolSol(kJ/mol) = EPB + ENPOLAR (if have)
+        # PolSol(kcal/mol) = EPB + ENPOLAR (if have)
         # for this infile the NpoSol is the value of [ENPOLAR], so it is included in the PolSol
 
         if pd.notna(row['EPB']) and pd.notna(row['ENPOLAR']):
@@ -100,7 +100,7 @@ def Data_Analysis_Pre(cycle_number_MD_FOLDER, REMOVED_FILES_FOLDER, NUMframe = "
         else:
             pol_sol = row['EGB']  # if have
     
-        # NpoSol(kJ/mol) = EDISPER or ESURF (if have)
+        # NpoSol(kcal/mol) = EDISPER or ESURF (if have)
         non_pol_solv = 0
         if pd.notna(row['EDISPER']):
             non_pol_solv = row['EDISPER']
@@ -110,11 +110,11 @@ def Data_Analysis_Pre(cycle_number_MD_FOLDER, REMOVED_FILES_FOLDER, NUMframe = "
         # add the values 
         output_data.append({
             '# frame': frame,
-            'DeltaG(kJ/mol)': delta_g,
-            'Coul(kJ/mol)': coul,
-            'vdW(kJ/mol)': vdW,
-            'PolSol(kJ/mol)': pol_sol,
-            'NpoSol(kJ/mol)': non_pol_solv
+            'DeltaG(kcal/mol)': delta_g,
+            'Coul(kcal/mol)': coul,
+            'vdW(kcal/mol)': vdW,
+            'PolSol(kcal/mol)': pol_sol,
+            'NpoSol(kcal/mol)': non_pol_solv
         })
 
     # transfer
@@ -252,7 +252,7 @@ def Data_Analysis_Cal_child(input_file, output_file, Data_Analysis_Signal = True
         f.write("# SF1=Coulomb/10-PolarSolvation/10+Non-PolarSolvation*10\n")
         f.write("# SF2=3*Coulomb+PolarSolvation\n")
         f.write("# C_AVG=norm(SUM Gi*e^BGi)\n")
-        f.write(f"#frame\tDeltaG(kJ/mol)\tCoul(kJ/mol)\tVdW(kJ/mol)\tPolSol(kJ/mol)\tNpoSol(kJ/mol)\tSF1\tSF2\n")
+        f.write(f"#frame\tDeltaG(kcal/mol)\tCoul(kcal/mol)\tVdW(kcal/mol)\tPolSol(kcal/mol)\tNpoSol(kcal/mol)\tSF1\tSF2\n")
 
         
         for _, row in df.iterrows():
@@ -264,7 +264,7 @@ def Data_Analysis_Cal_child(input_file, output_file, Data_Analysis_Signal = True
    
         
         f.write("\n# FINAL RESULTS\n")
-        f.write(f"#frame\t{'DeltaG(kJ/mol)':>15}\t{'Coul(kJ/mol)':>15}\t{'VdW(kJ/mol)':>15}\t{'PolSol(kJ/mol)':>15}\t{'NpoSol(kJ/mol)':>15}\t{'SF1':>15}\t{'SF2':>15}\t{'Canonical_AVG':>15}\t{'MedianDeltaG(kJ/mol)':>15}\t{'DeltaG_2s(kJ/mol)':>15}\n")
+        f.write(f"#frame\t{'DeltaG(kcal/mol)':>15}\t{'Coul(kcal/mol)':>15}\t{'VdW(kcal/mol)':>15}\t{'PolSol(kcal/mol)':>15}\t{'NpoSol(kcal/mol)':>15}\t{'SF1':>15}\t{'SF2':>15}\t{'Canonical_AVG':>15}\t{'MedianDeltaG(kcal/mol)':>15}\t{'DeltaG_2s(kcal/mol)':>15}\n")
        
         f.write(f"#AVG\t{mean_DeltaG:>15.1f}\t{mean_Coul:>15.1f}\t{mean_VdW:>15.1f}\t{mean_PolSol:>15.1f}\t{mean_NpoSol:>15.1f}\t{mean_SF1:>15.1f}\t{mean_SF2:>15.1f}\t{Canonical_AVG:>15.1f}\t{median_DeltaG:>15.1f}\t{DeltaG_2s:>15.1f}\n")
         f.write(f"#STD\t{std_DeltaG:>15.1f}\t{std_Coul:>15.1f}\t{std_VdW:>15.1f}\t{std_PolSol:>15.1f}\t{std_NpoSol:>15.1f}\t{std_SF1:>15.1f}\t{std_SF2:>15.1f}\t{'nan':>15}\t{'nan':>15}\t{std_DeltaG:>15.1f}\n")    

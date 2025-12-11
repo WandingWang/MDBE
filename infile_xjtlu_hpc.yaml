@@ -1,0 +1,25 @@
+# input setting
+input_files:
+  structure_file_path: "/gpfs/work/bio/wandingwang24/MDBE3/MDBE-main/DATA/abmpnn_model2/M2.pdb"  # make sure receptor firstly and then antibody/peptide
+
+
+# IMPORTANT Basic setting for XJTLU HPC
+Basic_setting:
+  conda_activate_script_path: "/gpfs/spack/opt/linux-rocky8-icelake/gcc-8.5.0/anaconda3-2022.10-4dp3trddxrrzcg6rozuot7ckgh3zjche/bin/activate"      # the path for command "conda activate", you can get it by: which activate 
+  VMD_path: "/gpfs/spack/opt/linux-rocky8-icelake/gcc-8.5.0/vmd-1.9.3-2ikhjpf46ggc5zvjlagti74h65wxrocx/bin/vmd"                      # the path to run vmd, you can git it by: which vmd
+  GROMACS_executable_path: "/gpfs/spack/opt/linux-rocky8-icelake/gcc-9.5.0/gromacs-2023.2-jzxeselj2n5xcx3uozwap5zgemorxohk/bin/gmx_mpi" # the path to run GROMACS gromacs
+  conda_gmx_MMPBSA_name: "gmx"                     # your enviroment name for gmx_MMPBSA
+
+
+# gmx_mmpbsa
+gmx_mmpbsa:
+  receptorFRAG: 1     # INT: How many chains in RECEPTOR (FIRST molecule in the starting pdb file)  
+  ABchains: 2         # INT: How many chains  in ANTIBODY/PEPTIDE (SECOND molecule in the starting pdb file)
+  startingFrameGMXPBSA: "2000"   # STRING, do not change that
+  
+
+# run 
+run:
+  num_processors: 8        # INT: number of processors (CPU cores) you want to use, check your own computer
+
+

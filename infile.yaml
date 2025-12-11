@@ -1,6 +1,6 @@
 # input setting
 input_files:
-  structure_file_path: "/home/bio/Downloads/TIGITandPeptide.pdb"  # make sure receptor firstly and then antibody
+  structure_file_path: "/home/bio/Desktop/AA_WWD/MDBE/DATA/sergio_sh3/3_cluster1_1.pdb"  # make sure receptor firstly and then antibody
 
 
 # IMPORTANT Basic setting
